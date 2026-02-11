@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
-import type maplibregl from 'maplibre-gl';
+import type mapboxgl from 'mapbox-gl';
 
 /*
  * ALL SPOT DATA FROM: SF_SLACKLINE_VOICE_AND_DATA.md
@@ -142,7 +142,7 @@ const spots: Spot[] = [
 
 export default function SpotsPage() {
   const mapContainer = useRef<HTMLDivElement>(null);
-  const map = useRef<maplibregl.Map | null>(null);
+  const map = useRef<mapboxgl.Map | null>(null);
   const [selectedSpot, setSelectedSpot] = useState<Spot | null>(null);
   const [splitView, setSplitView] = useState(false);
 
@@ -154,19 +154,19 @@ export default function SpotsPage() {
 
     let cancelled = false;
 
-    import('maplibre-gl').then((ml) => {
+    import('mapbox-gl').then((mb) => {
       if (cancelled || !mapContainer.current) return;
-    // CSS loaded via link tag below
-    const maplibregl = ml.default;
+    const mapboxgl = mb.default;
+    mapboxgl.accessToken = process.env.NEXT_PUBLIC_MAPBOX_TOKEN || '';
 
-    map.current = new maplibregl.Map({
+    map.current = new mapboxgl.Map({
       container: mapContainer.current,
-      style: `https://api.mapbox.com/styles/v1/mapbox/outdoors-v12?access_token=${process.env.NEXT_PUBLIC_MAPBOX_TOKEN}`,
+      style: 'mapbox://styles/mapbox/outdoors-v12',
       center: [-122.435, 37.77],
       zoom: 12,
     });
 
-    map.current.addControl(new maplibregl.NavigationControl(), 'top-right');
+    map.current.addControl(new mapboxgl.NavigationControl(), 'top-right');
 
     // Add spot markers
     spots.forEach((spot) => {
@@ -187,7 +187,7 @@ export default function SpotsPage() {
         });
       });
 
-      new maplibregl.Marker({ element: el })
+      new mapboxgl.Marker({ element: el })
         .setLngLat([spot.lng, spot.lat])
         .addTo(map.current!);
     });
@@ -221,7 +221,7 @@ export default function SpotsPage() {
   return (
     <div className="mt-14 font-body">
       {/* eslint-disable-next-line @next/next/no-css-tags */}
-      <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css" />
+      <link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/v3.9.4/mapbox-gl.css" />
       {/* Header */}
       <div className="bg-[#1A3A4A] px-5 py-6 sm:px-6">
         <div className="max-w-5xl mx-auto">
@@ -448,7 +448,7 @@ export default function SpotsPage() {
             opacity: 0;
           }
         }
-        .maplibregl-map {
+        .mapboxgl-map {
           font-family: var(--font-body), system-ui, sans-serif;
         }
       `}</style>
