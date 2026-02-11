@@ -270,10 +270,20 @@ export default function SpotsPage() {
                   <span className="font-medium text-[#1A3A4A]">Lines:</span> {selectedSpot.lengths}
                 </p>
               )}
-              <div className="mt-3 flex gap-4 text-[10px] text-gray-400">
+              {/* Google Earth link */}
+              <a
+                href={`https://earth.google.com/web/@${selectedSpot.lat},${selectedSpot.lng},50a,300d,35y,0h,45t,0r`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-3 flex items-center gap-1.5 text-xs font-semibold text-[#1E6B7B] hover:text-[#C8A84E] transition-colors"
+              >
+                <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+                See the trees in Google Earth →
+              </a>
+              <div className="mt-2 flex gap-4 text-[10px] text-gray-400">
                 <span>{selectedSpot.tweetCount} tweets</span>
                 <span>Active {selectedSpot.years}</span>
-                <span>📍 {selectedSpot.gpsSource}</span>
+                <span>{selectedSpot.gpsSource}</span>
               </div>
               {activeLines.includes(selectedSpot.name) && (
                 <div className="mt-3 flex items-center gap-2 text-xs font-semibold text-[#C8A84E]">
@@ -344,7 +354,18 @@ export default function SpotsPage() {
                     </span>
                   )}
                 </div>
-                <p className="text-[10px] text-gray-400 mt-1">{spot.tweetCount} tweets · {spot.years}</p>
+                <div className="flex items-center justify-between mt-1">
+                  <p className="text-[10px] text-gray-400">{spot.tweetCount} tweets · {spot.years}</p>
+                  <a
+                    href={`https://earth.google.com/web/@${spot.lat},${spot.lng},50a,300d,35y,0h,45t,0r`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={(e) => e.stopPropagation()}
+                    className="text-[10px] text-[#1E6B7B] hover:text-[#C8A84E] font-medium transition-colors"
+                  >
+                    Earth →
+                  </a>
+                </div>
               </button>
             ))}
           </div>
