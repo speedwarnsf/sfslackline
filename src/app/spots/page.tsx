@@ -201,14 +201,8 @@ export default function SpotsPage() {
       document.head.appendChild(link);
     }
 
-    // Timeout fallback
-    const timeout = setTimeout(() => {
-      if (!mapLoaded && !mapFailed) setMapFailed(true);
-    }, 8000);
-
     return () => {
       cancelled = true;
-      clearTimeout(timeout);
     };
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
