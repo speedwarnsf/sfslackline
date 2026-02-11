@@ -1,44 +1,50 @@
 'use client';
 
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { useState } from 'react';
 
 const navLinks = [
+  { href: '/safety', label: 'Safety', highlight: true },
   { href: '/learn', label: 'Learn' },
   { href: '/spots', label: 'Spots' },
   { href: '/community', label: 'Community' },
+  { href: '/history', label: 'History' },
   { href: '/events', label: 'Events' },
   { href: '/gear', label: 'Gear' },
-  { href: '/history', label: 'History' },
 ];
 
 export function Navigation() {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const pathname = usePathname();
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-[#1A3A4A]">
       <div className="max-w-5xl mx-auto px-4 sm:px-6">
         <div className="flex items-center justify-between h-14">
-          {/* Logo — text only, no circle */}
           <Link href="/" className="font-[family-name:var(--font-display)] text-base font-black tracking-tight">
             <span className="text-white">SF </span>
             <span className="text-[#C8A84E]">SLACKLINE</span>
           </Link>
 
-          {/* Desktop nav */}
           <div className="hidden md:flex items-center gap-6">
             {navLinks.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
-                className="text-xs font-medium text-white/60 hover:text-white transition-colors uppercase tracking-wider"
+                className={`text-xs font-medium uppercase tracking-wider transition-colors ${
+                  pathname === link.href
+                    ? 'text-[#C8A84E]'
+                    : link.highlight
+                    ? 'text-[#C8A84E]/80 hover:text-[#C8A84E]'
+                    : 'text-white/60 hover:text-white'
+                }`}
               >
                 {link.label}
               </Link>
             ))}
           </div>
 
-          {/* Mobile menu button */}
           <button
             onClick={() => setMobileOpen(!mobileOpen)}
             className="md:hidden p-2 text-white/70 hover:text-white"
@@ -55,7 +61,6 @@ export function Navigation() {
         </div>
       </div>
 
-      {/* Mobile menu */}
       {mobileOpen && (
         <div className="md:hidden bg-[#1A3A4A] border-t border-white/10">
           <div className="px-4 py-3 space-y-0.5">
@@ -64,7 +69,13 @@ export function Navigation() {
                 key={link.href}
                 href={link.href}
                 onClick={() => setMobileOpen(false)}
-                className="block px-3 py-2.5 text-sm font-medium text-white/70 hover:text-white transition-colors"
+                className={`block px-3 py-2.5 text-sm font-medium transition-colors ${
+                  pathname === link.href
+                    ? 'text-[#C8A84E]'
+                    : link.highlight
+                    ? 'text-[#C8A84E]/80'
+                    : 'text-white/70 hover:text-white'
+                }`}
               >
                 {link.label}
               </Link>
