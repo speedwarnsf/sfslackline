@@ -1,18 +1,12 @@
 @import "tailwindcss";
 
 @theme {
-  --color-neon-lime: #CCFF00;
-  --color-neon-cyan: #00F0FF;
-  --color-neon-pink: #FF2D7C;
-  --color-neon-orange: #FF6B00;
-  --color-dark-950: #0A0A0F;
-  --color-dark-900: #0F0F1A;
-  --color-dark-800: #1A1A2E;
-  --color-dark-700: #252540;
-  --color-dark-600: #353555;
-  --color-fog-100: #F0EDE8;
-  --color-fog-200: #D4CFC7;
-  --color-fog-300: #B8B0A5;
+  --color-deep-teal: #1A3A4A;
+  --color-teal: #1E6B7B;
+  --color-mid-teal: #4A9BAA;
+  --color-gold: #C8A84E;
+  --color-warm-cream: #F5F0E0;
+  --color-light-gray: #F2F4F6;
 }
 
 /* ============================
@@ -24,15 +18,15 @@ html {
 }
 
 body {
-  background: var(--color-dark-950);
-  color: var(--color-fog-100);
+  background: var(--color-light-gray);
+  color: var(--color-deep-teal);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 /* Selection */
 ::selection {
-  background: rgba(204, 255, 0, 0.3);
+  background: rgba(200, 168, 78, 0.3);
   color: white;
 }
 
@@ -41,23 +35,23 @@ body {
   width: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: var(--color-dark-900);
+  background: var(--color-light-gray);
 }
 ::-webkit-scrollbar-thumb {
-  background: var(--color-dark-600);
+  background: var(--color-mid-teal);
   border-radius: 3px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--color-neon-lime);
+  background: var(--color-teal);
 }
 
-/* Neon text glow */
+/* Gold text glow */
 .text-glow {
-  text-shadow: 0 0 20px rgba(204, 255, 0, 0.5), 0 0 40px rgba(204, 255, 0, 0.2);
+  text-shadow: 0 0 20px rgba(200, 168, 78, 0.5), 0 0 40px rgba(200, 168, 78, 0.2);
 }
 
-.text-glow-cyan {
-  text-shadow: 0 0 20px rgba(0, 240, 255, 0.5), 0 0 40px rgba(0, 240, 255, 0.2);
+.text-glow-teal {
+  text-shadow: 0 0 20px rgba(30, 107, 123, 0.5), 0 0 40px rgba(30, 107, 123, 0.2);
 }
 
 /* Line decoration */
@@ -71,19 +65,20 @@ body {
   left: 0;
   width: 60px;
   height: 2px;
-  background: linear-gradient(90deg, var(--color-neon-lime), transparent);
+  background: linear-gradient(90deg, var(--color-gold), transparent);
 }
 
 /* Glass card effect */
 .glass {
-  background: rgba(26, 26, 46, 0.6);
+  background: rgba(255, 255, 255, 0.9);
   backdrop-filter: blur(12px);
-  border: 1px solid rgba(204, 255, 0, 0.1);
+  border: 1px solid rgba(30, 107, 123, 0.1);
 }
 
 .glass:hover {
-  border-color: rgba(204, 255, 0, 0.3);
-  background: rgba(26, 26, 46, 0.8);
+  border-color: rgba(30, 107, 123, 0.3);
+  background: rgba(255, 255, 255, 1);
+  box-shadow: 0 8px 32px rgba(30, 107, 123, 0.1);
 }
 
 /* Animated line (decorative) */
@@ -98,7 +93,7 @@ body {
   left: 0;
   right: 0;
   height: 2px;
-  background: linear-gradient(90deg, transparent, var(--color-neon-lime), transparent);
+  background: linear-gradient(90deg, transparent, var(--color-gold), transparent);
   animation: slide-line 4s ease-in-out infinite;
 }
 
@@ -120,33 +115,33 @@ body {
 
 /* Button styles */
 .btn-primary {
-  background: var(--color-neon-lime);
-  color: var(--color-dark-950);
-  font-weight: 700;
+  background: var(--color-gold);
+  color: white;
+  font-weight: 600;
   letter-spacing: 0.05em;
-  text-transform: uppercase;
   padding: 0.75rem 2rem;
-  border-radius: 0;
-  clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 12px 100%, 0 calc(100% - 12px));
+  border-radius: 0.375rem;
   transition: all 0.2s ease;
+  border: none;
 }
 .btn-primary:hover {
-  background: white;
-  box-shadow: 0 0 30px rgba(204, 255, 0, 0.4);
+  background: #A88B3E;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(200, 168, 78, 0.3);
 }
 
 .btn-outline {
-  border: 1px solid rgba(204, 255, 0, 0.5);
-  color: var(--color-neon-lime);
+  border: 2px solid var(--color-teal);
+  color: var(--color-teal);
+  background: transparent;
   font-weight: 600;
   letter-spacing: 0.05em;
-  text-transform: uppercase;
   padding: 0.75rem 2rem;
-  border-radius: 0;
-  clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 12px 100%, 0 calc(100% - 12px));
+  border-radius: 0.375rem;
   transition: all 0.2s ease;
 }
 .btn-outline:hover {
-  background: rgba(204, 255, 0, 0.1);
-  border-color: var(--color-neon-lime);
+  background: var(--color-teal);
+  color: white;
+  transform: translateY(-1px);
 }

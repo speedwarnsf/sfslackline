@@ -9,25 +9,13 @@ export default {
   theme: {
     extend: {
       colors: {
-        // Adrenaline palette — electric energy meets Bay Area fog
-        neon: {
-          lime: '#CCFF00',
-          cyan: '#00F0FF',
-          pink: '#FF2D7C',
-          orange: '#FF6B00',
-        },
-        dark: {
-          950: '#0A0A0F',
-          900: '#0F0F1A',
-          800: '#1A1A2E',
-          700: '#252540',
-          600: '#353555',
-        },
-        fog: {
-          100: '#F0EDE8',
-          200: '#D4CFC7',
-          300: '#B8B0A5',
-        },
+        // Teal + Gold palette for SF Slackline
+        'deep-teal': '#1A3A4A',
+        'teal': '#1E6B7B',
+        'mid-teal': '#4A9BAA',
+        'gold': '#C8A84E',
+        'warm-cream': '#F5F0E0',
+        'light-gray': '#F2F4F6',
       },
       fontFamily: {
         display: ['var(--font-display)', 'system-ui', 'sans-serif'],
