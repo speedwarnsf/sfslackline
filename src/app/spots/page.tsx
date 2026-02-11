@@ -351,6 +351,40 @@ export default function SpotsPage() {
         </div>
       </div>
 
+      {/* Spot Profiles — Full list view */}
+      <section className="bg-white py-12 sm:py-16">
+        <div className="max-w-5xl mx-auto px-5 sm:px-6">
+          <h2 className="font-display text-2xl sm:text-3xl font-black text-[#1A3A4A] mb-1">All Spots</h2>
+          <p className="text-sm text-gray-500 font-light mb-8">Full profiles for every verified location</p>
+
+          <div className="space-y-4">
+            {spots.map((spot) => (
+              <div key={spot.name} className="p-5 rounded-xl border border-gray-100 hover:border-[#C8A84E]/20 transition-colors">
+                <div className="flex flex-col sm:flex-row sm:items-start gap-4">
+                  <div className="sm:w-24 shrink-0">
+                    <span className="text-[10px] font-mono text-[#C8A84E] bg-[#C8A84E]/10 px-2 py-0.5 rounded">{spot.tweetCount} tweets</span>
+                  </div>
+                  <div className="flex-1">
+                    <h3 className="font-display text-lg font-black text-[#1A3A4A]">{spot.name}</h3>
+                    <p className="text-xs text-[#1E6B7B] font-medium">{spot.aka}</p>
+                    <p className="text-sm text-gray-600 font-light mt-2 leading-relaxed">{spot.note}</p>
+                    {spot.lengths && (
+                      <p className="text-xs text-gray-500 mt-2">
+                        <span className="font-semibold text-[#1A3A4A]">Lines:</span> {spot.lengths}
+                      </p>
+                    )}
+                    <div className="mt-3 flex flex-wrap gap-4 text-[10px] text-gray-400">
+                      <span>Active: {spot.years}</span>
+                      <span>GPS: {spot.gpsSource}</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* CSS for map markers */}
       <style jsx global>{`
         .spot-marker {
