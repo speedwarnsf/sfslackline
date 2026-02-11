@@ -270,10 +270,10 @@ export default function SpotsPage() {
       )}
 
       {/* Map + sidebar layout */}
-      <div className="flex flex-col lg:flex-row" style={{ height: 'calc(100vh - 180px)' }}>
+      <div className="flex flex-col lg:flex-row" style={{ minHeight: 'calc(100vh - 180px)' }}>
         {/* Map */}
-        <div className="relative flex-1 min-h-[400px]">
-          <div ref={mapContainer} className="absolute inset-0" />
+        <div className="relative flex-1" style={{ height: '60vh', minHeight: '400px' }}>
+          <div ref={mapContainer} style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, width: '100%', height: '100%' }} />
           {mapError && (
             <div className="absolute inset-0 flex items-center justify-center bg-gray-100 z-5">
               <div className="text-center p-6">
@@ -281,6 +281,12 @@ export default function SpotsPage() {
                 <p className="text-xs text-gray-400 mt-2">Token: {process.env.NEXT_PUBLIC_MAPBOX_TOKEN ? 'present' : 'MISSING'}</p>
               </div>
             </div>
+          )}
+          {/* Fallback static map if WebGL unavailable */}
+          {!mapError && (
+            <noscript>
+              <img src={`https://api.mapbox.com/styles/v1/mapbox/outdoors-v12/static/-122.435,37.77,11,0/800x600@2x?access_token=${process.env.NEXT_PUBLIC_MAPBOX_TOKEN}`} alt="SF Slackline Spots Map" className="w-full h-full object-cover" />
+            </noscript>
           )}
 
           {/* Selected spot card */}
