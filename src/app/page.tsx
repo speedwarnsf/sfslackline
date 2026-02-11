@@ -23,7 +23,7 @@ export default function Home() {
   return (
     <main className="font-body">
       {/* ===== HERO ===== */}
-      <section className="relative h-[85vh] min-h-[500px] max-h-[700px] flex items-end overflow-hidden">
+      <section className="relative h-[70vh] min-h-[400px] max-h-[600px] flex items-end overflow-hidden mt-14">
         <Image
           src="/photos/highline-2.jpg"
           alt="First SF City Highline, 2012"
@@ -32,16 +32,16 @@ export default function Home() {
           priority
         />
         <div className="absolute inset-0 bg-gradient-to-t from-[#1A3A4A]/90 via-[#1A3A4A]/40 to-transparent" />
-        <div className="relative z-10 w-full max-w-5xl mx-auto px-6 pb-12">
-          <h1 className="font-display text-5xl sm:text-6xl md:text-7xl font-black text-white leading-[0.95] mb-4">
+        <div className="relative z-10 w-full max-w-5xl mx-auto px-5 sm:px-6 pb-8 sm:pb-12">
+          <h1 className="font-display text-4xl sm:text-5xl md:text-7xl font-black text-white leading-[0.95] mb-3">
             Walk the<br />Line.
           </h1>
-          <p className="text-white/80 text-base sm:text-lg font-light max-w-md mb-6">
-            Bay Area&apos;s slackline community since 2009. 849 photographs across 57 galleries.
+          <p className="text-white/80 text-sm sm:text-base font-light max-w-sm mb-5">
+            Bay Area&apos;s slackline community since 2009.
           </p>
           <Link
             href="/learn"
-            className="inline-block bg-[#C8A84E] text-[#1A3A4A] px-8 py-3 rounded font-semibold text-sm uppercase tracking-wider hover:bg-[#B8983E] transition-colors"
+            className="inline-block bg-[#C8A84E] text-[#1A3A4A] px-6 py-2.5 rounded text-xs font-semibold uppercase tracking-wider hover:bg-[#B8983E] transition-colors"
           >
             Explore the Archive
           </Link>
@@ -50,7 +50,7 @@ export default function Home() {
 
       {/* ===== STAT BAR ===== */}
       <section className="bg-[#1A3A4A]">
-        <div className="max-w-5xl mx-auto px-6 py-8 grid grid-cols-4 text-center text-white">
+        <div className="max-w-5xl mx-auto px-6 py-6 sm:py-8 grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-0 text-center text-white">
           {[
             { num: '849', label: 'Photos' },
             { num: '57', label: 'Galleries' },
@@ -67,12 +67,12 @@ export default function Home() {
 
       {/* ===== CATEGORY PILLS ===== */}
       <section className="bg-[#F2F4F6] py-8">
-        <div className="max-w-5xl mx-auto px-6 flex justify-center gap-3">
+        <div className="max-w-5xl mx-auto px-5 sm:px-6 flex flex-wrap justify-center gap-2 sm:gap-3">
           {['Spots', 'Gear', 'Safety', 'Events'].map((cat) => (
             <Link
               key={cat}
               href={cat === 'Safety' ? '/learn' : `/${cat.toLowerCase()}`}
-              className="px-6 py-2.5 rounded-lg bg-[#F5F0E0] text-[#1A3A4A] text-xs font-semibold uppercase tracking-wider hover:bg-[#C8A84E] hover:text-white transition-colors"
+              className="px-4 sm:px-6 py-2 sm:py-2.5 rounded-lg bg-[#F5F0E0] text-[#1A3A4A] text-[11px] sm:text-xs font-semibold uppercase tracking-wider hover:bg-[#C8A84E] hover:text-white transition-colors"
             >
               {cat}
             </Link>
@@ -205,8 +205,8 @@ export default function Home() {
       </section>
 
       {/* ===== CTA BAND ===== */}
-      <section className="bg-[#1E6B7B] py-12">
-        <div className="max-w-5xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-6">
+      <section className="bg-[#1E6B7B] py-10 sm:py-12">
+        <div className="max-w-5xl mx-auto px-5 sm:px-6 flex flex-col sm:flex-row items-center justify-between gap-4 sm:gap-6 text-center sm:text-left">
           <div className="text-white">
             <h2 className="font-display text-2xl font-black mb-1">Join the Community</h2>
             <p className="text-sm font-light text-white/80">Sessions every weekend. All levels welcome.</p>
