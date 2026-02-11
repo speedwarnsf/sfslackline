@@ -148,6 +148,7 @@ export default function SpotsPage() {
 
   // Simulate active lines for demo
   const [activeLines, setActiveLines] = useState<string[]>([]);
+  const [mapError, setMapError] = useState<string | null>(null);
 
   useEffect(() => {
     if (!mapContainer.current || map.current) return;
@@ -157,13 +158,29 @@ export default function SpotsPage() {
     import('mapbox-gl').then((mb) => {
       if (cancelled || !mapContainer.current) return;
     const mapboxgl = mb.default;
-    mapboxgl.accessToken = process.env.NEXT_PUBLIC_MAPBOX_TOKEN || '';
+    const token = process.env.NEXT_PUBLIC_MAPBOX_TOKEN || '';
+    mapboxgl.accessToken = token;
 
-    map.current = new mapboxgl.Map({
-      container: mapContainer.current,
-      style: 'mapbox://styles/mapbox/outdoors-v12',
-      center: [-122.435, 37.77],
-      zoom: 12,
+    if (!token) {
+      setMapError('Map token not configured');
+      return;
+    }
+
+    try {
+      map.current = new mapboxgl.Map({
+        container: mapContainer.current,
+        style: 'mapbox://styles/mapbox/outdoors-v12',
+        center: [-122.435, 37.77],
+        zoom: 12,
+      });
+    } catch (e) {
+      setMapError(`Map failed to load: ${e instanceof Error ? e.message : 'Unknown error'}`);
+      return;
+    }
+
+    map.current.on('error', (e) => {
+      console.error('Mapbox error:', e);
+      setMapError(`Map error: ${e.error?.message || 'Unknown'}`);
     });
 
     map.current.addControl(new mapboxgl.NavigationControl(), 'top-right');
@@ -252,6 +269,14 @@ export default function SpotsPage() {
         {/* Map */}
         <div className="relative flex-1 min-h-[400px]">
           <div ref={mapContainer} className="absolute inset-0" />
+          {mapError && (
+            <div className="absolute inset-0 flex items-center justify-center bg-gray-100 z-5">
+              <div className="text-center p-6">
+                <p className="text-sm text-red-600 font-medium">{mapError}</p>
+                <p className="text-xs text-gray-400 mt-2">Token: {process.env.NEXT_PUBLIC_MAPBOX_TOKEN ? 'present' : 'MISSING'}</p>
+              </div>
+            </div>
+          )}
 
           {/* Selected spot card */}
           {selectedSpot && (
