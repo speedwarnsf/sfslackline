@@ -9,6 +9,7 @@ const navLinks = [
   { href: '/learn', label: 'Learn' },
   { href: '/spots', label: 'Spots' },
   { href: '/community', label: 'Community' },
+  { href: '/board', label: 'Board' },
   { href: '/history', label: 'History' },
   { href: '/events', label: 'Events' },
   { href: '/gear', label: 'Gear' },

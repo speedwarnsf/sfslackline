@@ -155,61 +155,66 @@ export default function SpotsPage() {
 
     let cancelled = false;
 
-    import('mapbox-gl').then((mb) => {
+    // Load Mapbox GL JS via CDN script tag for maximum compatibility
+    const script = document.createElement('script');
+    script.src = 'https://api.mapbox.com/mapbox-gl-js/v3.9.4/mapbox-gl.js';
+    script.async = true;
+    script.onload = () => {
       if (cancelled || !mapContainer.current) return;
-    const mapboxgl = mb.default;
-    const token = process.env.NEXT_PUBLIC_MAPBOX_TOKEN || '';
-    mapboxgl.accessToken = token;
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const mapboxgl = (window as any).mapboxgl;
+      if (!mapboxgl) {
+        setMapError('Mapbox GL JS failed to load');
+        return;
+      }
 
-    if (!token) {
-      setMapError('Map token not configured');
-      return;
-    }
+      const token = process.env.NEXT_PUBLIC_MAPBOX_TOKEN || '';
+      mapboxgl.accessToken = token;
 
-    try {
-      map.current = new mapboxgl.Map({
-        container: mapContainer.current,
-        style: 'mapbox://styles/mapbox/outdoors-v12',
-        center: [-122.435, 37.77],
-        zoom: 12,
-      });
-    } catch (e) {
-      setMapError(`Map failed to load: ${e instanceof Error ? e.message : 'Unknown error'}`);
-      return;
-    }
+      if (!token) {
+        setMapError('Map token not configured');
+        return;
+      }
 
-    map.current.on('error', (e) => {
-      console.error('Mapbox error:', e);
-      setMapError(`Map error: ${e.error?.message || 'Unknown'}`);
-    });
-
-    map.current.addControl(new mapboxgl.NavigationControl(), 'top-right');
-
-    // Add spot markers
-    spots.forEach((spot) => {
-      const el = document.createElement('div');
-      el.className = 'spot-marker';
-      el.innerHTML = `
-        <div class="marker-dot ${spot.name === 'Dolores Park' || spot.name === 'The Panhandle' ? 'primary' : 'secondary'}">
-          <div class="pulse-ring"></div>
-        </div>
-      `;
-
-      el.addEventListener('click', () => {
-        setSelectedSpot(spot);
-        map.current?.flyTo({
-          center: [spot.lng, spot.lat],
-          zoom: 15,
-          duration: 1200,
+      try {
+        map.current = new mapboxgl.Map({
+          container: mapContainer.current,
+          style: 'mapbox://styles/mapbox/outdoors-v12',
+          center: [-122.435, 37.77],
+          zoom: 12,
         });
+      } catch (e) {
+        setMapError(`Map init failed: ${e instanceof Error ? e.message : 'Unknown'}`);
+        return;
+      }
+
+      map.current!.addControl(new mapboxgl.NavigationControl(), 'top-right');
+
+      spots.forEach((spot) => {
+        const el = document.createElement('div');
+        el.className = 'spot-marker';
+        el.innerHTML = `
+          <div class="marker-dot ${spot.name === 'Dolores Park' || spot.name === 'The Panhandle' ? 'primary' : 'secondary'}">
+            <div class="pulse-ring"></div>
+          </div>
+        `;
+
+        el.addEventListener('click', () => {
+          setSelectedSpot(spot);
+          map.current?.flyTo({
+            center: [spot.lng, spot.lat],
+            zoom: 15,
+            duration: 1200,
+          });
+        });
+
+        new mapboxgl.Marker({ element: el })
+          .setLngLat([spot.lng, spot.lat])
+          .addTo(map.current!);
       });
-
-      new mapboxgl.Marker({ element: el })
-        .setLngLat([spot.lng, spot.lat])
-        .addTo(map.current!);
-    });
-
-    }); // end dynamic import
+    };
+    script.onerror = () => setMapError('Failed to load Mapbox script');
+    document.head.appendChild(script);
 
     return () => {
       cancelled = true;
