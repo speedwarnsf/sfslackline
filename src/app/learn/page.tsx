@@ -1,39 +1,34 @@
+import Image from 'next/image';
 import Link from 'next/link';
 
-const lessons = [
-  {
-    level: 'Beginner',
-    color: 'neon-lime',
-    modules: [
-      { title: 'What is Slacklining?', duration: '5 min', description: 'History, gear basics, and what to expect.' },
-      { title: 'Setting Up Your First Line', duration: '8 min', description: 'Tree selection, webbing setup, tension basics.' },
-      { title: 'Mounting & Standing', duration: '10 min', description: 'Getting on the line and finding your center.' },
-      { title: 'Your First Steps', duration: '12 min', description: 'Weight transfer, arm position, and breathing.' },
-      { title: 'Turning Around', duration: '8 min', description: 'The 180 — your first real milestone.' },
-    ],
-  },
-  {
-    level: 'Intermediate',
-    color: 'neon-cyan',
-    modules: [
-      { title: 'Walking with Confidence', duration: '10 min', description: 'Flow state, longer distances, different tensions.' },
-      { title: 'Sitting & Lying Down', duration: '8 min', description: 'Controlled descents and recoveries.' },
-      { title: 'Basic Tricks', duration: '15 min', description: 'Bounce walk, drop knee, buddha sit.' },
-      { title: 'Different Line Types', duration: '10 min', description: 'Ratchet vs pulley, flat vs tubular webbing.' },
-      { title: 'Longlining Basics', duration: '12 min', description: 'Lines over 30m — new challenges, new rewards.' },
-    ],
-  },
-  {
-    level: 'Advanced',
-    color: 'neon-orange',
-    modules: [
-      { title: 'Tricklining', duration: '20 min', description: 'Backflips, chest bounces, combos.' },
-      { title: 'Longline Mastery', duration: '15 min', description: '100m+ sends, wind management, mental game.' },
-      { title: 'Highline Introduction', duration: '25 min', description: 'Safety systems, leashes, and mindset.' },
-      { title: 'Rigging Advanced Systems', duration: '20 min', description: 'Pulleys, multipliers, highline anchors.' },
-      { title: 'Competition Preparation', duration: '15 min', description: 'Judging criteria, routines, performance.' },
-    ],
-  },
+// Real instructional videos from the original sfslackline.org (NWslackline.org series)
+const instructionalVideos = [
+  { id: 'MdDzz5H2VQA', title: 'How to Slackline - Part 1: Setup & Basics', description: 'Everything you need to know to get started. How to pick trees, set up your line, and get on for the first time.' },
+  { id: 'REvz4jv1YZQ', title: 'How to Slackline - Part 2: Walking', description: 'Weight transfer, arm position, and the fundamentals of taking your first steps on the line.' },
+  { id: 'QCQLJsSm_ec', title: 'How to Slackline - Part 3: Turning Around', description: 'The 180-degree turn — your first real milestone. Techniques for reversing direction on the line.' },
+  { id: '-gKMeeAk460', title: 'How to Slackline - Part 4: Tricks & Sitting', description: 'Controlled sitting, lying down, and basic tricks. Building confidence and control.' },
+  { id: 'yjsaPot7hzE', title: 'How to Slackline - Part 5: Advanced Tips', description: 'Longer lines, higher tension, and tips from experienced slackliners.' },
+];
+
+// Real community/fun videos from the original site
+const communityVideos = [
+  { id: 'qKb35RrmuMo', title: 'SF Slackline Community', platform: 'youtube' as const },
+  { id: 'ZWWy0D8DOPc', title: 'Dolores Park Sessions', platform: 'youtube' as const },
+  { id: 'lOhk0QOpR8o', title: 'Panhandle Slacklining', platform: 'youtube' as const },
+  { id: 'mzIk-QX8qA0', title: 'Bay Area Slackline Sessions', platform: 'youtube' as const },
+  { id: 'pMdNYaQVeVA', title: 'SF Slackline Compilation', platform: 'youtube' as const },
+  { id: 'QBR6EFrF2rk', title: 'Ocean Beach Line', platform: 'youtube' as const },
+  { id: '4b6fxU9rcfU', title: 'Slackline Session', platform: 'youtube' as const },
+  { id: 'BeJVe_J1UNU', title: 'Slackline Skills', platform: 'youtube' as const },
+];
+
+const funVideos = [
+  { id: 'kdsryZINo3Y', title: 'Epic Slackline Moments', platform: 'youtube' as const },
+  { id: 'S2tiu26VNJM', title: 'Slackline Highlight Reel', platform: 'youtube' as const },
+  { id: 'qLnQ4kJfs50', title: 'Bay Area Adventures', platform: 'youtube' as const },
+  { id: 'Cc-Hn2QnU20', title: 'Tricklining Compilation', platform: 'youtube' as const },
+  { id: 'uWSLz-uC9XY', title: 'Slackline Fun', platform: 'youtube' as const },
+  { id: 'FXycwkc8BG0', title: 'Outdoor Balance', platform: 'youtube' as const },
 ];
 
 export default function LearnPage() {
@@ -47,8 +42,8 @@ export default function LearnPage() {
             From Zero to <span className="text-neon-lime">Hero</span>
           </h1>
           <p className="text-fog-300 text-xl max-w-3xl leading-relaxed">
-            Free, structured lessons to take you from your first wobble to walking highlines. 
-            Every lesson is written by experienced Bay Area slackliners who&apos;ve taught hundreds of people.
+            Real instructional videos, curated from the original SF Slackline site. 
+            The same series that taught Bay Area slackliners since 2009.
           </p>
         </div>
       </section>
@@ -58,9 +53,9 @@ export default function LearnPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid md:grid-cols-3 gap-8">
             {[
-              { icon: '🎯', title: 'Focus on Your Feet', tip: 'Look at a fixed point at the end of the line, not down at your feet.' },
-              { icon: '🫁', title: 'Breathe', tip: 'Deep belly breaths. The line amplifies tension — stay relaxed.' },
-              { icon: '💪', title: 'Bend Your Knees', tip: 'Straight legs = falling. Keep a soft bend and let your body absorb.' },
+              { icon: '🎯', title: 'Focus on the End', tip: 'Look at a fixed point at the end of the line, not down at your feet. Your body follows your eyes.' },
+              { icon: '🫁', title: 'Breathe', tip: 'Deep belly breaths. The line amplifies tension in your body — relaxation is the key to balance.' },
+              { icon: '💪', title: 'Bend Your Knees', tip: 'Straight legs = falling. Keep a soft bend and let your body absorb the movement of the line.' },
             ].map((t) => (
               <div key={t.title} className="flex gap-4">
                 <span className="text-3xl">{t.icon}</span>
@@ -74,36 +69,130 @@ export default function LearnPage() {
         </div>
       </section>
 
-      {/* Curriculum */}
+      {/* Instructional Videos */}
       <section className="py-16 md:py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="space-y-16">
-            {lessons.map((level) => (
-              <div key={level.level}>
-                <div className="flex items-center gap-4 mb-8">
-                  <h2 className={`font-[family-name:var(--font-display)] text-3xl font-bold text-${level.color}`}>
-                    {level.level}
-                  </h2>
-                  <div className={`flex-1 h-[1px] bg-${level.color}/20`} />
-                </div>
+          <h2 className="font-[family-name:var(--font-display)] text-3xl font-bold mb-2">
+            Instructional Series
+          </h2>
+          <p className="text-fog-300 mb-8">Complete 5-part tutorial from NWslackline.org — the same videos featured on the original SF Slackline site</p>
 
-                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
-                  {level.modules.map((mod, i) => (
-                    <div key={mod.title} className="glass p-6 group cursor-pointer hover:scale-[1.01] transition-all">
-                      <div className="flex items-start justify-between mb-3">
-                        <span className={`font-[family-name:var(--font-mono)] text-xs text-${level.color}/50`}>
-                          {String(i + 1).padStart(2, '0')}
-                        </span>
-                        <span className="text-xs text-fog-300 bg-dark-700/50 px-2 py-0.5">{mod.duration}</span>
-                      </div>
-                      <h3 className="font-[family-name:var(--font-display)] text-lg font-semibold text-fog-100 group-hover:text-neon-lime transition-colors mb-2">
-                        {mod.title}
-                      </h3>
-                      <p className="text-fog-300 text-sm leading-relaxed">{mod.description}</p>
+          <div className="space-y-6">
+            {instructionalVideos.map((video, i) => (
+              <a
+                key={video.id}
+                href={`https://youtube.com/watch?v=${video.id}`}
+                target="_blank"
+                rel="noopener"
+                className="glass p-4 flex flex-col md:flex-row gap-6 group hover:scale-[1.005] transition-all block"
+              >
+                <div className="relative w-full md:w-80 aspect-video flex-shrink-0 overflow-hidden bg-dark-800">
+                  <Image
+                    src={`https://img.youtube.com/vi/${video.id}/hqdefault.jpg`}
+                    alt={video.title}
+                    fill
+                    className="object-cover"
+                  />
+                  <div className="absolute inset-0 flex items-center justify-center bg-dark-950/20 group-hover:bg-dark-950/0 transition-colors">
+                    <div className="w-14 h-14 bg-neon-lime/90 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform">
+                      <svg className="w-6 h-6 text-dark-950 ml-1" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M8 5v14l11-7z" />
+                      </svg>
                     </div>
-                  ))}
+                  </div>
                 </div>
-              </div>
+                <div className="flex-1">
+                  <div className="flex items-center gap-3 mb-2">
+                    <span className="font-[family-name:var(--font-mono)] text-2xl text-neon-lime/30">{String(i + 1).padStart(2, '0')}</span>
+                    <h3 className="font-[family-name:var(--font-display)] text-xl font-semibold text-fog-100 group-hover:text-neon-lime transition-colors">
+                      {video.title}
+                    </h3>
+                  </div>
+                  <p className="text-fog-300 leading-relaxed">{video.description}</p>
+                </div>
+              </a>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Community Videos */}
+      <section className="py-16 md:py-24 bg-dark-900/30">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 className="font-[family-name:var(--font-display)] text-3xl font-bold mb-2">
+            Community Videos
+          </h2>
+          <p className="text-fog-300 mb-8">Shot by SF slackliners — real sessions, real community</p>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
+            {communityVideos.map((video) => (
+              <a
+                key={video.id}
+                href={`https://youtube.com/watch?v=${video.id}`}
+                target="_blank"
+                rel="noopener"
+                className="glass p-3 group hover:scale-[1.02] transition-all block"
+              >
+                <div className="relative aspect-video mb-2 overflow-hidden bg-dark-800">
+                  <Image
+                    src={`https://img.youtube.com/vi/${video.id}/hqdefault.jpg`}
+                    alt={video.title}
+                    fill
+                    className="object-cover"
+                  />
+                  <div className="absolute inset-0 flex items-center justify-center bg-dark-950/20 group-hover:bg-dark-950/0 transition-colors">
+                    <div className="w-10 h-10 bg-neon-lime/90 rounded-full flex items-center justify-center">
+                      <svg className="w-4 h-4 text-dark-950 ml-0.5" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M8 5v14l11-7z" />
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+                <h3 className="text-sm font-semibold text-fog-100 group-hover:text-neon-lime transition-colors">
+                  {video.title}
+                </h3>
+              </a>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Fun Videos */}
+      <section className="py-16 md:py-24">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 className="font-[family-name:var(--font-display)] text-3xl font-bold mb-2">
+            Other Fun Videos
+          </h2>
+          <p className="text-fog-300 mb-8">Inspiration, entertainment, and pure stoke from the slackline world</p>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+            {funVideos.map((video) => (
+              <a
+                key={video.id}
+                href={`https://youtube.com/watch?v=${video.id}`}
+                target="_blank"
+                rel="noopener"
+                className="glass p-3 group hover:scale-[1.02] transition-all block"
+              >
+                <div className="relative aspect-video mb-2 overflow-hidden bg-dark-800">
+                  <Image
+                    src={`https://img.youtube.com/vi/${video.id}/hqdefault.jpg`}
+                    alt={video.title}
+                    fill
+                    className="object-cover"
+                  />
+                  <div className="absolute inset-0 flex items-center justify-center bg-dark-950/20 group-hover:bg-dark-950/0 transition-colors">
+                    <div className="w-10 h-10 bg-neon-lime/90 rounded-full flex items-center justify-center">
+                      <svg className="w-4 h-4 text-dark-950 ml-0.5" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M8 5v14l11-7z" />
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+                <h3 className="text-sm font-semibold text-fog-100 group-hover:text-neon-lime transition-colors">
+                  {video.title}
+                </h3>
+              </a>
             ))}
           </div>
         </div>
@@ -116,7 +205,7 @@ export default function LearnPage() {
             Ready to walk?
           </h2>
           <p className="text-fog-300 mb-8">
-            Find a beginner-friendly spot near you and connect with local mentors.
+            Find a beginner-friendly spot near you and come to a Sunday session.
           </p>
           <div className="flex gap-4 justify-center">
             <Link href="/spots" className="btn-primary">Find a Spot</Link>
