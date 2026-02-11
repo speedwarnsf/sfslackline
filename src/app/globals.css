@@ -1,26 +1,152 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme {
+  --color-neon-lime: #CCFF00;
+  --color-neon-cyan: #00F0FF;
+  --color-neon-pink: #FF2D7C;
+  --color-neon-orange: #FF6B00;
+  --color-dark-950: #0A0A0F;
+  --color-dark-900: #0F0F1A;
+  --color-dark-800: #1A1A2E;
+  --color-dark-700: #252540;
+  --color-dark-600: #353555;
+  --color-fog-100: #F0EDE8;
+  --color-fog-200: #D4CFC7;
+  --color-fog-300: #B8B0A5;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+/* ============================
+   SF SLACKLINE — Global Styles
+   ============================ */
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--color-dark-950);
+  color: var(--color-fog-100);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Selection */
+::selection {
+  background: rgba(204, 255, 0, 0.3);
+  color: white;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-dark-900);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-dark-600);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-neon-lime);
+}
+
+/* Neon text glow */
+.text-glow {
+  text-shadow: 0 0 20px rgba(204, 255, 0, 0.5), 0 0 40px rgba(204, 255, 0, 0.2);
+}
+
+.text-glow-cyan {
+  text-shadow: 0 0 20px rgba(0, 240, 255, 0.5), 0 0 40px rgba(0, 240, 255, 0.2);
+}
+
+/* Line decoration */
+.line-accent {
+  position: relative;
+}
+.line-accent::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 60px;
+  height: 2px;
+  background: linear-gradient(90deg, var(--color-neon-lime), transparent);
+}
+
+/* Glass card effect */
+.glass {
+  background: rgba(26, 26, 46, 0.6);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(204, 255, 0, 0.1);
+}
+
+.glass:hover {
+  border-color: rgba(204, 255, 0, 0.3);
+  background: rgba(26, 26, 46, 0.8);
+}
+
+/* Animated line (decorative) */
+.slackline-decoration {
+  position: relative;
+  overflow: hidden;
+}
+.slackline-decoration::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--color-neon-lime), transparent);
+  animation: slide-line 4s ease-in-out infinite;
+}
+
+@keyframes slide-line {
+  0%, 100% { transform: translateX(-50%); opacity: 0.3; }
+  50% { transform: translateX(50%); opacity: 1; }
+}
+
+/* Section transitions */
+.section-fade {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.section-fade.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Button styles */
+.btn-primary {
+  background: var(--color-neon-lime);
+  color: var(--color-dark-950);
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  padding: 0.75rem 2rem;
+  border-radius: 0;
+  clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 12px 100%, 0 calc(100% - 12px));
+  transition: all 0.2s ease;
+}
+.btn-primary:hover {
+  background: white;
+  box-shadow: 0 0 30px rgba(204, 255, 0, 0.4);
+}
+
+.btn-outline {
+  border: 1px solid rgba(204, 255, 0, 0.5);
+  color: var(--color-neon-lime);
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  padding: 0.75rem 2rem;
+  border-radius: 0;
+  clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 12px 100%, 0 calc(100% - 12px));
+  transition: all 0.2s ease;
+}
+.btn-outline:hover {
+  background: rgba(204, 255, 0, 0.1);
+  border-color: var(--color-neon-lime);
 }
