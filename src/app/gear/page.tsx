@@ -1,106 +1,187 @@
 import Link from 'next/link';
 
-const gearCategories = [
-  {
-    title: 'Beginner Kits',
-    description: 'Everything you need to start. One purchase, you\'re ready.',
-    items: [
-      { name: 'Gibbon Classic Line', price: '$75', best: true, note: 'Our #1 recommendation for beginners. 50ft, ratchet included.' },
-      { name: 'Slackline Industries Base Line', price: '$60', best: false, note: 'Budget-friendly, solid quality. 50ft with ratchet and tree protectors.' },
-      { name: 'YogaSlackers e-line', price: '$50', best: false, note: 'Great starter line, softer webbing that\'s forgiving for learning.' },
-    ],
-  },
-  {
-    title: 'Intermediate Gear',
-    description: 'Ready to level up? Longer lines and better systems.',
-    items: [
-      { name: 'Balance Community Primitive Kit', price: '$120', best: true, note: 'Classic primitive setup. No ratchet — learn to rig properly.' },
-      { name: 'Gibbon Surfer Line', price: '$90', best: false, note: 'Bouncy and dynamic. Great for learning tricks.' },
-      { name: 'Slackline Industries Aggro Line', price: '$110', best: false, note: '100ft trickline for serious bouncing.' },
-    ],
-  },
-  {
-    title: 'Advanced / Longline',
-    description: 'For serious progression. Pulley systems and pro webbing.',
-    items: [
-      { name: 'Balance Community Longline Kit', price: '$280', best: true, note: 'Complete pulley system for 100m+ lines.' },
-      { name: 'Landcruising Webbing (per meter)', price: '$2-5/m', best: false, note: 'Pro-grade webbing. Choose your width and stretch profile.' },
-      { name: 'Rigging Plate + Pulleys', price: '$150+', best: false, note: 'Build your own system. Infinite customization.' },
-    ],
-  },
-];
+/*
+ * GEAR — Real recommendations + ISA standards from SF_SLACKLINE_VOICE_AND_DATA.md
+ * Balance Community is the primary recommended retailer.
+ * ISA DIN 79400 standards for tree protection.
+ */
 
 export default function GearPage() {
   return (
-    <div className="pt-24 pb-16">
-      <section className="py-16 md:py-24">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <span className="text-neon-lime text-xs font-semibold uppercase tracking-widest">Gear Guide</span>
-          <h1 className="font-[family-name:var(--font-display)] text-5xl md:text-7xl font-bold mt-3 mb-6 leading-tight">
-            Gear <span className="text-neon-lime">Up</span>
+    <div className="mt-14 font-body">
+      {/* Hero */}
+      <section className="bg-[#1A3A4A] py-12 sm:py-16">
+        <div className="max-w-5xl mx-auto px-5 sm:px-6">
+          <h1 className="font-display text-3xl sm:text-5xl font-black text-white leading-tight mb-3">
+            Gear Up
           </h1>
-          <p className="text-fog-300 text-xl max-w-3xl leading-relaxed">
-            Honest gear recommendations from the community. We only recommend what we actually use. 
-            Links support SF Slackline through affiliate commissions.
-          </p>
-          <p className="text-fog-300/60 text-sm mt-4">
-            💡 Don&apos;t buy gear to start — come to a Sunday session first and try ours for free.
+          <p className="text-white/60 text-sm sm:text-base font-light max-w-xl">
+            Don&apos;t buy gear to start. Come to a session first and try ours.
+            When you&apos;re ready, here&apos;s what to get and where.
           </p>
         </div>
       </section>
 
-      <section className="py-8">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
-          {gearCategories.map((cat) => (
-            <div key={cat.title}>
-              <h2 className="font-[family-name:var(--font-display)] text-3xl font-bold mb-2">{cat.title}</h2>
-              <p className="text-fog-300 mb-6">{cat.description}</p>
-              <div className="space-y-3">
-                {cat.items.map((item) => (
-                  <div key={item.name} className={`glass p-6 flex flex-col sm:flex-row sm:items-center gap-4 ${item.best ? 'border-neon-lime/30' : ''}`}>
-                    <div className="flex-1">
-                      <div className="flex items-center gap-3">
-                        <h3 className="font-[family-name:var(--font-display)] text-lg font-semibold text-fog-100">{item.name}</h3>
-                        {item.best && <span className="text-xs px-2 py-0.5 bg-neon-lime/10 text-neon-lime border border-neon-lime/20">Recommended</span>}
-                      </div>
-                      <p className="text-fog-300 text-sm mt-1">{item.note}</p>
+      {/* Beginner Kit */}
+      <section className="bg-white py-12 sm:py-16">
+        <div className="max-w-5xl mx-auto px-5 sm:px-6">
+          <h2 className="font-display text-2xl sm:text-3xl font-black text-[#1A3A4A] mb-1">Beginner Kit</h2>
+          <p className="text-sm text-gray-500 font-light mb-8">Everything you need. One purchase.</p>
+
+          <div className="space-y-4">
+            {[
+              {
+                name: 'Ratchet Kit (50ft)',
+                price: '$60–80',
+                rec: true,
+                desc: 'A 50ft ratchet kit with tree protectors is the standard starter setup. Gibbon, Slackline Industries, and YogaSlackers all make good ones. Gets you walking in 10 minutes.',
+              },
+              {
+                name: 'Primitive Kit',
+                price: '$100–130',
+                rec: false,
+                desc: 'No ratchet — uses line lockers or carabiners to tension. Lighter, more portable, teaches you proper rigging. Balance Community sells the definitive primitive kit.',
+              },
+            ].map((item) => (
+              <div key={item.name} className={`p-5 rounded-xl border ${item.rec ? 'border-[#C8A84E]/30 bg-[#F5F0E0]/30' : 'border-gray-100'}`}>
+                <div className="flex items-start justify-between gap-4">
+                  <div>
+                    <div className="flex items-center gap-2">
+                      <h3 className="font-semibold text-sm text-[#1A3A4A]">{item.name}</h3>
+                      {item.rec && <span className="text-[10px] px-1.5 py-0.5 bg-[#C8A84E]/10 text-[#C8A84E] border border-[#C8A84E]/20 rounded font-semibold">START HERE</span>}
                     </div>
-                    <div className="flex items-center gap-4">
-                      <span className="font-[family-name:var(--font-display)] text-xl font-bold text-neon-lime">{item.price}</span>
-                    </div>
+                    <p className="text-xs text-gray-600 font-light mt-1 leading-relaxed">{item.desc}</p>
                   </div>
-                ))}
+                  <span className="font-display text-lg font-black text-[#C8A84E] shrink-0">{item.price}</span>
+                </div>
               </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Longline / Advanced */}
+      <section className="bg-[#F2F4F6] py-12 sm:py-16">
+        <div className="max-w-5xl mx-auto px-5 sm:px-6">
+          <h2 className="font-display text-2xl font-black text-[#1A3A4A] mb-1">Longline Gear</h2>
+          <p className="text-sm text-gray-500 font-light mb-8">For 100ft+ lines. Pulley systems and pro webbing.</p>
+
+          <div className="space-y-4">
+            {[
+              { name: 'Pulley System Kit', price: '$250–350', desc: 'Complete pulley system for tensioning lines 100m+. Multiplies your pulling force. Essential for longlines — you physically cannot tension a 150ft line with a ratchet.' },
+              { name: 'Pro Webbing', price: '$2–5/meter', desc: 'Tubular or flat webbing in various widths and stretch profiles. 1" is standard. 2" is more forgiving. Buy by the meter from Balance Community.' },
+              { name: 'Rigging Plate + Pulleys', price: '$100–200', desc: 'Build your own system. Infinite customization. This is what T used to rig 140ft at Cole.' },
+            ].map((item) => (
+              <div key={item.name} className="p-5 rounded-xl bg-white border border-gray-200">
+                <div className="flex items-start justify-between gap-4">
+                  <div>
+                    <h3 className="font-semibold text-sm text-[#1A3A4A]">{item.name}</h3>
+                    <p className="text-xs text-gray-600 font-light mt-1 leading-relaxed">{item.desc}</p>
+                  </div>
+                  <span className="font-display text-lg font-black text-[#C8A84E] shrink-0">{item.price}</span>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Tree Protection — ISA Standards */}
+      <section className="bg-white py-12 sm:py-16">
+        <div className="max-w-5xl mx-auto px-5 sm:px-6">
+          <h2 className="font-display text-2xl sm:text-3xl font-black text-[#1A3A4A] mb-1">Tree Protection</h2>
+          <p className="text-sm text-gray-500 font-light mb-2">ISA DIN 79400 Standard. Non-negotiable.</p>
+          <p className="text-sm text-gray-600 font-light mb-8 max-w-2xl">
+            This is the gear that keeps our spots open. Every shutdown in our enforcement timeline
+            came from complaints — and tree damage is the #1 complaint. Protect the bark and
+            you protect the community.
+          </p>
+
+          <div className="grid sm:grid-cols-3 gap-5 mb-8">
+            <div className="p-5 rounded-xl bg-[#F5F0E0] border border-[#C8A84E]/20">
+              <h3 className="font-display text-2xl font-black text-[#C8A84E]">5cm+</h3>
+              <p className="text-sm font-semibold text-[#1A3A4A] mt-1">Sling width</p>
+              <p className="text-xs text-gray-600 font-light mt-1">Minimum 2 inches. Narrow slings cut bark.</p>
             </div>
-          ))}
+            <div className="p-5 rounded-xl bg-[#F5F0E0] border border-[#C8A84E]/20">
+              <h3 className="font-display text-2xl font-black text-[#C8A84E]">20cm</h3>
+              <p className="text-sm font-semibold text-[#1A3A4A] mt-1">Pad width</p>
+              <p className="text-xs text-gray-600 font-light mt-1">8 inches wide, 2–3 meters long per tree.</p>
+            </div>
+            <div className="p-5 rounded-xl bg-[#F5F0E0] border border-[#C8A84E]/20">
+              <h3 className="font-display text-2xl font-black text-[#C8A84E]">30cm</h3>
+              <p className="text-sm font-semibold text-[#1A3A4A] mt-1">Min tree diameter</p>
+              <p className="text-xs text-gray-600 font-light mt-1">About 12 inches. No small or young trees.</p>
+            </div>
+          </div>
+
+          <div className="space-y-3">
+            {[
+              { name: 'Professional Tree Protectors', price: '$20–40/pair', desc: 'Purpose-built felt or foam pads with velcro. Balance Community stocks several options. The easiest solution.' },
+              { name: 'Carpet Strips', price: 'Free–$5', desc: 'Cut carpet remnants work. SF Rec Park explicitly listed carpet strips as acceptable. Ask at any carpet store for scraps.' },
+              { name: 'Felt Mats / Burlap', price: '$5–15', desc: 'Hardware store felt or burlap sacking. Wrap around the trunk, secure with tape or string. Cheap and effective.' },
+            ].map((item) => (
+              <div key={item.name} className="p-4 rounded-lg border border-gray-100">
+                <div className="flex items-start justify-between gap-4">
+                  <div>
+                    <h3 className="font-semibold text-sm text-[#1A3A4A]">{item.name}</h3>
+                    <p className="text-xs text-gray-500 font-light mt-1">{item.desc}</p>
+                  </div>
+                  <span className="text-sm font-semibold text-[#1E6B7B] shrink-0">{item.price}</span>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
-      {/* Tree protection */}
-      <section className="py-16 bg-dark-900/30 border-y border-dark-700/30">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="font-[family-name:var(--font-display)] text-2xl font-bold mb-4 text-neon-lime">
-            🌳 Always Use Tree Protection
-          </h2>
-          <p className="text-fog-300 leading-relaxed">
-            Every single time. No exceptions. Tree protectors (wide, padded wraps around the tree) 
-            prevent damage to bark and keep slacklining welcome in our parks. 
-            If your kit doesn&apos;t include them, buy them separately. 
-            A towel or carpet scrap works in a pinch, but proper protectors are best.
+      {/* Where to Buy */}
+      <section className="bg-[#1A3A4A] py-12 sm:py-14">
+        <div className="max-w-5xl mx-auto px-5 sm:px-6">
+          <h2 className="font-display text-2xl font-black text-white mb-3">Where to Buy</h2>
+          <div className="p-5 rounded-xl bg-white/5 border border-white/10">
+            <h3 className="font-semibold text-sm text-[#C8A84E] mb-2">Balance Community</h3>
+            <p className="text-white/60 text-sm font-light leading-relaxed">
+              The online hub for slackliners since the early days. Started as a forum and community,
+              now primarily a gear retailer. Best selection of webbing, hardware, tree protection, and
+              complete kits in the US. This is where the slackline community buys gear.
+            </p>
+            <a
+              href="https://balancecommunity.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-block mt-3 bg-[#C8A84E] text-[#1A3A4A] px-5 py-2.5 rounded text-xs font-semibold uppercase tracking-wider hover:bg-[#B8983E] transition-colors"
+            >
+              balancecommunity.com
+            </a>
+          </div>
+          <p className="text-white/30 text-[10px] mt-3">
+            ISA gear standards: <a href="https://slacklineinternational.org/isa-gear-standards/" target="_blank" rel="noopener noreferrer" className="text-[#C8A84E]/50 underline">slacklineinternational.org</a>
           </p>
         </div>
       </section>
 
-      <section className="py-16">
-        <div className="max-w-4xl mx-auto px-4 text-center">
-          <h2 className="font-[family-name:var(--font-display)] text-3xl font-bold mb-4">
-            Not sure what to get?
-          </h2>
-          <p className="text-fog-300 mb-8">
-            Come to a session, try different setups, and ask the community. 
-            Everyone loves talking gear.
+      {/* CTA */}
+      <section className="bg-[#1E6B7B] py-10">
+        <div className="max-w-5xl mx-auto px-5 sm:px-6 text-center">
+          <h2 className="font-display text-xl font-black text-white mb-2">Still not sure?</h2>
+          <p className="text-sm font-light text-white/70 mb-5">
+            Come to a session. Try different setups. Everyone loves talking gear.
           </p>
-          <Link href="/events" className="btn-primary">Come to a Session</Link>
+          <div className="flex gap-3 justify-center">
+            <Link
+              href="/spots"
+              className="inline-block bg-[#C8A84E] text-[#1A3A4A] px-5 py-2.5 rounded text-xs font-semibold uppercase tracking-wider hover:bg-[#B8983E] transition-colors"
+            >
+              Find a Spot
+            </Link>
+            <Link
+              href="/safety"
+              className="inline-block border border-white/30 text-white px-5 py-2.5 rounded text-xs font-semibold uppercase tracking-wider hover:bg-white/10 transition-colors"
+            >
+              Safety & Legal
+            </Link>
+          </div>
         </div>
       </section>
     </div>
