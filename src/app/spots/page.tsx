@@ -161,7 +161,7 @@ export default function SpotsPage() {
 
     map.current = new maplibregl.Map({
       container: mapContainer.current,
-      style: 'https://tiles.openfreemap.org/styles/positron',
+      style: `https://api.mapbox.com/styles/v1/mapbox/outdoors-v12?access_token=${process.env.NEXT_PUBLIC_MAPBOX_TOKEN}`,
       center: [-122.435, 37.77],
       zoom: 12,
     });
