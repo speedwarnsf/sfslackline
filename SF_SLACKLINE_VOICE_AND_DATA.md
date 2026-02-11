@@ -280,6 +280,52 @@ Source: [Wayback Machine 2019](https://web.archive.org/web/20190920143203/https:
 
 ---
 
-*Built from: 360 @sfslackline tweets (Feb 2011–Nov 2018), sfslackline.org content, EXIF data from 22 photos, SF Rec & Park archived policy, ISA resources.*
+---
+
+## Extended Family — World-Class Visitors
+
+SF Slackline wasn't isolated. World-record holders passed through, crashed on couches, and slacked at the parks.
+
+### Tarzen — "The Grand Slacker of Austin"
+- Austin, Texas legend. Grandfather, massage therapist, "experience creator"
+- Shepherds Austin's slackline scene. Rigs lines across bridges, rides longboards down parking garages
+- Catchphrase: "I hope you have the best day ever." Little Chihuahua named Moca
+- Documentary: "Tarzen: The Grand Slacker of Austin" by Circus Picnic (YouTube: UimnK9DIxEw)
+- Article: circuspicnic.com/post/tarzen-the-grand-slacker-of-austin
+- **Visited SF and slacked with the crew**
+
+### Andy Lewis ("Sketchy Andy") — Marin County Native
+- Born Oct 7, 1986, Santa Rosa, CA. Grew up in Greenbrae (Marin County)
+- Madonna's Super Bowl XLVI halftime show trickline performer, Feb 5, 2012
+- 4x slackline world champion (2008–2011). First-ever slackline world champion
+- Wikipedia page, NYT coverage, SNL and Conan parodies
+- **Bay Area native, connected to SF slackline community**
+- Note: Later controversies (harassment charges, Utah monolith removal)
+
+### Alexander Schulz — German World Record Holder
+- Born 1991, Rosenheim, Germany. Multiple highline world record holder
+- Founded "One Inch Dreams" collective (2012)
+- Crossed active volcano Mount Yasur on a highline (April 2020, Vanuatu)
+- Late 2011: Two-month trip in western US, walked 119m Consumnes River Gorge, CA
+- **Stayed with SF Slackline crew. Walked longest midline world record**
+
+### Lukas Irmler — German Record Breaker
+- Walked longest highline in the world: 2km (Aug 2019)
+- Guinness record: highest slackline walk at 2,500m between hot air balloons (Nov 2024)
+- **Stayed with SF Slackline crew for several nights**
+
+---
+
+## Injury Archive
+
+Community-sourced injury documentation from sfslackline.org/sf_slackline/injury-upload/
+
+12 photos archived: broken fingers (with X-rays), Dat's arm injuries, high ankle sprain, possible broken toes, finger-meets-carabiner, Kiki's toes, O'Malley's injury, Anya's injury, line injury.
+
+Key finding: Medical literature has almost zero documented slackline injuries — only 7 PubMed results, most about slacklining as *therapy*.
+
+---
+
+*Built from: 360 @sfslackline tweets (Feb 2011–Nov 2018), sfslackline.org content, EXIF data from 22 photos, SF Rec & Park archived policy, ISA resources, Dustin's firsthand accounts.*
 *Document created: February 11, 2026*
 *This is a living document. Update it with new verified data only.*
