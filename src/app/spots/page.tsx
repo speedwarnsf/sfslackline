@@ -257,70 +257,106 @@ export default function SpotsPage() {
         </div>
       )}
 
-      {/* Map area */}
-      <div className="relative w-full" style={{ height: '65vh', minHeight: '450px' }}>
-        {/* Interactive map container */}
+      {/* Map area — splits when multiple lines are active */}
+      {activeLines.length >= 2 ? (
+        /* SPLIT VIEW: one panel per active line */
         <div
-          ref={mapContainer}
-          style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0 }}
-        />
-
-        {/* Fallback static map image */}
-        {mapFailed && staticMapUrl && (
-          <div className="absolute inset-0 z-[1]">
-            <img
-              src={staticMapUrl}
-              alt="SF Slackline Spots"
-              className="w-full h-full object-cover"
-            />
-            <div className="absolute top-3 left-3 bg-white/90 rounded-lg px-3 py-2 shadow text-xs text-[#1A3A4A]">
-              Static map · Interactive map unavailable on this device
-            </div>
-          </div>
-        )}
-
-        {/* Selected spot card */}
-        {selectedSpot && (
-          <div className="absolute bottom-4 left-4 right-4 sm:left-4 sm:right-auto sm:w-80 bg-white rounded-xl shadow-lg p-4 z-10">
-            <button
-              onClick={() => setSelectedSpot(null)}
-              className="absolute top-2 right-2 text-gray-400 hover:text-gray-600 text-lg leading-none"
-            >
-              ×
-            </button>
-            <h3 className="font-display text-lg font-black text-[#1A3A4A]">{selectedSpot.name}</h3>
-            <p className="text-xs text-[#1E6B7B] font-medium">{selectedSpot.aka}</p>
-            <p className="text-xs text-gray-500 font-light mt-2">{selectedSpot.note}</p>
-            {selectedSpot.lengths && (
-              <p className="text-xs text-gray-500 mt-1">
-                <span className="font-medium text-[#1A3A4A]">Lines:</span> {selectedSpot.lengths}
-              </p>
-            )}
-            <a
-              href={`https://earth.google.com/web/@${selectedSpot.lat},${selectedSpot.lng},50a,300d,35y,0h,45t,0r`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="mt-3 inline-flex items-center gap-1.5 text-xs font-semibold text-[#1E6B7B] hover:text-[#C8A84E] transition-colors"
-            >
-              <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
-              See the trees in Google Earth →
-            </a>
-            <div className="mt-2 flex gap-4 text-[10px] text-gray-400">
-              <span>{selectedSpot.tweetCount} tweets</span>
-              <span>Active {selectedSpot.years}</span>
-            </div>
-            {activeLines.includes(selectedSpot.name) && (
-              <div className="mt-2 flex items-center gap-2 text-xs font-semibold text-[#C8A84E]">
-                <span className="relative flex h-2 w-2">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#C8A84E] opacity-75" />
-                  <span className="relative inline-flex rounded-full h-2 w-2 bg-[#C8A84E]" />
-                </span>
-                LINE UP NOW
+          className={`grid w-full ${activeLines.length === 2 ? 'grid-cols-2' : activeLines.length === 3 ? 'grid-cols-3' : 'grid-cols-2 grid-rows-2'}`}
+          style={{ height: '65vh', minHeight: '450px' }}
+        >
+          {activeLines.slice(0, 4).map((name) => {
+            const spot = spots.find(s => s.name === name);
+            if (!spot) return null;
+            const panelMapUrl = MAPBOX_TOKEN
+              ? `https://api.mapbox.com/styles/v1/mapbox/satellite-streets-v12/static/pin-l+C8A84E(${spot.lng},${spot.lat})/${spot.lng},${spot.lat},16,0/400x400@2x?access_token=${MAPBOX_TOKEN}`
+              : '';
+            return (
+              <div key={name} className="relative overflow-hidden border border-[#1A3A4A]/20">
+                {panelMapUrl && (
+                  <img src={panelMapUrl} alt={spot.name} className="w-full h-full object-cover" />
+                )}
+                {/* Pulsing beacon overlay */}
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none">
+                  <span className="relative flex h-6 w-6">
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#C8A84E] opacity-60" />
+                    <span className="relative inline-flex rounded-full h-6 w-6 bg-[#C8A84E] border-2 border-white shadow-lg" />
+                  </span>
+                </div>
+                {/* Label */}
+                <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-3">
+                  <div className="flex items-center gap-2">
+                    <span className="relative flex h-2 w-2">
+                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#C8A84E] opacity-75" />
+                      <span className="relative inline-flex rounded-full h-2 w-2 bg-[#C8A84E]" />
+                    </span>
+                    <span className="text-white text-xs font-semibold">{spot.name}</span>
+                  </div>
+                  <p className="text-white/60 text-[10px] mt-0.5">{spot.aka}</p>
+                  {spot.lengths && <p className="text-white/50 text-[10px]">{spot.lengths}</p>}
+                  <a
+                    href={`https://earth.google.com/web/@${spot.lat},${spot.lng},50a,100d,35y,0h,45t,0r`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-[#C8A84E] text-[10px] font-medium hover:text-white transition-colors mt-1 inline-block"
+                  >
+                    Google Earth →
+                  </a>
+                </div>
               </div>
-            )}
-          </div>
-        )}
-      </div>
+            );
+          })}
+        </div>
+      ) : (
+        /* SINGLE MAP VIEW */
+        <div className="relative w-full" style={{ height: '65vh', minHeight: '450px' }}>
+          <div
+            ref={mapContainer}
+            style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0 }}
+          />
+
+          {mapFailed && staticMapUrl && (
+            <div className="absolute inset-0 z-[1]">
+              <img src={staticMapUrl} alt="SF Slackline Spots" className="w-full h-full object-cover" />
+              <div className="absolute top-3 left-3 bg-white/90 rounded-lg px-3 py-2 shadow text-xs text-[#1A3A4A]">
+                Static map · Interactive map unavailable on this device
+              </div>
+            </div>
+          )}
+
+          {selectedSpot && (
+            <div className="absolute bottom-4 left-4 right-4 sm:left-4 sm:right-auto sm:w-80 bg-white rounded-xl shadow-lg p-4 z-10">
+              <button onClick={() => setSelectedSpot(null)} className="absolute top-2 right-2 text-gray-400 hover:text-gray-600 text-lg leading-none">×</button>
+              <h3 className="font-display text-lg font-black text-[#1A3A4A]">{selectedSpot.name}</h3>
+              <p className="text-xs text-[#1E6B7B] font-medium">{selectedSpot.aka}</p>
+              <p className="text-xs text-gray-500 font-light mt-2">{selectedSpot.note}</p>
+              {selectedSpot.lengths && (
+                <p className="text-xs text-gray-500 mt-1"><span className="font-medium text-[#1A3A4A]">Lines:</span> {selectedSpot.lengths}</p>
+              )}
+              <a
+                href={`https://earth.google.com/web/@${selectedSpot.lat},${selectedSpot.lng},50a,300d,35y,0h,45t,0r`}
+                target="_blank" rel="noopener noreferrer"
+                className="mt-3 inline-flex items-center gap-1.5 text-xs font-semibold text-[#1E6B7B] hover:text-[#C8A84E] transition-colors"
+              >
+                <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+                See the trees in Google Earth →
+              </a>
+              <div className="mt-2 flex gap-4 text-[10px] text-gray-400">
+                <span>{selectedSpot.tweetCount} tweets</span>
+                <span>Active {selectedSpot.years}</span>
+              </div>
+              {activeLines.includes(selectedSpot.name) && (
+                <div className="mt-2 flex items-center gap-2 text-xs font-semibold text-[#C8A84E]">
+                  <span className="relative flex h-2 w-2">
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#C8A84E] opacity-75" />
+                    <span className="relative inline-flex rounded-full h-2 w-2 bg-[#C8A84E]" />
+                  </span>
+                  LINE UP NOW
+                </div>
+              )}
+            </div>
+          )}
+        </div>
+      )}
 
       {/* Demo controls */}
       <div className="bg-[#1A3A4A] px-5 py-4">
