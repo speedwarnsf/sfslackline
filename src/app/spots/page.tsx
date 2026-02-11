@@ -1,13 +1,6 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
-import type mapboxgl from 'mapbox-gl';
-
-/*
- * ALL SPOT DATA FROM: SF_SLACKLINE_VOICE_AND_DATA.md
- * GPS from EXIF metadata or known park coordinates.
- * Tweet counts from @sfslackline archive (360 tweets, 2011–2018).
- */
 
 interface Spot {
   name: string;
@@ -19,7 +12,6 @@ interface Spot {
   years: string;
   note: string;
   lengths?: string;
-  active?: boolean; // for future real-time status
 }
 
 const spots: Spot[] = [
@@ -140,116 +132,118 @@ const spots: Spot[] = [
   },
 ];
 
+const MAPBOX_TOKEN = process.env.NEXT_PUBLIC_MAPBOX_TOKEN || '';
+
 export default function SpotsPage() {
   const mapContainer = useRef<HTMLDivElement>(null);
-  const map = useRef<mapboxgl.Map | null>(null);
+  const mapRef = useRef<unknown>(null);
   const [selectedSpot, setSelectedSpot] = useState<Spot | null>(null);
-  const [splitView, setSplitView] = useState(false);
-
-  // Simulate active lines for demo
   const [activeLines, setActiveLines] = useState<string[]>([]);
-  const [mapError, setMapError] = useState<string | null>(null);
+  const [mapLoaded, setMapLoaded] = useState(false);
+  const [mapFailed, setMapFailed] = useState(false);
 
   useEffect(() => {
-    if (!mapContainer.current || map.current) return;
-
+    if (!mapContainer.current || mapRef.current) return;
     let cancelled = false;
 
-    // Load Mapbox GL JS via CDN script tag for maximum compatibility
-    const script = document.createElement('script');
-    script.src = 'https://api.mapbox.com/mapbox-gl-js/v3.9.4/mapbox-gl.js';
-    script.async = true;
-    script.onload = () => {
+    // Try Mapbox GL JS via CDN
+    const existing = document.getElementById('mapbox-gl-script');
+    const initMap = () => {
       if (cancelled || !mapContainer.current) return;
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const mapboxgl = (window as any).mapboxgl;
-      if (!mapboxgl) {
-        setMapError('Mapbox GL JS failed to load');
+      if (!mapboxgl || !MAPBOX_TOKEN) {
+        setMapFailed(true);
         return;
       }
-
-      const token = process.env.NEXT_PUBLIC_MAPBOX_TOKEN || '';
-      mapboxgl.accessToken = token;
-
-      if (!token) {
-        setMapError('Map token not configured');
-        return;
-      }
-
+      mapboxgl.accessToken = MAPBOX_TOKEN;
       try {
-        map.current = new mapboxgl.Map({
+        const m = new mapboxgl.Map({
           container: mapContainer.current,
           style: 'mapbox://styles/mapbox/outdoors-v12',
           center: [-122.435, 37.77],
           zoom: 12,
         });
-      } catch (e) {
-        setMapError(`Map init failed: ${e instanceof Error ? e.message : 'Unknown'}`);
-        return;
-      }
+        mapRef.current = m;
+        m.on('load', () => { if (!cancelled) setMapLoaded(true); });
+        m.on('error', () => { if (!cancelled) setMapFailed(true); });
+        m.addControl(new mapboxgl.NavigationControl(), 'top-right');
 
-      map.current!.addControl(new mapboxgl.NavigationControl(), 'top-right');
-
-      spots.forEach((spot) => {
-        const el = document.createElement('div');
-        el.className = 'spot-marker';
-        el.innerHTML = `
-          <div class="marker-dot ${spot.name === 'Dolores Park' || spot.name === 'The Panhandle' ? 'primary' : 'secondary'}">
-            <div class="pulse-ring"></div>
-          </div>
-        `;
-
-        el.addEventListener('click', () => {
-          setSelectedSpot(spot);
-          map.current?.flyTo({
-            center: [spot.lng, spot.lat],
-            zoom: 15,
-            duration: 1200,
+        spots.forEach((spot) => {
+          const el = document.createElement('div');
+          el.className = 'spot-marker';
+          el.innerHTML = `<div class="marker-dot ${spot.name === 'Dolores Park' || spot.name === 'The Panhandle' ? 'primary' : 'secondary'}"><div class="pulse-ring"></div></div>`;
+          el.addEventListener('click', () => {
+            setSelectedSpot(spot);
+            m.flyTo({ center: [spot.lng, spot.lat], zoom: 15, duration: 1200 });
           });
+          new mapboxgl.Marker({ element: el }).setLngLat([spot.lng, spot.lat]).addTo(m);
         });
-
-        new mapboxgl.Marker({ element: el })
-          .setLngLat([spot.lng, spot.lat])
-          .addTo(map.current!);
-      });
+      } catch {
+        setMapFailed(true);
+      }
     };
-    script.onerror = () => setMapError('Failed to load Mapbox script');
-    document.head.appendChild(script);
+
+    if (existing) {
+      initMap();
+    } else {
+      const script = document.createElement('script');
+      script.id = 'mapbox-gl-script';
+      script.src = 'https://api.mapbox.com/mapbox-gl-js/v3.9.4/mapbox-gl.js';
+      script.async = true;
+      script.onload = initMap;
+      script.onerror = () => setMapFailed(true);
+      document.head.appendChild(script);
+
+      const link = document.createElement('link');
+      link.rel = 'stylesheet';
+      link.href = 'https://api.mapbox.com/mapbox-gl-js/v3.9.4/mapbox-gl.css';
+      document.head.appendChild(link);
+    }
+
+    // Timeout fallback
+    const timeout = setTimeout(() => {
+      if (!mapLoaded && !mapFailed) setMapFailed(true);
+    }, 8000);
 
     return () => {
       cancelled = true;
-      map.current?.remove();
-      map.current = null;
+      clearTimeout(timeout);
     };
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const simulateLineUp = (spotName: string) => {
-    setActiveLines((prev) => [...prev, spotName]);
-    const spot = spots.find((s) => s.name === spotName);
-    if (spot && map.current) {
-      map.current.flyTo({
-        center: [spot.lng, spot.lat],
-        zoom: 16,
-        duration: 1500,
-      });
-      setSelectedSpot(spot);
+  const flyTo = (spot: Spot) => {
+    setSelectedSpot(spot);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const m = mapRef.current as any;
+    if (m?.flyTo) {
+      m.flyTo({ center: [spot.lng, spot.lat], zoom: 15, duration: 1200 });
     }
   };
 
-  const simulateLineDown = (spotName: string) => {
-    setActiveLines((prev) => prev.filter((n) => n !== spotName));
+  const simulateLineUp = (name: string) => {
+    setActiveLines(prev => [...prev, name]);
+    const spot = spots.find(s => s.name === name);
+    if (spot) flyTo(spot);
   };
+
+  // Static map URL as fallback
+  const staticMapUrl = MAPBOX_TOKEN
+    ? `https://api.mapbox.com/styles/v1/mapbox/outdoors-v12/static/${spots
+        .map(s => `pin-s+C8A84E(${s.lng},${s.lat})`)
+        .join(',')
+      }/-122.435,37.77,11,0/800x500@2x?access_token=${MAPBOX_TOKEN}`
+    : '';
 
   return (
     <div className="mt-14 font-body">
-      {/* eslint-disable-next-line @next/next/no-css-tags */}
-      <link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/v3.9.4/mapbox-gl.css" />
       {/* Header */}
       <div className="bg-[#1A3A4A] px-5 py-6 sm:px-6">
         <div className="max-w-5xl mx-auto">
           <h1 className="font-display text-3xl sm:text-4xl font-black text-white mb-1">Spot Map</h1>
           <p className="text-sm text-white/60 font-light">
-            {spots.length} verified locations from tweets + EXIF GPS · {activeLines.length > 0 ? `${activeLines.length} line${activeLines.length > 1 ? 's' : ''} up now` : 'No lines up right now'}
+            {spots.length} verified locations · {activeLines.length > 0 ? `${activeLines.length} line${activeLines.length > 1 ? 's' : ''} up` : 'No lines up right now'}
           </p>
         </div>
       </div>
@@ -269,223 +263,144 @@ export default function SpotsPage() {
         </div>
       )}
 
-      {/* Map + sidebar layout */}
-      <div className="flex flex-col lg:flex-row" style={{ minHeight: 'calc(100vh - 180px)' }}>
-        {/* Map */}
-        <div className="relative flex-1" style={{ height: '60vh', minHeight: '400px' }}>
-          <div ref={mapContainer} style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, width: '100%', height: '100%' }} />
-          {mapError && (
-            <div className="absolute inset-0 flex items-center justify-center bg-gray-100 z-5">
-              <div className="text-center p-6">
-                <p className="text-sm text-red-600 font-medium">{mapError}</p>
-                <p className="text-xs text-gray-400 mt-2">Token: {process.env.NEXT_PUBLIC_MAPBOX_TOKEN ? 'present' : 'MISSING'}</p>
-              </div>
-            </div>
-          )}
-          {/* Fallback static map if WebGL unavailable */}
-          {!mapError && (
-            <noscript>
-              <img src={`https://api.mapbox.com/styles/v1/mapbox/outdoors-v12/static/-122.435,37.77,11,0/800x600@2x?access_token=${process.env.NEXT_PUBLIC_MAPBOX_TOKEN}`} alt="SF Slackline Spots Map" className="w-full h-full object-cover" />
-            </noscript>
-          )}
+      {/* Map area */}
+      <div className="relative w-full" style={{ height: '65vh', minHeight: '450px' }}>
+        {/* Interactive map container */}
+        <div
+          ref={mapContainer}
+          style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0 }}
+        />
 
-          {/* Selected spot card */}
-          {selectedSpot && (
-            <div className="absolute bottom-4 left-4 right-4 sm:left-4 sm:right-auto sm:w-80 bg-white rounded-xl shadow-lg p-4 z-10">
-              <button
-                onClick={() => setSelectedSpot(null)}
-                className="absolute top-2 right-2 text-gray-400 hover:text-gray-600 text-lg"
-              >
-                ×
-              </button>
-              <h3 className="font-display text-lg font-black text-[#1A3A4A]">{selectedSpot.name}</h3>
-              <p className="text-xs text-[#1E6B7B] font-medium">{selectedSpot.aka}</p>
-              <p className="text-xs text-gray-500 font-light mt-2">{selectedSpot.note}</p>
-              {selectedSpot.lengths && (
-                <p className="text-xs text-gray-500 mt-1">
-                  <span className="font-medium text-[#1A3A4A]">Lines:</span> {selectedSpot.lengths}
-                </p>
-              )}
-              {/* Google Earth link */}
-              <a
-                href={`https://earth.google.com/web/@${selectedSpot.lat},${selectedSpot.lng},50a,300d,35y,0h,45t,0r`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="mt-3 flex items-center gap-1.5 text-xs font-semibold text-[#1E6B7B] hover:text-[#C8A84E] transition-colors"
-              >
-                <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
-                See the trees in Google Earth →
-              </a>
-              <div className="mt-2 flex gap-4 text-[10px] text-gray-400">
-                <span>{selectedSpot.tweetCount} tweets</span>
-                <span>Active {selectedSpot.years}</span>
-                <span>{selectedSpot.gpsSource}</span>
-              </div>
-              {activeLines.includes(selectedSpot.name) && (
-                <div className="mt-3 flex items-center gap-2 text-xs font-semibold text-[#C8A84E]">
-                  <span className="relative flex h-2 w-2">
-                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#C8A84E] opacity-75" />
-                    <span className="relative inline-flex rounded-full h-2 w-2 bg-[#C8A84E]" />
-                  </span>
-                  LINE UP NOW
-                </div>
-              )}
-            </div>
-          )}
-        </div>
-
-        {/* Sidebar — spot list */}
-        <div className="lg:w-80 bg-[#F2F4F6] overflow-y-auto border-l border-gray-200">
-          {/* Demo controls */}
-          <div className="p-4 bg-[#1A3A4A] text-white">
-            <p className="text-[10px] uppercase tracking-widest text-white/40 mb-2">Demo: simulate real-time</p>
-            <div className="flex gap-2">
-              <button
-                onClick={() => simulateLineUp('Dolores Park')}
-                className="px-3 py-1.5 bg-[#C8A84E] text-[#1A3A4A] rounded text-xs font-semibold hover:bg-[#B8983E] transition-colors"
-              >
-                DP Line Up
-              </button>
-              <button
-                onClick={() => simulateLineUp('The Panhandle')}
-                className="px-3 py-1.5 bg-[#C8A84E] text-[#1A3A4A] rounded text-xs font-semibold hover:bg-[#B8983E] transition-colors"
-              >
-                Panhandle Up
-              </button>
-              <button
-                onClick={() => setActiveLines([])}
-                className="px-3 py-1.5 border border-white/20 text-white/60 rounded text-xs hover:bg-white/5 transition-colors"
-              >
-                All Down
-              </button>
+        {/* Fallback static map image */}
+        {mapFailed && staticMapUrl && (
+          <div className="absolute inset-0 z-[1]">
+            <img
+              src={staticMapUrl}
+              alt="SF Slackline Spots"
+              className="w-full h-full object-cover"
+            />
+            <div className="absolute top-3 left-3 bg-white/90 rounded-lg px-3 py-2 shadow text-xs text-[#1A3A4A]">
+              Static map · Interactive map unavailable on this device
             </div>
           </div>
+        )}
 
-          {/* Spot list */}
-          <div className="divide-y divide-gray-200">
-            {spots.map((spot) => (
-              <button
-                key={spot.name}
-                onClick={() => {
-                  setSelectedSpot(spot);
-                  map.current?.flyTo({
-                    center: [spot.lng, spot.lat],
-                    zoom: 15,
-                    duration: 1200,
-                  });
-                }}
-                className={`w-full text-left p-4 hover:bg-white transition-colors ${
-                  selectedSpot?.name === spot.name ? 'bg-white' : ''
-                }`}
-              >
-                <div className="flex items-start justify-between">
-                  <div>
-                    <h3 className="font-semibold text-sm text-[#1A3A4A]">{spot.name}</h3>
-                    <p className="text-[11px] text-[#1E6B7B]">{spot.aka}</p>
-                  </div>
-                  {activeLines.includes(spot.name) && (
-                    <span className="relative flex h-3 w-3 mt-1">
-                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#C8A84E] opacity-75" />
-                      <span className="relative inline-flex rounded-full h-3 w-3 bg-[#C8A84E]" />
-                    </span>
-                  )}
-                </div>
-                <div className="flex items-center justify-between mt-1">
-                  <p className="text-[10px] text-gray-400">{spot.tweetCount} tweets · {spot.years}</p>
-                  <a
-                    href={`https://earth.google.com/web/@${spot.lat},${spot.lng},50a,300d,35y,0h,45t,0r`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    onClick={(e) => e.stopPropagation()}
-                    className="text-[10px] text-[#1E6B7B] hover:text-[#C8A84E] font-medium transition-colors"
-                  >
-                    Earth →
-                  </a>
-                </div>
-              </button>
-            ))}
+        {/* Selected spot card */}
+        {selectedSpot && (
+          <div className="absolute bottom-4 left-4 right-4 sm:left-4 sm:right-auto sm:w-80 bg-white rounded-xl shadow-lg p-4 z-10">
+            <button
+              onClick={() => setSelectedSpot(null)}
+              className="absolute top-2 right-2 text-gray-400 hover:text-gray-600 text-lg leading-none"
+            >
+              ×
+            </button>
+            <h3 className="font-display text-lg font-black text-[#1A3A4A]">{selectedSpot.name}</h3>
+            <p className="text-xs text-[#1E6B7B] font-medium">{selectedSpot.aka}</p>
+            <p className="text-xs text-gray-500 font-light mt-2">{selectedSpot.note}</p>
+            {selectedSpot.lengths && (
+              <p className="text-xs text-gray-500 mt-1">
+                <span className="font-medium text-[#1A3A4A]">Lines:</span> {selectedSpot.lengths}
+              </p>
+            )}
+            <a
+              href={`https://earth.google.com/web/@${selectedSpot.lat},${selectedSpot.lng},50a,300d,35y,0h,45t,0r`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-3 inline-flex items-center gap-1.5 text-xs font-semibold text-[#1E6B7B] hover:text-[#C8A84E] transition-colors"
+            >
+              <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+              See the trees in Google Earth →
+            </a>
+            <div className="mt-2 flex gap-4 text-[10px] text-gray-400">
+              <span>{selectedSpot.tweetCount} tweets</span>
+              <span>Active {selectedSpot.years}</span>
+            </div>
+            {activeLines.includes(selectedSpot.name) && (
+              <div className="mt-2 flex items-center gap-2 text-xs font-semibold text-[#C8A84E]">
+                <span className="relative flex h-2 w-2">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#C8A84E] opacity-75" />
+                  <span className="relative inline-flex rounded-full h-2 w-2 bg-[#C8A84E]" />
+                </span>
+                LINE UP NOW
+              </div>
+            )}
+          </div>
+        )}
+      </div>
+
+      {/* Demo controls */}
+      <div className="bg-[#1A3A4A] px-5 py-4">
+        <div className="max-w-5xl mx-auto">
+          <p className="text-[10px] uppercase tracking-widest text-white/40 mb-2">Demo: simulate real-time</p>
+          <div className="flex gap-2 flex-wrap">
+            <button onClick={() => simulateLineUp('Dolores Park')} className="px-3 py-1.5 bg-[#C8A84E] text-[#1A3A4A] rounded text-xs font-semibold hover:bg-[#B8983E] transition-colors">DP Line Up</button>
+            <button onClick={() => simulateLineUp('The Panhandle')} className="px-3 py-1.5 bg-[#C8A84E] text-[#1A3A4A] rounded text-xs font-semibold hover:bg-[#B8983E] transition-colors">Panhandle Up</button>
+            <button onClick={() => setActiveLines([])} className="px-3 py-1.5 border border-white/20 text-white/60 rounded text-xs hover:bg-white/5 transition-colors">All Down</button>
           </div>
         </div>
       </div>
 
-      {/* Spot Profiles — Full list view */}
-      <section className="bg-white py-12 sm:py-16">
-        <div className="max-w-5xl mx-auto px-5 sm:px-6">
-          <h2 className="font-display text-2xl sm:text-3xl font-black text-[#1A3A4A] mb-1">All Spots</h2>
-          <p className="text-sm text-gray-500 font-light mb-8">Full profiles for every verified location</p>
-
-          <div className="space-y-4">
-            {spots.map((spot) => (
-              <div key={spot.name} className="p-5 rounded-xl border border-gray-100 hover:border-[#C8A84E]/20 transition-colors">
-                <div className="flex flex-col sm:flex-row sm:items-start gap-4">
-                  <div className="sm:w-24 shrink-0">
-                    <span className="text-[10px] font-mono text-[#C8A84E] bg-[#C8A84E]/10 px-2 py-0.5 rounded">{spot.tweetCount} tweets</span>
-                  </div>
-                  <div className="flex-1">
-                    <h3 className="font-display text-lg font-black text-[#1A3A4A]">{spot.name}</h3>
-                    <p className="text-xs text-[#1E6B7B] font-medium">{spot.aka}</p>
-                    <p className="text-sm text-gray-600 font-light mt-2 leading-relaxed">{spot.note}</p>
-                    {spot.lengths && (
-                      <p className="text-xs text-gray-500 mt-2">
-                        <span className="font-semibold text-[#1A3A4A]">Lines:</span> {spot.lengths}
-                      </p>
-                    )}
-                    <div className="mt-3 flex flex-wrap gap-4 text-[10px] text-gray-400">
-                      <span>Active: {spot.years}</span>
-                      <span>GPS: {spot.gpsSource}</span>
-                    </div>
-                  </div>
+      {/* All Spots list */}
+      <div className="max-w-5xl mx-auto px-5 py-10">
+        <h2 className="font-display text-2xl font-black text-[#1A3A4A] mb-1">All Spots</h2>
+        <p className="text-sm text-gray-500 mb-6">Full profiles for every verified location</p>
+        <div className="grid gap-4 sm:grid-cols-2">
+          {spots.map((spot) => (
+            <button
+              key={spot.name}
+              onClick={() => flyTo(spot)}
+              className="text-left p-5 rounded-xl border border-gray-200 hover:border-[#1E6B7B] hover:shadow-md transition-all"
+            >
+              <div className="flex items-start justify-between">
+                <div>
+                  <h3 className="font-semibold text-[#1A3A4A]">{spot.name}</h3>
+                  <p className="text-xs text-[#1E6B7B] font-medium">{spot.aka}</p>
                 </div>
+                {activeLines.includes(spot.name) && (
+                  <span className="relative flex h-3 w-3 mt-1">
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#C8A84E] opacity-75" />
+                    <span className="relative inline-flex rounded-full h-3 w-3 bg-[#C8A84E]" />
+                  </span>
+                )}
               </div>
-            ))}
-          </div>
+              <p className="text-xs text-gray-500 mt-2">{spot.note}</p>
+              {spot.lengths && <p className="text-xs text-gray-400 mt-1"><span className="font-medium text-[#1A3A4A]">Lines:</span> {spot.lengths}</p>}
+              <div className="mt-3 flex items-center justify-between">
+                <span className="text-[10px] text-gray-400">{spot.tweetCount} tweets · {spot.years}</span>
+                <a
+                  href={`https://earth.google.com/web/@${spot.lat},${spot.lng},50a,300d,35y,0h,45t,0r`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={e => e.stopPropagation()}
+                  className="text-[10px] text-[#1E6B7B] hover:text-[#C8A84E] font-medium"
+                >
+                  Google Earth →
+                </a>
+              </div>
+            </button>
+          ))}
         </div>
-      </section>
+      </div>
 
-      {/* CSS for map markers */}
+      {/* Marker CSS */}
       <style jsx global>{`
-        .spot-marker {
-          cursor: pointer;
-        }
+        .spot-marker { cursor: pointer; }
         .marker-dot {
-          width: 16px;
-          height: 16px;
-          border-radius: 50%;
-          position: relative;
-          border: 2px solid white;
+          width: 16px; height: 16px; border-radius: 50%;
+          position: relative; border: 2px solid white;
           box-shadow: 0 1px 4px rgba(0,0,0,0.3);
         }
-        .marker-dot.primary {
-          background: #C8A84E;
-          width: 20px;
-          height: 20px;
-        }
-        .marker-dot.secondary {
-          background: #1E6B7B;
-        }
+        .marker-dot.primary { background: #C8A84E; width: 20px; height: 20px; }
+        .marker-dot.secondary { background: #1E6B7B; }
         .pulse-ring {
-          position: absolute;
-          inset: -6px;
-          border-radius: 50%;
+          position: absolute; inset: -6px; border-radius: 50%;
           border: 2px solid #C8A84E;
-          animation: pulse-ring 2s ease-out infinite;
-          opacity: 0;
+          animation: pulse-ring 2s ease-out infinite; opacity: 0;
         }
-        .marker-dot.secondary .pulse-ring {
-          border-color: #1E6B7B;
-        }
+        .marker-dot.secondary .pulse-ring { border-color: #1E6B7B; }
         @keyframes pulse-ring {
-          0% {
-            transform: scale(0.5);
-            opacity: 0.8;
-          }
-          100% {
-            transform: scale(2);
-            opacity: 0;
-          }
-        }
-        .mapboxgl-map {
-          font-family: var(--font-body), system-ui, sans-serif;
+          0% { transform: scale(0.5); opacity: 0.8; }
+          100% { transform: scale(2); opacity: 0; }
         }
       `}</style>
     </div>
