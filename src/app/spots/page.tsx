@@ -142,12 +142,16 @@ export default function SpotsPage() {
   const [mapLoaded, setMapLoaded] = useState(false);
   const [mapFailed, setMapFailed] = useState(false);
 
+  const isSplit = activeLines.length >= 2;
+
   useEffect(() => {
-    if (!mapContainer.current || mapRef.current) return;
+    // Don't init map when in split view
+    if (isSplit) return;
+    // Wait for container to be in DOM
+    if (!mapContainer.current) return;
+
     let cancelled = false;
 
-    // Try Mapbox GL JS via CDN
-    const existing = document.getElementById('mapbox-gl-script');
     const initMap = () => {
       if (cancelled || !mapContainer.current) return;
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -184,7 +188,9 @@ export default function SpotsPage() {
       }
     };
 
+    const existing = document.getElementById('mapbox-gl-script');
     if (existing) {
+      // Script already loaded, just init
       initMap();
     } else {
       const script = document.createElement('script');
@@ -203,9 +209,15 @@ export default function SpotsPage() {
 
     return () => {
       cancelled = true;
+      // Clean up map when switching to split view
+      if (mapRef.current) {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        (mapRef.current as any).remove?.();
+        mapRef.current = null;
+      }
     };
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [isSplit]);
 
   const flyTo = (spot: Spot) => {
     setSelectedSpot(spot);
