@@ -1,8 +1,7 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
-import maplibregl from 'maplibre-gl';
-import 'maplibre-gl/dist/maplibre-gl.css';
+import type maplibregl from 'maplibre-gl';
 
 /*
  * ALL SPOT DATA FROM: SF_SLACKLINE_VOICE_AND_DATA.md
@@ -153,6 +152,13 @@ export default function SpotsPage() {
   useEffect(() => {
     if (!mapContainer.current || map.current) return;
 
+    let cancelled = false;
+
+    import('maplibre-gl').then((ml) => {
+      if (cancelled || !mapContainer.current) return;
+    // CSS loaded via link tag below
+    const maplibregl = ml.default;
+
     map.current = new maplibregl.Map({
       container: mapContainer.current,
       style: {
@@ -205,7 +211,10 @@ export default function SpotsPage() {
         .addTo(map.current!);
     });
 
+    }); // end dynamic import
+
     return () => {
+      cancelled = true;
       map.current?.remove();
       map.current = null;
     };
@@ -230,6 +239,8 @@ export default function SpotsPage() {
 
   return (
     <div className="mt-14 font-body">
+      {/* eslint-disable-next-line @next/next/no-css-tags */}
+      <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css" />
       {/* Header */}
       <div className="bg-[#1A3A4A] px-5 py-6 sm:px-6">
         <div className="max-w-5xl mx-auto">
