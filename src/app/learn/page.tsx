@@ -106,6 +106,56 @@ export default function LearnPage() {
         </div>
       </section>
 
+      {/* Progression Path */}
+      <section className="bg-white py-12 sm:py-14 border-t border-gray-100">
+        <div className="max-w-5xl mx-auto px-5 sm:px-6">
+          <h2 className="font-display text-2xl sm:text-3xl font-black text-[#1A3A4A] mb-2">The Progression</h2>
+          <p className="text-sm text-gray-500 font-light mb-8">Where you&apos;re going. No rush — most people spend months at each stage and that&apos;s the point.</p>
+
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            <div className="rounded-lg p-5 bg-[#F5F0E0] border border-[#C8A84E]/15">
+              <span className="text-[10px] font-mono text-[#C8A84E] font-bold">STAGE 1</span>
+              <h3 className="font-semibold text-sm text-[#1A3A4A] mt-1 mb-2">Beginner</h3>
+              <p className="text-xs text-gray-600 font-light leading-relaxed mb-2">
+                30–50ft, knee height. Learning to stand, walk, turn around. A basic ratchet kit is all you need.
+              </p>
+              <p className="text-[10px] text-gray-400">Gear: ratchet kit, tree pads</p>
+            </div>
+            <div className="rounded-lg p-5 bg-[#F5F0E0] border border-[#C8A84E]/15">
+              <span className="text-[10px] font-mono text-[#C8A84E] font-bold">STAGE 2</span>
+              <h3 className="font-semibold text-sm text-[#1A3A4A] mt-1 mb-2">Intermediate</h3>
+              <p className="text-xs text-gray-600 font-light leading-relaxed mb-2">
+                50–80ft. Sitting, tricks, surfing the line. You start feeling the line instead of fighting it.
+              </p>
+              <p className="text-[10px] text-gray-400">Gear: primitive or pulley system</p>
+            </div>
+            <div className="rounded-lg p-5 bg-[#F5F0E0] border border-[#C8A84E]/15">
+              <span className="text-[10px] font-mono text-[#C8A84E] font-bold">STAGE 3</span>
+              <h3 className="font-semibold text-sm text-[#1A3A4A] mt-1 mb-2">Longline</h3>
+              <p className="text-xs text-gray-600 font-light leading-relaxed mb-2">
+                100–200ft+. Different beast. The line moves under you like water. Pulley tensioning systems, longer webbing, patience.
+              </p>
+              <p className="text-[10px] text-gray-400">Gear: pulleys, longer webbing, backup</p>
+            </div>
+            <div className="rounded-lg p-5 bg-[#F5F0E0] border border-[#C8A84E]/15">
+              <span className="text-[10px] font-mono text-[#C8A84E] font-bold">STAGE 4</span>
+              <h3 className="font-semibold text-sm text-[#1A3A4A] mt-1 mb-2">Highline</h3>
+              <p className="text-xs text-gray-600 font-light leading-relaxed mb-2">
+                Off the ground. Harness, leash, redundant anchors. This is a different sport with real consequences. Learn from experienced highliners, not YouTube.
+              </p>
+              <p className="text-[10px] text-gray-400">Gear: harness, leash, redundant everything</p>
+            </div>
+          </div>
+
+          <p className="text-xs text-gray-400 font-light mt-5">
+            Need gear details? Check the{' '}
+            <Link href="/gear" className="text-[#1E6B7B] underline underline-offset-2">Gear Guide</Link>.
+            Tree protection info on the{' '}
+            <Link href="/safety" className="text-[#1E6B7B] underline underline-offset-2">Safety page</Link>.
+          </p>
+        </div>
+      </section>
+
       {/* Etiquette */}
       <section className="bg-[#1A3A4A] py-12 sm:py-14">
         <div className="max-w-5xl mx-auto px-5 sm:px-6">
@@ -170,12 +220,18 @@ export default function LearnPage() {
             Come to a session. Try different setups. Everyone shares. When you&apos;re ready to buy,
             <a href="https://balancecommunity.com" target="_blank" rel="noopener noreferrer" className="text-[#C8A84E] ml-1">Balance Community</a> has everything.
           </p>
-          <div className="flex gap-3 justify-center">
+          <div className="flex gap-3 justify-center flex-wrap">
             <Link
               href="/gear"
               className="inline-block bg-[#C8A84E] text-[#1A3A4A] px-5 py-2.5 rounded text-xs font-semibold uppercase tracking-wider hover:bg-[#B8983E] transition-colors"
             >
               Gear Guide
+            </Link>
+            <Link
+              href="/safety"
+              className="inline-block border border-[#C8A84E]/50 text-[#C8A84E] px-5 py-2.5 rounded text-xs font-semibold uppercase tracking-wider hover:bg-white/10 transition-colors"
+            >
+              Tree Protection
             </Link>
             <Link
               href="/spots"
