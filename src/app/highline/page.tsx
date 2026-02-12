@@ -1,11 +1,17 @@
+'use client';
+
+import { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import Lightbox from '@/components/Lightbox';
 
 export default function HighlinePage() {
+  const [showHero, setShowHero] = useState(false);
   return (
     <div className="mt-14 font-body">
-      {/* Hero with highline photo */}
-      <section className="relative h-[60vh] min-h-[400px] flex items-end overflow-hidden">
+      {showHero && <Lightbox images={[{ src: '/photos/highline-2.jpg', alt: 'First SF Slackline highline · Feb 18, 2012 · Canon 1D Mark IV', caption: 'First SF Slackline highline · Feb 18, 2012 · Canon 1D Mark IV' }]} index={0} onClose={() => setShowHero(false)} />}
+      {/* Hero with highline photo — clickable */}
+      <section className="relative h-[60vh] min-h-[400px] flex items-end overflow-hidden cursor-pointer" onClick={() => setShowHero(true)}>
         <Image src="/photos/highline-2.jpg" alt="First SF Slackline highline · Feb 18, 2012 · Canon 1D Mark IV" fill className="object-cover" priority />
         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
         <div className="relative z-10 max-w-5xl mx-auto px-5 sm:px-6 pb-10 sm:pb-14 w-full">
@@ -43,6 +49,12 @@ export default function HighlinePage() {
       {/* Bay Area highline spots */}
       <section className="bg-[#FAF8F2] py-12 sm:py-16">
         <div className="max-w-5xl mx-auto px-5 sm:px-6">
+          <blockquote className="border-l-4 border-[#C8A84E] pl-4 py-2 mb-8">
+            <p className="text-[#1A3A4A] text-sm italic leading-relaxed">
+              &ldquo;Ft Miley line up one high and one low!&rdquo;
+            </p>
+            <footer className="text-[11px] text-[#1A3A4A]/40 mt-1.5">@sfslackline &middot; Nov 24, 2013</footer>
+          </blockquote>
           <h2 className="font-display text-2xl sm:text-3xl font-black text-[#1A3A4A] mb-1">Bay Area Highline Locations</h2>
           <p className="text-sm text-gray-500 font-light mb-8">Known spots for experienced highliners</p>
           <div className="grid sm:grid-cols-2 gap-5">

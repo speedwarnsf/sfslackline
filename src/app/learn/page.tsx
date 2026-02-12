@@ -1,14 +1,30 @@
 'use client';
 
+import { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import YouTubeEmbed from '@/components/YouTubeEmbed';
+import Lightbox from '@/components/Lightbox';
+import TweetQuote from '@/components/TweetQuote';
+import { TweetQuoteDark } from '@/components/TweetQuote';
 
 /*
  * LEARN — Video IDs from original sfslackline.org (NWslackline series)
  * Community videos from @sfslackline YouTube/Vimeo references
  * Advice from community voice in SF_SLACKLINE_VOICE_AND_DATA.md
  */
+
+function ClickablePhotoBreak({ src, alt }: { src: string; alt: string }) {
+  const [show, setShow] = useState(false);
+  return (
+    <>
+      <div className="relative h-48 sm:h-64 cursor-pointer group" onClick={() => setShow(true)}>
+        <Image src={src} alt={alt} fill className="object-cover group-hover:brightness-90 transition-all duration-300" />
+      </div>
+      {show && <Lightbox images={[{ src, alt, caption: alt }]} index={0} onClose={() => setShow(false)} />}
+    </>
+  );
+}
 
 const instructionalVideos = [
   { id: 'MdDzz5H2VQA', title: 'Setup & Basics', part: 1, desc: 'Pick your trees, rig your line, get on for the first time. Everything starts here.' },
@@ -51,8 +67,8 @@ export default function LearnPage() {
             Come Play
           </h1>
           <p className="text-white/70 text-sm sm:text-lg font-light max-w-xl">
-            Real tutorials from the NWslackline series. Real advice from the SF crew.
-            You don&apos;t need to buy anything to start — just show up.
+            Dat taught hundreds of people to walk at Dolores Park. His method: &quot;Want to try?&quot;
+            That&apos;s it. No signup form. No waiver. Just get on the line.
           </p>
         </div>
       </section>
@@ -60,6 +76,7 @@ export default function LearnPage() {
       {/* Getting Started */}
       <section className="bg-[#F5F0E0] py-10 sm:py-12">
         <div className="max-w-5xl mx-auto px-5 sm:px-6">
+          <TweetQuote text="Stop by if you want a lesson - Dat." date="2011" note="— this is how it starts" />
           <h2 className="font-display text-xl font-black text-[#1A3A4A] mb-4">Getting Started</h2>
           <div className="grid sm:grid-cols-3 gap-5">
             <div className="bg-white rounded-lg p-5 border border-[#C8A84E]/10">
@@ -110,16 +127,15 @@ export default function LearnPage() {
         </div>
       </section>
 
-      {/* Photo break */}
-      <div className="relative h-48 sm:h-64">
-        <Image src="/photos/april2011.jpg" alt="April 2011 · Learning on the line" fill className="object-cover" />
-      </div>
+      {/* Photo break — clickable */}
+      <ClickablePhotoBreak src="/photos/april2011.jpg" alt="April 2011 · Learning on the line" />
 
       {/* Progression Path */}
       <section className="bg-[#FAF8F2] py-12 sm:py-14 border-t border-gray-100">
         <div className="max-w-5xl mx-auto px-5 sm:px-6">
           <h2 className="font-display text-2xl sm:text-3xl font-black text-[#1A3A4A] mb-2">The Progression</h2>
-          <p className="text-sm text-gray-500 font-light mb-8">Where you&apos;re going. No rush — most people spend months at each stage and that&apos;s the point.</p>
+          <p className="text-sm text-gray-500 font-light mb-4">Where you&apos;re going. No rush — most people spend months at each stage and that&apos;s the point.</p>
+          <TweetQuote text="A little rain wont teather us to the earth. But it reminds us that things fall." date="Mar 13, 2011" />
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
             <div className="rounded-lg p-5 bg-[#F5F0E0] border border-[#C8A84E]/15">
@@ -168,6 +184,7 @@ export default function LearnPage() {
       {/* Etiquette */}
       <section className="bg-[#1A3A4A] py-12 sm:py-14">
         <div className="max-w-5xl mx-auto px-5 sm:px-6">
+          <TweetQuoteDark text="Two new personal bests today and two new friends." date="2011" />
           <h2 className="font-display text-2xl font-black text-white mb-6">Etiquette</h2>
           <div className="grid sm:grid-cols-2 gap-5">
             {[

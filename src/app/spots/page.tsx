@@ -275,9 +275,9 @@ export default function SpotsPage() {
       {/* Header */}
       <div className="bg-[#1A3A4A] px-5 py-6 sm:px-6">
         <div className="max-w-5xl mx-auto">
-          <h1 className="font-display text-3xl sm:text-4xl font-black text-white mb-1">Spot Map</h1>
+          <h1 className="font-display text-3xl sm:text-4xl font-black text-white mb-1">Where We Slack</h1>
           <p className="text-sm text-white/60 font-light">
-            {spots.length} verified locations · {activeLines.length > 0 ? `${activeLines.length} line${activeLines.length > 1 ? 's' : ''} up` : 'No lines up right now'}
+            {spots.length} spots from 9 years of tweets &amp; EXIF data · {activeLines.length > 0 ? `${activeLines.length} line${activeLines.length > 1 ? 's' : ''} up` : 'Come out and change that'}
           </p>
         </div>
       </div>
@@ -434,6 +434,12 @@ export default function SpotsPage() {
 
       {/* Line Lengths — from verified tweets */}
       <div className="max-w-5xl mx-auto px-5 sm:px-6 py-10">
+        <blockquote className="border-l-4 border-[#C8A84E] pl-4 py-2 mb-8">
+          <p className="text-[#1A3A4A] text-sm sm:text-base italic leading-relaxed">
+            &ldquo;Equinox line this sunday!! 135&apos; at panhandle and cole. Celebrate perfect balance with us.&rdquo;
+          </p>
+          <footer className="text-[11px] text-[#1A3A4A]/40 mt-1.5 not-italic">@sfslackline &middot; Sep 22, 2013</footer>
+        </blockquote>
         <h2 className="font-display text-2xl font-black text-[#1A3A4A] mb-1">Line Lengths</h2>
         <p className="text-sm text-gray-500 mb-6">Verified from @sfslackline tweets</p>
         <div className="space-y-2">
@@ -467,6 +473,12 @@ export default function SpotsPage() {
 
       {/* All Spots list */}
       <div className="max-w-5xl mx-auto px-5 py-10">
+        <blockquote className="border-l-4 border-[#C8A84E] pl-4 py-2 mb-6">
+          <p className="text-[#1A3A4A] text-sm italic leading-relaxed">
+            &ldquo;4 lines up at lake merrit in oakland. Field tripping in the east bay.&rdquo;
+          </p>
+          <footer className="text-[11px] text-[#1A3A4A]/40 mt-1.5">@sfslackline &middot; Oct 1, 2011</footer>
+        </blockquote>
         <h2 className="font-display text-2xl font-black text-[#1A3A4A] mb-1">All Spots</h2>
         <p className="text-sm text-gray-500 mb-6">Full profiles for every verified location</p>
         <div className="grid gap-4 sm:grid-cols-2">

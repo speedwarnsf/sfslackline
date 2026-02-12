@@ -162,9 +162,15 @@ export default function CommunityPage() {
       <section className="bg-[#F5F0E0] py-14 sm:py-20">
         <div className="max-w-5xl mx-auto px-5 sm:px-6">
           <h2 className="font-display text-2xl sm:text-4xl font-black text-[#1A3A4A] mb-1">The SF Crew</h2>
-          <p className="text-sm sm:text-base text-[#1A3A4A]/60 font-light mb-10">
+          <p className="text-sm sm:text-base text-[#1A3A4A]/60 font-light mb-4">
             The people who showed up, rigged lines, and taught strangers to walk.
           </p>
+          <blockquote className="border-l-4 border-[#C8A84E] pl-4 py-2 mb-10">
+            <p className="text-[#1A3A4A] text-sm italic leading-relaxed">
+              &ldquo;Two new personal bests today and two new friends.&rdquo;
+            </p>
+            <footer className="text-[11px] text-[#1A3A4A]/40 mt-1.5">@sfslackline &middot; 2011</footer>
+          </blockquote>
 
           {/* Photo strip — big, clickable */}
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4 mb-10">
@@ -220,9 +226,15 @@ export default function CommunityPage() {
       <section className="bg-[#FAF8F2] py-14 sm:py-20">
         <div className="max-w-5xl mx-auto px-5 sm:px-6">
           <h2 className="font-display text-2xl sm:text-4xl font-black text-[#1A3A4A] mb-1">Extended Family</h2>
-          <p className="text-sm sm:text-base text-gray-500 font-light mb-10">
+          <p className="text-sm sm:text-base text-gray-500 font-light mb-4">
             World-class walkers who passed through SF. Slept on couches. Rigged at our parks.
           </p>
+          <blockquote className="border-l-4 border-[#C8A84E] pl-4 py-2 mb-10">
+            <p className="text-[#1A3A4A] text-sm italic leading-relaxed">
+              &ldquo;Line is down. Moon is up.&rdquo;
+            </p>
+            <footer className="text-[11px] text-[#1A3A4A]/40 mt-1.5">@sfslackline &middot; 2011 &mdash; the kind of night world-record holders crashed on our couches for</footer>
+          </blockquote>
 
           <div className="grid gap-6">
             {extendedFamily.map((person) => (

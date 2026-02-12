@@ -34,12 +34,16 @@ const allPhotos = [
   { src: '/photos/panhandle-nemesis.jpg', caption: 'Panhandle nemesis line', date: '2012' },
 ];
 
-// Tweets that define the voice
+// Tweets that define the voice — more of them, showing the full range
 const tweets = [
   { text: 'Lines up. Sun hot. Come play.', date: '2011' },
   { text: 'A little rain wont teather us to the earth. But it reminds us that things fall.', date: 'Mar 13, 2011' },
+  { text: 'Sasha\'s bday at dp. 6 lines. Come out!!', date: 'Sep 2011' },
   { text: 'Getting shut down. We need to do something about this.', date: 'Jun 2, 2012' },
+  { text: 'Such a perfect night. -Anya', date: 'Aug 2011' },
   { text: 'Two new personal bests today and two new friends.', date: '2011' },
+  { text: 'Stop by if you want a lesson - Dat.', date: '2011' },
+  { text: 'Line is down. Moon is up.', date: '2011' },
   { text: 'SF Slackers, still at it! Three lines up.', date: 'Nov 7, 2018' },
 ];
 
@@ -77,8 +81,8 @@ export default function Home() {
             SF<br />Slackline
           </h1>
           <p className="text-white/60 text-base sm:text-lg font-light max-w-md mb-6 leading-relaxed">
-            849 photos. 360 tweets. 57 albums.<br />
-            15 years of lines between trees.
+            The palms at Dolores. 140ft at Cole. 150ft over sand at Ocean Beach.<br />
+            15 years of lines between trees. Come out.
           </p>
           <div className="flex flex-wrap gap-3">
             <Link
@@ -102,7 +106,7 @@ export default function Home() {
         <div className="max-w-6xl mx-auto px-5 sm:px-8">
           <h2 className="font-display text-3xl sm:text-4xl font-black text-[#1A3A4A] mb-2">The Photos</h2>
           <p className="text-[#1E6B7B] text-sm font-light mb-10">
-            Shot on Nikon D90s, Canon 1D Mark IVs, and a lot of iPhones. Every one clickable. Every one real.
+            Shot on whatever people had — Nikon D90s, Canon 1D Mark IVs, a lot of cracked iPhones. Click any of em.
           </p>
 
           {/* Featured photos — large, masonry-ish */}
@@ -267,7 +271,7 @@ export default function Home() {
             All we r missing is you.
           </h2>
           <p className="text-[#1A3A4A]/60 text-sm font-light mb-8 max-w-md mx-auto">
-            The last tweet was November 2018. The lines are still there. The trees are still there. Maybe you are too.
+            The last tweet was November 2018. Five likes. Then silence. But the palms at Dolores haven&apos;t gone anywhere. Neither has the spacing at Cole. Maybe you haven&apos;t either.
           </p>
           <div className="flex flex-wrap gap-3 justify-center">
             <Link

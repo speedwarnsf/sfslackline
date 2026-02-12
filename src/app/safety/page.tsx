@@ -74,11 +74,17 @@ export default function SafetyPage() {
           <p className="text-sm text-gray-500 font-light mb-2">
             12 photos from sfslackline.org/sf_slackline/injury-upload/
           </p>
-          <p className="text-sm text-gray-600 font-light mb-8 max-w-2xl">
+          <p className="text-sm text-gray-600 font-light mb-4 max-w-2xl">
             The community uploaded these. Broken fingers, rope burns, ankle sprains.
             Mostly minor. Nothing life-threatening. The worst injuries are broken fingers
             from catching the line on a fall, and ankle sprains from bad dismounts.
           </p>
+          <blockquote className="border-l-4 border-[#C8A84E] pl-4 py-2 mb-8">
+            <p className="text-[#1A3A4A] text-sm italic leading-relaxed">
+              &ldquo;Jst put on a little show for the sfpd... Nerve wracking!&rdquo;
+            </p>
+            <footer className="text-[11px] text-[#1A3A4A]/40 mt-1.5">@sfslackline &middot; Feb 27, 2011 &mdash; sometimes the scariest part isn&apos;t the line</footer>
+          </blockquote>
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
             {injuries.map((injury, i) => (
               <div key={injury.file} className="rounded-lg overflow-hidden border border-gray-100 cursor-pointer group" onClick={() => lightbox.open(i)}>

@@ -1,5 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
+import TweetQuote from '@/components/TweetQuote';
+import { TweetQuoteDark } from '@/components/TweetQuote';
 
 /*
  * GEAR — Real recommendations + ISA standards from SF_SLACKLINE_VOICE_AND_DATA.md
@@ -20,8 +22,8 @@ export default function GearPage() {
             Gear Up
           </h1>
           <p className="text-white/70 text-sm sm:text-lg font-light max-w-xl">
-            Don&apos;t buy gear to start. Come to a session first and try ours.
-            When you&apos;re ready, here&apos;s what actually matters — and what doesn&apos;t.
+            Seriously — don&apos;t buy gear yet. Come to a session, try ours, borrow a friend&apos;s.
+            Everyone shares. When you&apos;re hooked (you will be), here&apos;s what actually matters.
           </p>
           <p className="text-white/40 text-xs font-light mt-3">
             New to slacklining? Start with{' '}
@@ -85,6 +87,7 @@ export default function GearPage() {
             Total starter cost: <strong className="text-[#1A3A4A]">$50–80</strong> for a ratchet kit with tree pro.
             That&apos;s it. Everything else is nice to have.
           </p>
+          <TweetQuote text="Lines up. Sun hot. Come play." date="2011" note="— $50 and a sunny day is all you need" />
         </div>
       </section>
 
@@ -205,6 +208,7 @@ export default function GearPage() {
         <div className="max-w-5xl mx-auto px-5 sm:px-6">
           <h2 className="font-display text-2xl sm:text-3xl font-black text-[#1A3A4A] mb-1">Tree Protection</h2>
           <p className="text-sm text-[#1A3A4A]/60 font-light mb-2">ISA DIN 79400 Standard. Non-negotiable.</p>
+          <TweetQuote text="Getting shut down. We need to do something about this." date="Jun 2, 2012" note="— tree damage is why we lose spots" />
           <p className="text-sm text-[#1A3A4A]/50 font-light mb-8 max-w-2xl">
             Every shutdown in our{' '}
             <Link href="/safety" className="text-[#1E6B7B] underline hover:text-[#1E6B7B]/80">
@@ -262,6 +266,7 @@ export default function GearPage() {
       {/* Where to Buy */}
       <section className="bg-[#1A3A4A] py-12 sm:py-14">
         <div className="max-w-5xl mx-auto px-5 sm:px-6">
+          <TweetQuoteDark text="Dusty's got em." date="2011" note="— gear was always shared" />
           <h2 className="font-display text-2xl font-black text-white mb-3">Where to Buy</h2>
           <div className="p-5 rounded-xl bg-white/5 border border-white/10">
             <h3 className="font-semibold text-sm text-[#C8A84E] mb-2">Balance Community</h3>
