@@ -65,13 +65,18 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="mt-10 pt-6 border-t border-white/10 flex flex-col sm:flex-row justify-between items-center gap-3">
-          <p className="text-white/30 text-[10px]">
-            &copy; 2009–{new Date().getFullYear()} San Francisco Slacklining Association
+        <div className="mt-8 pt-6 border-t border-white/10">
+          <p className="text-white/20 text-xs italic font-light text-center mb-6">
+            &ldquo;All we r missing is you!!!&rdquo; <span className="not-italic text-[10px]">— @sfslackline</span>
           </p>
-          <a href="https://sfslackline.org" target="_blank" rel="noopener noreferrer" className="text-white/30 hover:text-[#C8A84E] text-[10px] transition-colors">
-            Visit the original sfslackline.org (2009)
-          </a>
+          <div className="flex flex-col sm:flex-row justify-between items-center gap-3">
+            <p className="text-white/30 text-[10px]">
+              &copy; 2009–{new Date().getFullYear()} San Francisco Slacklining Association
+            </p>
+            <a href="https://sfslackline.org" target="_blank" rel="noopener noreferrer" className="text-white/30 hover:text-[#C8A84E] text-[10px] transition-colors">
+              Visit the original sfslackline.org (2009)
+            </a>
+          </div>
         </div>
       </div>
     </footer>
