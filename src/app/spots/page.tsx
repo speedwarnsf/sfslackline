@@ -219,6 +219,8 @@ export default function SpotsPage() {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isSplit]);
 
+  const [zoomedSpot, setZoomedSpot] = useState<Spot | null>(null);
+
   const flyTo = (spot: Spot) => {
     setSelectedSpot(spot);
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -226,6 +228,12 @@ export default function SpotsPage() {
     if (m?.flyTo) {
       m.flyTo({ center: [spot.lng, spot.lat], zoom: 15, duration: 1200 });
     }
+    // For static map fallback — show zoomed satellite of this spot
+    if (mapFailed || !mapRef.current) {
+      setZoomedSpot(spot);
+    }
+    // Scroll to map
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   const simulateLineUp = (name: string) => {
@@ -328,10 +336,32 @@ export default function SpotsPage() {
 
           {mapFailed && staticMapUrl && (
             <div className="absolute inset-0 z-[1]">
-              <img src={staticMapUrl} alt="SF Slackline Spots" className="w-full h-full object-cover" />
-              <div className="absolute top-3 left-3 bg-white/90 rounded-lg px-3 py-2 shadow text-xs text-[#1A3A4A]">
-                Static map · Interactive map unavailable on this device
-              </div>
+              <img
+                src={zoomedSpot
+                  ? `https://api.mapbox.com/styles/v1/mapbox/satellite-streets-v12/static/pin-l+C8A84E(${zoomedSpot.lng},${zoomedSpot.lat})/${zoomedSpot.lng},${zoomedSpot.lat},16,0/800x500@2x?access_token=${MAPBOX_TOKEN}`
+                  : staticMapUrl
+                }
+                alt={zoomedSpot ? zoomedSpot.name : 'SF Slackline Spots'}
+                className="w-full h-full object-cover"
+              />
+              {zoomedSpot ? (
+                <div className="absolute top-3 left-3 right-3 flex items-center justify-between">
+                  <div className="bg-white/90 rounded-lg px-3 py-2 shadow">
+                    <p className="text-sm font-semibold text-[#1A3A4A]">{zoomedSpot.name}</p>
+                    <p className="text-[10px] text-[#1E6B7B]">{zoomedSpot.aka}</p>
+                  </div>
+                  <button
+                    onClick={() => setZoomedSpot(null)}
+                    className="bg-white/90 rounded-lg px-3 py-2 shadow text-xs text-[#1A3A4A] font-medium hover:bg-white transition-colors"
+                  >
+                    All spots
+                  </button>
+                </div>
+              ) : (
+                <div className="absolute top-3 left-3 bg-white/90 rounded-lg px-3 py-2 shadow text-xs text-[#1A3A4A]">
+                  Tap a spot below to zoom in
+                </div>
+              )}
             </div>
           )}
 
