@@ -450,7 +450,7 @@ export default function HistoryPage() {
       </section>
 
       {/* ═══ Closing ═══ */}
-      <section className="bg-white py-14 sm:py-20">
+      <section className="bg-[#FAF8F2] py-14 sm:py-20">
         <div className="max-w-3xl mx-auto px-5 sm:px-6 text-center">
           <blockquote className="text-gray-600 text-base sm:text-lg italic font-light leading-relaxed">
             &quot;A little rain wont teather us to the earth. But it reminds us that things fall.&quot;

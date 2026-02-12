@@ -88,7 +88,7 @@ export default function LearnPage() {
       </section>
 
       {/* Instructional Series */}
-      <section className="bg-white py-12 sm:py-16">
+      <section className="bg-[#FAF8F2] py-12 sm:py-16">
         <div className="max-w-5xl mx-auto px-5 sm:px-6">
           <h2 className="font-display text-2xl sm:text-3xl font-black text-[#1A3A4A] mb-1">Instructional Series</h2>
           <p className="text-sm text-gray-500 font-light mb-8">5-part tutorial from NWslackline.org — featured on the original SF Slackline site</p>
@@ -111,7 +111,7 @@ export default function LearnPage() {
       </section>
 
       {/* Progression Path */}
-      <section className="bg-white py-12 sm:py-14 border-t border-gray-100">
+      <section className="bg-[#FAF8F2] py-12 sm:py-14 border-t border-gray-100">
         <div className="max-w-5xl mx-auto px-5 sm:px-6">
           <h2 className="font-display text-2xl sm:text-3xl font-black text-[#1A3A4A] mb-2">The Progression</h2>
           <p className="text-sm text-gray-500 font-light mb-8">Where you&apos;re going. No rush — most people spend months at each stage and that&apos;s the point.</p>
@@ -199,7 +199,7 @@ export default function LearnPage() {
       </section>
 
       {/* Fun Videos */}
-      <section className="bg-white py-12 sm:py-16">
+      <section className="bg-[#FAF8F2] py-12 sm:py-16">
         <div className="max-w-5xl mx-auto px-5 sm:px-6">
           <h2 className="font-display text-2xl font-black text-[#1A3A4A] mb-1">Inspiration</h2>
           <p className="text-sm text-gray-500 font-light mb-6">Pure stoke from the slackline world</p>

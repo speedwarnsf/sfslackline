@@ -41,7 +41,7 @@ export default function HighlinePage() {
       </section>
 
       {/* Bay Area highline spots */}
-      <section className="bg-white py-12 sm:py-16">
+      <section className="bg-[#FAF8F2] py-12 sm:py-16">
         <div className="max-w-5xl mx-auto px-5 sm:px-6">
           <h2 className="font-display text-2xl sm:text-3xl font-black text-[#1A3A4A] mb-1">Bay Area Highline Locations</h2>
           <p className="text-sm text-gray-500 font-light mb-8">Known spots for experienced highliners</p>
