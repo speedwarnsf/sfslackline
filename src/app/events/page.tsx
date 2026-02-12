@@ -197,7 +197,7 @@ export default function EventsPage() {
       </section>
 
       {/* ── Featured events with photos ── */}
-      <section className="bg-white py-12 sm:py-16">
+      <section className="bg-[#FAF8F2] py-12 sm:py-16">
         <div className="max-w-5xl mx-auto px-5 sm:px-6">
           <h2 className="font-display text-2xl sm:text-3xl font-black text-[#1A3A4A] mb-2">Moments</h2>
           <p className="text-sm text-gray-400 font-light mb-10">Photo-documented events from the archive</p>
@@ -242,7 +242,7 @@ export default function EventsPage() {
       </section>
 
       {/* ── 2012: The Policy ── */}
-      <section className="bg-white py-12 sm:py-14">
+      <section className="bg-[#FAF8F2] py-12 sm:py-14">
         <div className="max-w-5xl mx-auto px-5 sm:px-6">
           <div className="max-w-2xl">
             <span className="text-[10px] font-mono text-[#C8A84E] uppercase tracking-wider">2012</span>

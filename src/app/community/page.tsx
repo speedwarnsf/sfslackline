@@ -217,7 +217,7 @@ export default function CommunityPage() {
       </section>
 
       {/* Extended Family */}
-      <section className="bg-white py-14 sm:py-20">
+      <section className="bg-[#FAF8F2] py-14 sm:py-20">
         <div className="max-w-5xl mx-auto px-5 sm:px-6">
           <h2 className="font-display text-2xl sm:text-4xl font-black text-[#1A3A4A] mb-1">Extended Family</h2>
           <p className="text-sm sm:text-base text-gray-500 font-light mb-10">
