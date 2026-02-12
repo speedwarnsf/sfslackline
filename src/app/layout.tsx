@@ -32,6 +32,7 @@ export const metadata: Metadata = {
     "community",
   ],
   metadataBase: new URL("https://sfslackline.vercel.app"),
+  alternates: { canonical: "https://sfslackline.vercel.app" },
   openGraph: {
     title: "SF Slackline — Walk the Line",
     description: "849 photos. 360 tweets. 15 years of lines between trees. San Francisco's slackline community since 2009.",
