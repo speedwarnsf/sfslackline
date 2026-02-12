@@ -144,11 +144,9 @@ export default function SpotsPage() {
 
   const isSplit = activeLines.length >= 2;
 
+  // Initialize map once and keep it alive across view transitions
   useEffect(() => {
-    // Don't init map when in split view
-    if (isSplit) return;
-    // Wait for container to be in DOM
-    if (!mapContainer.current) return;
+    if (!mapContainer.current || mapRef.current) return;
 
     let cancelled = false;
 
@@ -190,7 +188,6 @@ export default function SpotsPage() {
 
     const existing = document.getElementById('mapbox-gl-script');
     if (existing) {
-      // Script already loaded, just init
       initMap();
     } else {
       const script = document.createElement('script');
@@ -209,7 +206,6 @@ export default function SpotsPage() {
 
     return () => {
       cancelled = true;
-      // Clean up map when switching to split view
       if (mapRef.current) {
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         (mapRef.current as any).remove?.();
@@ -217,6 +213,18 @@ export default function SpotsPage() {
       }
     };
   // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  // Resize map when returning from split view
+  useEffect(() => {
+    if (!isSplit && mapRef.current) {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const m = mapRef.current as any;
+      // Allow DOM to update visibility before resizing
+      requestAnimationFrame(() => {
+        m.resize?.();
+      });
+    }
   }, [isSplit]);
 
   const [zoomedSpot, setZoomedSpot] = useState<Spot | null>(null);
@@ -278,10 +286,10 @@ export default function SpotsPage() {
       )}
 
       {/* Map area — splits when multiple lines are active */}
-      {activeLines.length >= 2 ? (
+      {isSplit && (
         /* SPLIT VIEW: one panel per active line */
         <div
-          className={`grid w-full ${activeLines.length === 2 ? 'grid-cols-2' : activeLines.length === 3 ? 'grid-cols-3' : 'grid-cols-2 grid-rows-2'}`}
+          className={`grid w-full ${activeLines.length === 2 ? 'grid-cols-1 sm:grid-cols-2' : activeLines.length === 3 ? 'grid-cols-1 sm:grid-cols-3' : 'grid-cols-1 sm:grid-cols-2 sm:grid-rows-2'}`}
           style={{ height: '65vh', minHeight: '450px' }}
         >
           {activeLines.slice(0, 4).map((name) => {
@@ -326,9 +334,10 @@ export default function SpotsPage() {
             );
           })}
         </div>
-      ) : (
-        /* SINGLE MAP VIEW */
-        <div className="relative w-full" style={{ height: '65vh', minHeight: '450px' }}>
+      )}
+
+      {/* SINGLE MAP VIEW — always mounted, hidden during split to preserve map instance */}
+      <div className="relative w-full" style={{ height: isSplit ? 0 : '65vh', minHeight: isSplit ? 0 : '450px', overflow: isSplit ? 'hidden' : undefined, visibility: isSplit ? 'hidden' : undefined }}>
           <div
             ref={mapContainer}
             style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0 }}
@@ -398,7 +407,6 @@ export default function SpotsPage() {
             </div>
           )}
         </div>
-      )}
 
       {/* Demo controls */}
       <div className="bg-[#1A3A4A] px-5 py-4">
