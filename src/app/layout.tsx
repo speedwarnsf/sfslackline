@@ -31,12 +31,20 @@ export const metadata: Metadata = {
     "outdoor",
     "community",
   ],
+  metadataBase: new URL("https://sfslackline.vercel.app"),
   openGraph: {
     title: "SF Slackline — Walk the Line",
-    description: "San Francisco's slackline community hub. Learn, connect, explore.",
-    url: "https://sfslackline.com",
+    description: "849 photos. 360 tweets. 15 years of lines between trees. San Francisco's slackline community since 2009.",
+    url: "https://sfslackline.vercel.app",
     siteName: "SF Slackline",
     type: "website",
+    images: [{ url: "/photos/highline-2.jpg", width: 1200, height: 630, alt: "SF Slackline highline · Feb 2012" }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "SF Slackline — Walk the Line",
+    description: "849 photos. 360 tweets. 15 years of lines between trees.",
+    images: ["/photos/highline-2.jpg"],
   },
 };
 
