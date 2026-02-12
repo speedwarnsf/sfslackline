@@ -51,13 +51,16 @@ export default function SafetyPage() {
       {lightbox.index >= 0 && (
         <Lightbox images={lightbox.images} index={lightbox.index} onClose={lightbox.close} />
       )}
-      {/* Hero */}
-      <section className="bg-[#1A3A4A] py-12 sm:py-16">
-        <div className="max-w-5xl mx-auto px-5 sm:px-6">
-          <h1 className="font-display text-3xl sm:text-5xl font-black text-white leading-tight mb-3">
+      {/* Hero with photo */}
+      <section className="relative bg-[#1A3A4A] py-16 sm:py-24 overflow-hidden">
+        <div className="absolute inset-0 opacity-20">
+          <Image src="/photos/april2011.jpg" alt="April 2011" fill className="object-cover" priority />
+        </div>
+        <div className="relative max-w-5xl mx-auto px-5 sm:px-6">
+          <h1 className="font-display text-4xl sm:text-6xl font-black text-white leading-tight mb-3">
             Here&apos;s What<br />Actually Happens
           </h1>
-          <p className="text-white/60 text-sm sm:text-base font-light max-w-xl">
+          <p className="text-white/70 text-sm sm:text-lg font-light max-w-xl">
             Injuries, enforcement, policy, and what the medical literature says.
             Not a liability disclaimer. Not a scare tactic. Just the record.
           </p>
