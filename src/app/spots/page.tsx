@@ -432,6 +432,38 @@ export default function SpotsPage() {
         </div>
       </div>
 
+      {/* Line Lengths — from verified tweets */}
+      <div className="max-w-5xl mx-auto px-5 sm:px-6 py-10">
+        <h2 className="font-display text-2xl font-black text-[#1A3A4A] mb-1">Line Lengths</h2>
+        <p className="text-sm text-gray-500 mb-6">Verified from @sfslackline tweets</p>
+        <div className="space-y-2">
+          {[
+            { len: '35ft', ctx: 'Beginner lines at Dolores Park', pct: 12 },
+            { len: '40ft', ctx: 'Panhandle secondary lines', pct: 14 },
+            { len: '70–80ft', ctx: 'Standard park lines', pct: 27 },
+            { len: '100ft', ctx: 'Panhandle with Mac (Dec 2011)', pct: 34 },
+            { len: '120ft', ctx: 'Panhandle (Dec 2013)', pct: 41 },
+            { len: '130–140ft', ctx: 'Panhandle at Cole — most common longline', pct: 48 },
+            { len: '150ft', ctx: 'Ocean Beach / Fort Funston over sand', pct: 51 },
+            { len: '186ft', ctx: 'Panhandle record? (Nov 2012)', pct: 63 },
+            { len: '195ft', ctx: 'Panhandle (Jun 2013)', pct: 66 },
+            { len: '200–300ft', ctx: 'GGP threaded (Mar 2012)', pct: 100 },
+          ].map((l) => (
+            <div key={l.len} className="flex items-center gap-3">
+              <span className="font-display text-sm font-black text-[#1A3A4A] w-20 shrink-0 text-right">{l.len}</span>
+              <div className="flex-1 bg-gray-100 rounded-full h-6 overflow-hidden">
+                <div
+                  className="h-full rounded-full bg-gradient-to-r from-[#1E6B7B] to-[#C8A84E] flex items-center justify-end pr-2"
+                  style={{ width: `${l.pct}%`, minWidth: '60px' }}
+                >
+                  <span className="text-[10px] text-white font-medium truncate">{l.ctx}</span>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
       {/* All Spots list */}
       <div className="max-w-5xl mx-auto px-5 py-10">
         <h2 className="font-display text-2xl font-black text-[#1A3A4A] mb-1">All Spots</h2>
@@ -444,7 +476,7 @@ export default function SpotsPage() {
               className="text-left rounded-xl border border-gray-200 hover:border-[#1E6B7B] hover:shadow-md transition-all overflow-hidden"
             >
               {spot.photo && (
-                <div className="relative h-40 sm:h-48">
+                <div className="relative h-48 sm:h-56">
                   <Image src={spot.photo} alt={spot.photoCaption || spot.name} fill className="object-cover" sizes="(max-width: 640px) 100vw, 50vw" />
                 </div>
               )}
