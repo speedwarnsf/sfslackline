@@ -34,7 +34,7 @@ const enforcementTimeline = [
   { date: 'Jun 2, 2012', tweet: '"Getting shut down. We need to do something about this."', context: 'The first real call to action. Something had changed — enforcement was no longer occasional.' },
   { date: 'Sep 30, 2012', tweet: '"Scratch that. Douchebag complained and Park Police say NO."', context: 'A single complaint killed a longline session at the Panhandle. Park Police responded immediately.' },
   { date: 'Sep 30, 2012', tweet: '"Waterline up walked and shutdown by nps rangers."', context: 'Same day. NPS rangers shut down a waterline. Two shutdowns in one afternoon.' },
-  { date: '2014–2016', tweet: '(Posting frequency drops from daily to 3 tweets/year)', context: 'The enforcement worked. Activity didn\'t stop but the public, documented sessions became rare.' },
+  { date: 'Nov 7, 2018', tweet: '"SF Slackers, still at it! Three lines up."', context: 'The final tweet. 5 likes. After years of silence, one last proof of life. Then nothing.' },
 ];
 
 export default function SafetyPage() {
@@ -116,10 +116,29 @@ export default function SafetyPage() {
       <section className="bg-[#F2F4F6] py-12 sm:py-16">
         <div className="max-w-5xl mx-auto px-5 sm:px-6">
           <h2 className="font-display text-2xl sm:text-3xl font-black text-[#1A3A4A] mb-1">SF Rec & Park Policy</h2>
-          <p className="text-sm text-gray-500 font-light mb-8">
-            Archived from sfrecpark.org/slacklining-policy/ via Wayback Machine, Sep 2019.
-            <span className="text-[#C8A84E] font-medium"> This page is now a 404.</span>
-          </p>
+          {/* Policy Disappearance Callout */}
+          <div className="mb-8 p-5 rounded-lg bg-[#C8A84E]/15 border-l-4 border-[#C8A84E]">
+            <p className="text-sm font-semibold text-[#1A3A4A] mb-1">
+              The city&apos;s slacklining policy page at sfrecpark.org/slacklining-policy/ now returns 404.
+            </p>
+            <p className="text-sm text-gray-700 font-light">
+              We&apos;ve preserved the original text here. Whether the policy was revoked, updated, or
+              simply lost in a website migration to CivicPlus is unknown. The Dolores Park page
+              (sfrecpark.org/parks-open-spaces/dolores-park/) is also gone. For what it&apos;s worth:
+              Austin, Boulder, and Portland&apos;s slackline policy pages are all 404 too.
+              Every city that once published slackline rules has quietly unpublished them.
+            </p>
+            <p className="text-xs text-gray-500 font-light mt-2">
+              Archived via{' '}
+              <a href="https://web.archive.org/web/20190920143203/https://sfrecpark.org/slacklining-policy/" target="_blank" rel="noopener noreferrer" className="text-[#1E6B7B] underline">
+                Wayback Machine, Sep 20, 2019
+              </a>
+              . Confirmed identical in{' '}
+              <a href="https://web.archive.org/web/20190514014819/https://sfrecpark.org/slacklining-policy/" target="_blank" rel="noopener noreferrer" className="text-[#1E6B7B] underline">
+                May 2019 snapshot
+              </a>.
+            </p>
+          </div>
 
           <div className="bg-white rounded-xl p-6 sm:p-8 border border-gray-200">
             <h3 className="font-display text-lg font-black text-[#1A3A4A] mb-4">Official Rules (as of 2019)</h3>
@@ -158,9 +177,9 @@ export default function SafetyPage() {
 
             <div className="mt-4 p-4 rounded-lg bg-[#C8A84E]/10 border border-[#C8A84E]/20">
               <p className="text-sm text-gray-700 font-light">
-                <span className="font-semibold text-[#1A3A4A]">Status unknown.</span> This policy page
-                returned 404 as of 2026. Whether the rules changed, were revoked, or just moved
-                is unclear. The page simply disappeared. If you find the current policy, let us know.
+                <span className="font-semibold text-[#1A3A4A]">To confirm current status:</span> Call
+                SF Rec & Park at 415-831-2700. These rules may still be in effect — or they may not.
+                The website can&apos;t tell you anymore.
               </p>
             </div>
           </div>
@@ -229,7 +248,32 @@ export default function SafetyPage() {
             </div>
           </div>
 
-          <div className="mt-8 p-5 rounded-lg bg-[#1A3A4A]">
+          {/* Three Categories of Tree Stress */}
+          <div className="mt-8 grid sm:grid-cols-3 gap-4">
+            <div className="p-4 rounded-lg border border-gray-200">
+              <h4 className="text-sm font-semibold text-[#1A3A4A] mb-1">1. Tension</h4>
+              <p className="text-xs text-gray-600 font-light leading-relaxed">
+                The pull force on the tree. Why minimum diameter matters — thin trees flex,
+                crack, or uproot. Higher tension (longer lines, more bounce) = bigger tree required.
+              </p>
+            </div>
+            <div className="p-4 rounded-lg border border-gray-200">
+              <h4 className="text-sm font-semibold text-[#1A3A4A] mb-1">2. Pressure</h4>
+              <p className="text-xs text-gray-600 font-light leading-relaxed">
+                Contact force from sling on bark. Narrow slings concentrate force and crush cambium.
+                Wide slings (5cm+) spread the load. Trees with thin bark are especially vulnerable.
+              </p>
+            </div>
+            <div className="p-4 rounded-lg border border-gray-200">
+              <h4 className="text-sm font-semibold text-[#1A3A4A] mb-1">3. Friction</h4>
+              <p className="text-xs text-gray-600 font-light leading-relaxed">
+                Sling movement against bark during use. Robust padding (felt, carpet) ensures
+                the sling rubs on protection, not bark. This is what the 2–3 meter wrap is for.
+              </p>
+            </div>
+          </div>
+
+          <div className="mt-6 p-5 rounded-lg bg-[#1A3A4A]">
             <p className="text-white/80 text-sm font-light">
               <span className="text-[#C8A84E] font-semibold">Pad your trees. Don&apos;t be the reason we lose a spot.</span>
             </p>
