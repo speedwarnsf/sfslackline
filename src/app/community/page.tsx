@@ -166,17 +166,17 @@ export default function CommunityPage() {
             The people who showed up, rigged lines, and taught strangers to walk.
           </p>
 
-          {/* Photo strip */}
-          <div className="grid grid-cols-3 gap-2 sm:gap-3 mb-10 rounded-xl overflow-hidden">
-            <div className="relative aspect-[4/3]">
-              <Image src="/photos/memorial.jpg" alt="Memorial Day slacklining" fill className="object-cover" />
-            </div>
-            <div className="relative aspect-[4/3]">
-              <Image src="/photos/prideline.jpg" alt="Pride weekend slacklining" fill className="object-cover" />
-            </div>
-            <div className="relative aspect-[4/3]">
-              <Image src="/photos/july4th.jpg" alt="July 4th slacklining" fill className="object-cover" />
-            </div>
+          {/* Photo strip — big, clickable */}
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4 mb-10">
+            {[
+              { src: '/photos/memorial.jpg', alt: 'Memorial Day · May 30, 2011 · Nikon D90' },
+              { src: '/photos/prideline.jpg', alt: 'Pride weekend · Jun 25, 2011' },
+              { src: '/photos/july4th.jpg', alt: 'July 4th · Jul 2, 2011 · Nikon D90' },
+            ].map((p) => (
+              <div key={p.src} className="relative aspect-[4/3] sm:aspect-[3/4] rounded-xl overflow-hidden">
+                <ClickablePhoto src={p.src} alt={p.alt} className="object-cover" fill sizes="(max-width: 640px) 100vw, 33vw" />
+              </div>
+            ))}
           </div>
 
           <div className="space-y-4">
@@ -252,20 +252,18 @@ export default function CommunityPage() {
         </div>
       </section>
 
-      {/* Photo break */}
+      {/* Photo break — full bleed, all clickable */}
       <section className="grid grid-cols-2 sm:grid-cols-4">
-        <div className="relative aspect-square">
-          <Image src="/photos/highline.jpg" alt="Highline" fill className="object-cover" />
-        </div>
-        <div className="relative aspect-square">
-          <Image src="/photos/ocean-beach.jpg" alt="Ocean Beach slackline" fill className="object-cover" />
-        </div>
-        <div className="relative aspect-square">
-          <Image src="/photos/rooftop.jpg" alt="Rooftop slackline" fill className="object-cover" />
-        </div>
-        <div className="relative aspect-square">
-          <Image src="/photos/panhandle-170.jpg" alt="170ft at the Panhandle" fill className="object-cover" />
-        </div>
+        {[
+          { src: '/photos/highline.jpg', alt: 'Highline · Feb 18, 2012 · Canon 1D Mark IV' },
+          { src: '/photos/ocean-beach.jpg', alt: 'Ocean Beach · 150ft over sand · Dec 2011' },
+          { src: '/photos/rooftop.jpg', alt: 'SF rooftop session · Feb 24, 2012' },
+          { src: '/photos/panhandle-170.jpg', alt: '170ft at the Panhandle · Nov 2011' },
+        ].map((p) => (
+          <div key={p.src} className="relative aspect-square overflow-hidden">
+            <ClickablePhoto src={p.src} alt={p.alt} className="object-cover" fill sizes="(max-width: 640px) 50vw, 25vw" />
+          </div>
+        ))}
       </section>
 
       {/* Friends & Partners */}
