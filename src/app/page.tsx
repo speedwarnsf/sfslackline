@@ -90,7 +90,7 @@ export default function Home() {
   );
 
   return (
-    <main className="font-body">
+    <div className="font-body">
       {lightbox.index >= 0 && (
         <Lightbox images={lightbox.images} index={lightbox.index} onClose={lightbox.close} />
       )}
@@ -280,6 +280,6 @@ export default function Home() {
           </a>
         </div>
       </section>
-    </main>
+    </div>
   );
 }
