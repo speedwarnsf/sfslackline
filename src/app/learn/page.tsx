@@ -110,6 +110,11 @@ export default function LearnPage() {
         </div>
       </section>
 
+      {/* Photo break */}
+      <div className="relative h-48 sm:h-64">
+        <Image src="/photos/april2011.jpg" alt="April 2011 · Learning on the line" fill className="object-cover" />
+      </div>
+
       {/* Progression Path */}
       <section className="bg-[#FAF8F2] py-12 sm:py-14 border-t border-gray-100">
         <div className="max-w-5xl mx-auto px-5 sm:px-6">
