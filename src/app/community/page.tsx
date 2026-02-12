@@ -1,5 +1,23 @@
+'use client';
+
+import { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import Lightbox from '@/components/Lightbox';
+
+function ClickablePhoto({ src, alt, className, fill, sizes }: { src: string; alt: string; className?: string; fill?: boolean; sizes?: string }) {
+  const [show, setShow] = useState(false);
+  return (
+    <>
+      <div className="cursor-pointer" onClick={() => setShow(true)}>
+        <Image src={src} alt={alt} className={className} fill={fill} sizes={sizes} />
+      </div>
+      {show && (
+        <Lightbox images={[{ src, alt, caption: alt }]} index={0} onClose={() => setShow(false)} />
+      )}
+    </>
+  );
+}
 
 /*
  * COMMUNITY — ALL DATA FROM SF_SLACKLINE_VOICE_AND_DATA.md

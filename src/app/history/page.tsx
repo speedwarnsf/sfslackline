@@ -1,5 +1,9 @@
+'use client';
+
+import { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import Lightbox from '@/components/Lightbox';
 
 /*
  * HISTORY — ALL DATA FROM SF_SLACKLINE_VOICE_AND_DATA.md
@@ -26,13 +30,40 @@ function Tweet({ text, date, highlight }: { text: string; date: string; highligh
 }
 
 function Photo({ src, caption, tall }: { src: string; caption: string; tall?: boolean }) {
+  const [showLightbox, setShowLightbox] = useState(false);
   return (
-    <figure className="rounded-lg overflow-hidden">
-      <div className={`relative ${tall ? 'h-64 sm:h-80' : 'h-48 sm:h-64'}`}>
-        <Image src={src} alt={caption} fill className="object-cover" />
+    <>
+      <figure className="rounded-lg overflow-hidden cursor-pointer group" onClick={() => setShowLightbox(true)}>
+        <div className={`relative ${tall ? 'h-72 sm:h-96' : 'h-56 sm:h-80'}`}>
+          <Image src={src} alt={caption} fill className="object-cover group-hover:scale-[1.03] transition-transform duration-500" />
+          <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300" />
+        </div>
+        <figcaption className="text-[11px] text-gray-500 mt-2 px-0.5 font-light">{caption}</figcaption>
+      </figure>
+      {showLightbox && (
+        <Lightbox
+          images={[{ src, alt: caption, caption }]}
+          index={0}
+          onClose={() => setShowLightbox(false)}
+        />
+      )}
+    </>
+  );
+}
+
+function ArchivePhoto({ src, caption }: { src: string; caption: string }) {
+  const [show, setShow] = useState(false);
+  return (
+    <>
+      <div className="relative aspect-square rounded-lg overflow-hidden group cursor-pointer" onClick={() => setShow(true)}>
+        <Image src={src} alt={caption} fill className="object-cover group-hover:scale-105 transition-transform duration-500" />
+        <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-colors duration-300" />
+        <p className="absolute bottom-2 left-2 right-2 text-xs text-white drop-shadow-lg opacity-0 group-hover:opacity-100 transition-opacity">{caption}</p>
       </div>
-      <figcaption className="text-[10px] text-gray-400 mt-1.5 px-0.5">{caption}</figcaption>
-    </figure>
+      {show && (
+        <Lightbox images={[{ src, alt: caption, caption }]} index={0} onClose={() => setShow(false)} />
+      )}
+    </>
   );
 }
 
@@ -412,11 +443,7 @@ export default function HistoryPage() {
               { src: '/photos/panhandle-nemesis.jpg', caption: 'Panhandle nemesis' },
               { src: '/photos/nightline.jpg', caption: 'Nightline at Dolores Park' },
             ].map((photo) => (
-              <div key={photo.src} className="relative h-40 sm:h-52 rounded-lg overflow-hidden group">
-                <Image src={photo.src} alt={photo.caption} fill className="object-cover group-hover:scale-105 transition-transform duration-500" />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
-                <p className="absolute bottom-2 left-2 right-2 text-[10px] text-white opacity-0 group-hover:opacity-100 transition-opacity">{photo.caption}</p>
-              </div>
+              <ArchivePhoto key={photo.src} src={photo.src} caption={photo.caption} />
             ))}
           </div>
         </div>
