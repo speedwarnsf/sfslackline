@@ -441,24 +441,25 @@ export default function SpotsPage() {
             { len: '35ft', ctx: 'Beginner lines at Dolores Park', pct: 12 },
             { len: '40ft', ctx: 'Panhandle secondary lines', pct: 14 },
             { len: '70–80ft', ctx: 'Standard park lines', pct: 27 },
-            { len: '100ft', ctx: 'Panhandle with Mac (Dec 2011)', pct: 34 },
-            { len: '120ft', ctx: 'Panhandle (Dec 2013)', pct: 41 },
-            { len: '130–140ft', ctx: 'Panhandle at Cole — most common longline', pct: 48 },
-            { len: '150ft', ctx: 'Ocean Beach / Fort Funston over sand', pct: 51 },
-            { len: '186ft', ctx: 'Panhandle record? (Nov 2012)', pct: 63 },
-            { len: '195ft', ctx: 'Panhandle (Jun 2013)', pct: 66 },
-            { len: '200–300ft', ctx: 'GGP threaded (Mar 2012)', pct: 100 },
+            { len: '100ft', ctx: 'Panhandle with Mac · Dec 2011', pct: 34 },
+            { len: '120ft', ctx: 'Panhandle · Dec 2013', pct: 41 },
+            { len: '130–140ft', ctx: 'Cole & Fell — most common longline', pct: 48 },
+            { len: '150ft', ctx: 'Ocean Beach over sand', pct: 51 },
+            { len: '186ft', ctx: 'Panhandle record · Nov 2012', pct: 63 },
+            { len: '195ft', ctx: 'Panhandle · Jun 2013', pct: 66 },
+            { len: '200–300ft', ctx: 'GGP threaded · Mar 2012', pct: 100 },
           ].map((l) => (
-            <div key={l.len} className="flex items-center gap-3">
-              <span className="font-display text-sm font-black text-[#1A3A4A] w-20 shrink-0 text-right">{l.len}</span>
-              <div className="flex-1 bg-gray-100 rounded-full h-6 overflow-hidden">
-                <div
-                  className="h-full rounded-full bg-gradient-to-r from-[#1E6B7B] to-[#C8A84E] flex items-center justify-end pr-2"
-                  style={{ width: `${l.pct}%`, minWidth: '60px' }}
-                >
-                  <span className="text-[10px] text-white font-medium truncate">{l.ctx}</span>
+            <div key={l.len}>
+              <div className="flex items-center gap-3">
+                <span className="font-display text-sm font-black text-[#1A3A4A] w-20 shrink-0 text-right">{l.len}</span>
+                <div className="flex-1 bg-gray-100 rounded-full h-5 overflow-hidden">
+                  <div
+                    className="h-full rounded-full bg-gradient-to-r from-[#1E6B7B] to-[#C8A84E]"
+                    style={{ width: `${l.pct}%`, minWidth: '8px' }}
+                  />
                 </div>
               </div>
+              <p className="text-[11px] text-gray-400 font-light ml-[calc(5rem+12px)]">{l.ctx}</p>
             </div>
           ))}
         </div>
