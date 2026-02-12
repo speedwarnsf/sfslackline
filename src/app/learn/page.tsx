@@ -1,5 +1,7 @@
-import Image from 'next/image';
+'use client';
+
 import Link from 'next/link';
+import YouTubeEmbed from '@/components/YouTubeEmbed';
 
 /*
  * LEARN — Video IDs from original sfslackline.org (NWslackline series)
@@ -87,38 +89,18 @@ export default function LearnPage() {
           <h2 className="font-display text-2xl sm:text-3xl font-black text-[#1A3A4A] mb-1">Instructional Series</h2>
           <p className="text-sm text-gray-500 font-light mb-8">5-part tutorial from NWslackline.org — featured on the original SF Slackline site</p>
 
-          <div className="space-y-4">
+          <div className="space-y-6">
             {instructionalVideos.map((v) => (
-              <a
-                key={v.id}
-                href={`https://youtube.com/watch?v=${v.id}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex flex-col sm:flex-row gap-4 p-4 rounded-xl border border-gray-100 hover:border-[#C8A84E]/30 hover:bg-[#F5F0E0]/30 transition-all group"
-              >
-                <div className="relative w-full sm:w-56 h-32 shrink-0 rounded-lg overflow-hidden bg-[#1A3A4A]">
-                  <Image
-                    src={`https://img.youtube.com/vi/${v.id}/mqdefault.jpg`}
-                    alt={v.title}
-                    fill
-                    className="object-cover group-hover:opacity-80 transition-opacity"
-                  />
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="w-10 h-10 rounded-full bg-[#C8A84E]/90 flex items-center justify-center group-hover:scale-110 transition-transform">
-                      <svg className="w-4 h-4 text-white ml-0.5" fill="currentColor" viewBox="0 0 20 20">
-                        <path d="M6.3 2.841A1.5 1.5 0 004 4.11V15.89a1.5 1.5 0 002.3 1.269l9.344-5.89a1.5 1.5 0 000-2.538L6.3 2.84z" />
-                      </svg>
-                    </div>
-                  </div>
-                </div>
-                <div className="flex-1">
+              <div key={v.id} className="rounded-xl overflow-hidden border border-gray-100">
+                <YouTubeEmbed id={v.id} title={v.title} />
+                <div className="p-4">
                   <div className="flex items-center gap-2 mb-1">
                     <span className="text-[10px] font-mono text-[#C8A84E] font-bold">PART {v.part}</span>
-                    <h3 className="font-semibold text-sm text-[#1A3A4A] group-hover:text-[#1E6B7B] transition-colors">{v.title}</h3>
+                    <h3 className="font-semibold text-sm text-[#1A3A4A]">{v.title}</h3>
                   </div>
                   <p className="text-xs text-gray-500 font-light">{v.desc}</p>
                 </div>
-              </a>
+              </div>
             ))}
           </div>
         </div>
@@ -149,34 +131,14 @@ export default function LearnPage() {
         <div className="max-w-5xl mx-auto px-5 sm:px-6">
           <h2 className="font-display text-2xl font-black text-[#1A3A4A] mb-1">Community Videos</h2>
           <p className="text-sm text-gray-500 font-light mb-6">Real sessions, real community</p>
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {communityVideos.map((v) => (
-              <a
-                key={v.id}
-                href={`https://youtube.com/watch?v=${v.id}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group rounded-lg overflow-hidden bg-white shadow-sm hover:shadow-md transition-shadow"
-              >
-                <div className="relative h-24 sm:h-28 bg-[#1A3A4A]">
-                  <Image
-                    src={`https://img.youtube.com/vi/${v.id}/mqdefault.jpg`}
-                    alt={v.title}
-                    fill
-                    className="object-cover group-hover:opacity-80 transition-opacity"
-                  />
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="w-8 h-8 rounded-full bg-[#C8A84E]/90 flex items-center justify-center">
-                      <svg className="w-3 h-3 text-white ml-0.5" fill="currentColor" viewBox="0 0 20 20">
-                        <path d="M6.3 2.841A1.5 1.5 0 004 4.11V15.89a1.5 1.5 0 002.3 1.269l9.344-5.89a1.5 1.5 0 000-2.538L6.3 2.84z" />
-                      </svg>
-                    </div>
-                  </div>
-                </div>
+              <div key={v.id} className="rounded-lg overflow-hidden bg-white shadow-sm">
+                <YouTubeEmbed id={v.id} title={v.title} />
                 <div className="p-2">
                   <h3 className="text-[11px] font-medium text-[#1A3A4A]">{v.title}</h3>
                 </div>
-              </a>
+              </div>
             ))}
           </div>
         </div>
@@ -187,34 +149,14 @@ export default function LearnPage() {
         <div className="max-w-5xl mx-auto px-5 sm:px-6">
           <h2 className="font-display text-2xl font-black text-[#1A3A4A] mb-1">Inspiration</h2>
           <p className="text-sm text-gray-500 font-light mb-6">Pure stoke from the slackline world</p>
-          <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {funVideos.map((v) => (
-              <a
-                key={v.id}
-                href={`https://youtube.com/watch?v=${v.id}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group rounded-lg overflow-hidden border border-gray-100 hover:border-[#C8A84E]/30 transition-colors"
-              >
-                <div className="relative h-28 sm:h-32 bg-[#1A3A4A]">
-                  <Image
-                    src={`https://img.youtube.com/vi/${v.id}/mqdefault.jpg`}
-                    alt={v.title}
-                    fill
-                    className="object-cover group-hover:opacity-80 transition-opacity"
-                  />
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="w-8 h-8 rounded-full bg-[#C8A84E]/90 flex items-center justify-center">
-                      <svg className="w-3 h-3 text-white ml-0.5" fill="currentColor" viewBox="0 0 20 20">
-                        <path d="M6.3 2.841A1.5 1.5 0 004 4.11V15.89a1.5 1.5 0 002.3 1.269l9.344-5.89a1.5 1.5 0 000-2.538L6.3 2.84z" />
-                      </svg>
-                    </div>
-                  </div>
-                </div>
+              <div key={v.id} className="rounded-lg overflow-hidden border border-gray-100">
+                <YouTubeEmbed id={v.id} title={v.title} />
                 <div className="p-2">
                   <h3 className="text-[11px] font-medium text-[#1A3A4A]">{v.title}</h3>
                 </div>
-              </a>
+              </div>
             ))}
           </div>
         </div>

@@ -1,5 +1,9 @@
+'use client';
+
 import Image from 'next/image';
 import Link from 'next/link';
+import Lightbox, { useLightbox } from '@/components/Lightbox';
+import YouTubeEmbed from '@/components/YouTubeEmbed';
 
 /*
  * ALL DATA FROM: SF_SLACKLINE_VOICE_AND_DATA.md
@@ -55,7 +59,7 @@ const incidents = [
   { date: 'Feb 2011', what: '"Jst put on a little show for the sfpd... Nerve wracking!"' },
   { date: 'Jun 2011', what: '"Trucks rolled up with fence. Lines dwn." Dolores Park renovation forces relocation.' },
   { date: 'Jun 2012', what: '"Getting shut down. We need to do something about this."' },
-  { date: 'Sep 2012', what: '"Douchebag complained and Park Police say NO." NPS rangers shut down waterline same day.' },
+  { date: 'Sep 2012', what: '"Scratch that. Douchebag complained and Park Police say NO." NPS rangers shut down waterline same day.' },
 ];
 
 // Real tutorial videos — verified YouTube IDs
@@ -65,9 +69,32 @@ const tutorials = [
   { id: 'QCQLJsSm_ec', title: 'Turning Around' },
 ];
 
+const archivePhotos = [
+  { f: 'prideline.jpg', d: 'Jun 25, 2011', c: 'MS690' },
+  { f: 'rainbow.jpg', d: 'Aug 8, 2010', c: 'Nikon D90' },
+  { f: 'july4th.jpg', d: 'Jul 2, 2011', c: 'Nikon D90' },
+  { f: 'highline.jpg', d: 'Feb 18, 2012', c: 'Canon 1D Mark IV' },
+  { f: 'ocean-beach-2.jpg', d: 'Dec 5, 2011', c: '' },
+  { f: 'rooftop.jpg', d: 'Feb 24, 2012', c: 'iPhone 4' },
+  { f: 'memorial.jpg', d: 'May 30, 2011', c: 'Nikon D90' },
+  { f: 'yosemite.jpg', d: 'Aug 10, 2010', c: 'Canon G11' },
+];
+
 export default function Home() {
+  const lightbox = useLightbox(
+    archivePhotos.map((p) => ({
+      src: `/photos/${p.f}`,
+      alt: `${p.d}${p.c ? ` · ${p.c}` : ''}`,
+      caption: `${p.d}${p.c ? ` · ${p.c}` : ''}`,
+    }))
+  );
+
   return (
     <main className="font-body">
+      {lightbox.index >= 0 && (
+        <Lightbox images={lightbox.images} index={lightbox.index} onClose={lightbox.close} />
+      )}
+
       {/* ===== HERO ===== */}
       <section className="relative h-[70vh] min-h-[400px] max-h-[600px] flex items-end overflow-hidden mt-14">
         <Image
@@ -176,19 +203,14 @@ export default function Home() {
           <h2 className="font-display text-2xl sm:text-3xl font-black text-[#1A3A4A] mb-1">From the Archive</h2>
           <p className="text-sm text-gray-500 font-light mb-8">Dates and cameras from EXIF metadata</p>
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-            {[
-              { f: 'prideline.jpg', d: 'Jun 25, 2011', c: 'MS690' },
-              { f: 'rainbow.jpg', d: 'Aug 8, 2010', c: 'Nikon D90' },
-              { f: 'july4th.jpg', d: 'Jul 2, 2011', c: 'Nikon D90' },
-              { f: 'highline.jpg', d: 'Feb 18, 2012', c: 'Canon 1D Mark IV' },
-              { f: 'ocean-beach-2.jpg', d: 'Dec 5, 2011', c: '' },
-              { f: 'rooftop.jpg', d: 'Feb 24, 2012', c: 'iPhone 4' },
-              { f: 'memorial.jpg', d: 'May 30, 2011', c: 'Nikon D90' },
-              { f: 'yosemite.jpg', d: 'Aug 10, 2010', c: 'Canon G11' },
-            ].map((p) => (
-              <div key={p.f} className="rounded-lg overflow-hidden">
+            {archivePhotos.map((p, i) => (
+              <div
+                key={p.f}
+                className="rounded-lg overflow-hidden cursor-pointer group"
+                onClick={() => lightbox.open(i)}
+              >
                 <div className="relative h-28 sm:h-36">
-                  <Image src={`/photos/${p.f}`} alt={`${p.d}${p.c ? ` · ${p.c}` : ''}`} fill className="object-cover" />
+                  <Image src={`/photos/${p.f}`} alt={`${p.d}${p.c ? ` · ${p.c}` : ''}`} fill className="object-cover group-hover:scale-105 transition-transform duration-300" />
                 </div>
                 <div className="p-2 bg-[#F2F4F6]">
                   <p className="text-xs font-medium text-[#1A3A4A]">{p.d}</p>
@@ -210,32 +232,12 @@ export default function Home() {
           <p className="text-sm text-gray-500 font-light mb-8">NWslackline.org tutorial series · YouTube</p>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             {tutorials.map((v) => (
-              <a
-                key={v.id}
-                href={`https://youtube.com/watch?v=${v.id}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group rounded-xl overflow-hidden bg-white shadow-sm hover:shadow-md transition-shadow"
-              >
-                <div className="relative h-32 bg-[#1A3A4A]">
-                  <Image
-                    src={`https://img.youtube.com/vi/${v.id}/mqdefault.jpg`}
-                    alt={v.title}
-                    fill
-                    className="object-cover group-hover:opacity-80 transition-opacity"
-                  />
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="w-10 h-10 rounded-full bg-[#C8A84E]/90 flex items-center justify-center group-hover:scale-110 transition-transform">
-                      <svg className="w-4 h-4 text-white ml-0.5" fill="currentColor" viewBox="0 0 20 20">
-                        <path d="M6.3 2.841A1.5 1.5 0 004 4.11V15.89a1.5 1.5 0 002.3 1.269l9.344-5.89a1.5 1.5 0 000-2.538L6.3 2.84z" />
-                      </svg>
-                    </div>
-                  </div>
-                </div>
+              <div key={v.id} className="rounded-xl overflow-hidden bg-white shadow-sm">
+                <YouTubeEmbed id={v.id} title={v.title} />
                 <div className="p-3">
                   <h3 className="font-semibold text-sm text-[#1A3A4A]">{v.title}</h3>
                 </div>
-              </a>
+              </div>
             ))}
           </div>
         </div>

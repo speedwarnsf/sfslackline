@@ -1,5 +1,8 @@
+'use client';
+
 import Image from 'next/image';
 import Link from 'next/link';
+import Lightbox, { useLightbox } from '@/components/Lightbox';
 
 /*
  * SAFETY & LEGAL — ALL DATA FROM SF_SLACKLINE_VOICE_AND_DATA.md
@@ -35,8 +38,19 @@ const enforcementTimeline = [
 ];
 
 export default function SafetyPage() {
+  const lightbox = useLightbox(
+    injuries.map((injury) => ({
+      src: `/photos/injuries/${injury.file}`,
+      alt: injury.desc,
+      caption: injury.desc,
+    }))
+  );
+
   return (
     <div className="mt-14 font-body">
+      {lightbox.index >= 0 && (
+        <Lightbox images={lightbox.images} index={lightbox.index} onClose={lightbox.close} />
+      )}
       {/* Hero */}
       <section className="bg-[#1A3A4A] py-12 sm:py-16">
         <div className="max-w-5xl mx-auto px-5 sm:px-6">
@@ -63,14 +77,14 @@ export default function SafetyPage() {
             from catching the line on a fall, and ankle sprains from bad dismounts.
           </p>
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
-            {injuries.map((injury) => (
-              <div key={injury.file} className="rounded-lg overflow-hidden border border-gray-100">
+            {injuries.map((injury, i) => (
+              <div key={injury.file} className="rounded-lg overflow-hidden border border-gray-100 cursor-pointer group" onClick={() => lightbox.open(i)}>
                 <div className="relative h-32 sm:h-40 bg-gray-100">
                   <Image
                     src={`/photos/injuries/${injury.file}`}
                     alt={injury.desc}
                     fill
-                    className="object-cover"
+                    className="object-cover group-hover:scale-105 transition-transform duration-300"
                   />
                 </div>
                 <div className="p-2.5 bg-[#F2F4F6]">
