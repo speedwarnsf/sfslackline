@@ -1,5 +1,9 @@
+'use client';
+
+import { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import Lightbox from '@/components/Lightbox';
 
 /*
  * EVENTS — ALL DATA FROM SF_SLACKLINE_VOICE_AND_DATA.md
@@ -163,6 +167,18 @@ const recurringPatterns = [
   },
 ];
 
+function EventPhoto({ src, alt }: { src: string; alt: string }) {
+  const [show, setShow] = useState(false);
+  return (
+    <>
+      <div className="relative h-64 sm:h-80 bg-gray-100 cursor-pointer" onClick={() => setShow(true)}>
+        <Image src={src} alt={alt} fill className="object-cover hover:scale-[1.02] transition-transform duration-500" sizes="(max-width: 640px) 100vw, 50vw" />
+      </div>
+      {show && <Lightbox images={[{ src, alt, caption: alt }]} index={0} onClose={() => setShow(false)} />}
+    </>
+  );
+}
+
 export default function EventsPage() {
   return (
     <div className="mt-14 font-body">
@@ -189,15 +205,7 @@ export default function EventsPage() {
           <div className="grid sm:grid-cols-2 gap-6">
             {featuredEvents.map((event) => (
               <div key={event.title} className="group rounded-xl overflow-hidden border border-gray-100 hover:border-[#C8A84E]/30 transition-colors">
-                <div className="relative h-56 sm:h-64 bg-gray-100">
-                  <Image
-                    src={event.photo}
-                    alt={event.title}
-                    fill
-                    className="object-cover group-hover:scale-[1.02] transition-transform duration-500"
-                    sizes="(max-width: 640px) 100vw, 50vw"
-                  />
-                </div>
+                <EventPhoto src={event.photo} alt={event.title} />
                 <div className="p-5">
                   <span className="text-[10px] font-mono text-[#C8A84E] uppercase tracking-wider">{event.date}</span>
                   <h3 className="font-display text-lg font-black text-[#1A3A4A] mt-1 mb-1">{event.title}</h3>
