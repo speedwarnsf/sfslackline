@@ -13,6 +13,7 @@ const navLinks = [
   { href: '/history', label: 'History' },
   { href: '/events', label: 'Events' },
   { href: '/gear', label: 'Gear' },
+  { href: '/photos', label: 'Photos' },
 ];
 
 export function Navigation() {
