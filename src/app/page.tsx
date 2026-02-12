@@ -154,7 +154,7 @@ export default function Home() {
           </div>
 
           <p className="text-center text-[#1A3A4A]/40 text-xs mt-8 tracking-wide">
-            21 of 849 photos · Full archive at <a href="https://sfslackline.org" target="_blank" rel="noopener noreferrer" className="underline hover:text-[#1E6B7B]">sfslackline.org</a>
+            21 of 849 photos · <a href="/photos" className="underline hover:text-[#1E6B7B]">View full gallery</a> · <a href="https://sfslackline.org" target="_blank" rel="noopener noreferrer" className="underline hover:text-[#1E6B7B]">Original archive</a>
           </p>
         </div>
       </section>
