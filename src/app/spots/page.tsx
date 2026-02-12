@@ -40,9 +40,9 @@ const spots: Spot[] = [
   {
     name: 'Ocean Beach / Fort Funston',
     aka: 'South of hang gliders · Pilings',
-    lat: 37.7748,
-    lng: -122.4472,
-    gpsSource: 'ocean-beach.jpg EXIF',
+    lat: 37.7141,
+    lng: -122.5024,
+    gpsSource: 'Corrected to southern Ocean Beach / Fort Funston area',
     tweetCount: '5+',
     years: '2011',
     note: '150ft line over sand. Beach slacklining at the pilings.',
