@@ -1,6 +1,8 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
+import Image from 'next/image';
+import Lightbox from '@/components/Lightbox';
 
 interface Spot {
   name: string;
@@ -12,6 +14,8 @@ interface Spot {
   years: string;
   note: string;
   lengths?: string;
+  photo?: string;
+  photoCaption?: string;
 }
 
 const spots: Spot[] = [
@@ -25,6 +29,8 @@ const spots: Spot[] = [
     years: '2010–2018',
     note: 'Primary spot since 2009. Near J Church line. "The palms."',
     lengths: '35–80ft typical, up to 6 lines simultaneously',
+    photo: '/photos/nightline-2.jpg',
+    photoCaption: 'Nightline at the palms · Oct 2010',
   },
   {
     name: 'The Panhandle',
@@ -36,6 +42,8 @@ const spots: Spot[] = [
     years: '2011–2016',
     note: 'Longline territory. 80–200ft. "cole in the panhandle."',
     lengths: '80–195ft, record 186ft (Nov 2012)',
+    photo: '/photos/panhandle-170.jpg',
+    photoCaption: '170ft at Cole & Fell · Nov 2011',
   },
   {
     name: 'Ocean Beach / Fort Funston',
@@ -47,6 +55,8 @@ const spots: Spot[] = [
     years: '2011',
     note: '150ft line over sand. Beach slacklining at the pilings.',
     lengths: '150ft over sand',
+    photo: '/photos/ocean-beach.jpg',
+    photoCaption: '150ft over sand · Dec 2011',
   },
   {
     name: 'Golden Gate Park',
@@ -68,6 +78,8 @@ const spots: Spot[] = [
     tweetCount: '2+',
     years: '2013',
     note: '"Ft Miley line up one high and one low!" With Dat Phan.',
+    photo: '/photos/highline.jpg',
+    photoCaption: 'Highline · Feb 2012',
   },
   {
     name: 'Islais Creek Park',
@@ -429,8 +441,14 @@ export default function SpotsPage() {
             <button
               key={spot.name}
               onClick={() => flyTo(spot)}
-              className="text-left p-5 rounded-xl border border-gray-200 hover:border-[#1E6B7B] hover:shadow-md transition-all"
+              className="text-left rounded-xl border border-gray-200 hover:border-[#1E6B7B] hover:shadow-md transition-all overflow-hidden"
             >
+              {spot.photo && (
+                <div className="relative h-40 sm:h-48">
+                  <Image src={spot.photo} alt={spot.photoCaption || spot.name} fill className="object-cover" sizes="(max-width: 640px) 100vw, 50vw" />
+                </div>
+              )}
+              <div className="p-5">
               <div className="flex items-start justify-between">
                 <div>
                   <h3 className="font-semibold text-[#1A3A4A]">{spot.name}</h3>
@@ -456,6 +474,7 @@ export default function SpotsPage() {
                 >
                   Google Earth →
                 </a>
+              </div>
               </div>
             </button>
           ))}
