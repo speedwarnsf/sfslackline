@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import Link from 'next/link';
 
 /*
@@ -9,13 +10,16 @@ import Link from 'next/link';
 export default function GearPage() {
   return (
     <div className="mt-14 font-body">
-      {/* Hero */}
-      <section className="bg-[#1A3A4A] py-12 sm:py-16">
-        <div className="max-w-5xl mx-auto px-5 sm:px-6">
-          <h1 className="font-display text-3xl sm:text-5xl font-black text-white leading-tight mb-3">
+      {/* Hero with photo */}
+      <section className="relative bg-[#1A3A4A] py-16 sm:py-24 overflow-hidden">
+        <div className="absolute inset-0 opacity-25">
+          <Image src="/photos/panhandle-nemesis.jpg" alt="Panhandle setup" fill className="object-cover" />
+        </div>
+        <div className="relative max-w-5xl mx-auto px-5 sm:px-6">
+          <h1 className="font-display text-4xl sm:text-6xl font-black text-white leading-tight mb-3">
             Gear Up
           </h1>
-          <p className="text-white/60 text-sm sm:text-base font-light max-w-xl">
+          <p className="text-white/70 text-sm sm:text-lg font-light max-w-xl">
             Don&apos;t buy gear to start. Come to a session first and try ours.
             When you&apos;re ready, here&apos;s what actually matters — and what doesn&apos;t.
           </p>

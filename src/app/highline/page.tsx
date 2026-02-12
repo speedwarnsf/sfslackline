@@ -1,17 +1,20 @@
+import Image from 'next/image';
 import Link from 'next/link';
 
 export default function HighlinePage() {
   return (
     <div className="mt-14 font-body">
-      {/* Hero */}
-      <section className="bg-[#1A3A4A] py-12 sm:py-16">
-        <div className="max-w-5xl mx-auto px-5 sm:px-6">
-          <h1 className="font-display text-3xl sm:text-5xl font-black text-white leading-tight mb-3">
-            Walk the Sky
+      {/* Hero with highline photo */}
+      <section className="relative h-[60vh] min-h-[400px] flex items-end overflow-hidden">
+        <Image src="/photos/highline-2.jpg" alt="First SF Slackline highline · Feb 18, 2012 · Canon 1D Mark IV" fill className="object-cover" priority />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
+        <div className="relative z-10 max-w-5xl mx-auto px-5 sm:px-6 pb-10 sm:pb-14 w-full">
+          <h1 className="font-display text-4xl sm:text-6xl md:text-7xl font-black text-white leading-[0.9] mb-3">
+            Walk<br />the Sky
           </h1>
-          <p className="text-white/60 text-sm sm:text-base font-light max-w-xl">
+          <p className="text-white/70 text-sm sm:text-lg font-light max-w-xl">
             Highlining is slacklining at height — sometimes hundreds or thousands of feet above the ground.
-            It&apos;s the ultimate expression of balance, courage, and trust in your systems.
+            The ultimate expression of balance, courage, and trust in your systems.
           </p>
         </div>
       </section>
