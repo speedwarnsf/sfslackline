@@ -17,7 +17,7 @@ import Lightbox from '@/components/Lightbox';
 function Tweet({ text, date, highlight }: { text: string; date: string; highlight?: boolean }) {
   return (
     <blockquote
-      className={`rounded-lg p-4 sm:p-5 ${
+      className={` p-4 sm:p-5 ${
         highlight
           ? 'bg-red-900/80 border-l-4 border-red-400'
           : 'bg-[#1A3A4A] border-l-4 border-[#C8A84E]'
@@ -33,7 +33,7 @@ function Photo({ src, caption, tall }: { src: string; caption: string; tall?: bo
   const [showLightbox, setShowLightbox] = useState(false);
   return (
     <>
-      <figure className="rounded-lg overflow-hidden cursor-pointer group" onClick={() => setShowLightbox(true)}>
+      <figure className=" overflow-hidden cursor-pointer group" onClick={() => setShowLightbox(true)}>
         <div className={`relative ${tall ? 'h-72 sm:h-96' : 'h-56 sm:h-80'}`}>
           <Image src={src} alt={caption} fill className="object-cover group-hover:scale-[1.03] transition-transform duration-500" />
           <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300" />
@@ -55,7 +55,7 @@ function ArchivePhoto({ src, caption }: { src: string; caption: string }) {
   const [show, setShow] = useState(false);
   return (
     <>
-      <div className="relative aspect-square rounded-lg overflow-hidden group cursor-pointer" onClick={() => setShow(true)}>
+      <div className="relative aspect-square  overflow-hidden group cursor-pointer" onClick={() => setShow(true)}>
         <Image src={src} alt={caption} fill className="object-cover group-hover:scale-105 transition-transform duration-500" />
         <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-colors duration-300" />
         <p className="absolute bottom-2 left-2 right-2 text-xs text-white drop-shadow-lg opacity-0 group-hover:opacity-100 transition-opacity">{caption}</p>
@@ -69,9 +69,9 @@ function ArchivePhoto({ src, caption }: { src: string; caption: string }) {
 
 function Enforcement({ children }: { children: React.ReactNode }) {
   return (
-    <div className="bg-red-950/30 border border-red-900/30 rounded-lg p-4 sm:p-5 my-4">
+    <div className="bg-red-950/30 border border-red-900/30  p-4 sm:p-5 my-4">
       <div className="flex items-center gap-2 mb-3">
-        <span className="text-red-400 text-xs font-semibold uppercase tracking-widest">⚠ Enforcement</span>
+        <span className="text-red-400 text-xs font-semibold uppercase tracking-widest">ENFORCEMENT</span>
       </div>
       {children}
     </div>
@@ -339,7 +339,7 @@ export default function HistoryPage() {
                     created an official slacklining policy. It was real. It had rules. It meant slacklining
                     was <em>allowed</em>.
                   </p>
-                  <div className="bg-white border border-gray-200 rounded-lg p-5 space-y-2">
+                  <div className="bg-white border border-gray-200  p-5 space-y-2">
                     <p className="text-xs font-semibold text-[#1E6B7B] uppercase tracking-wider mb-3">Key Rules (archived 2019)</p>
                     <ul className="space-y-1.5 text-sm text-gray-600">
                       <li className="flex gap-2"><span className="text-[#1E6B7B]">→</span> Allowed in city parks (with exceptions)</li>
@@ -362,7 +362,7 @@ export default function HistoryPage() {
                       </a>
                     </p>
                   </div>
-                  <div className="bg-red-950/10 border border-red-200 rounded-lg p-4 mt-2">
+                  <div className="bg-red-950/10 border border-red-200  p-4 mt-2">
                     <p className="text-sm text-red-800 font-semibold">This page is now a 404.</p>
                     <p className="text-xs text-red-700/70 mt-1 leading-relaxed">
                       sfrecpark.org/slacklining-policy/ returns &quot;page not found&quot; as of 2026.
@@ -399,7 +399,7 @@ export default function HistoryPage() {
                   Then, November 7, 2018. The final tweet. A photo. Five likes.
                 </p>
 
-                <div className="bg-[#1A3A4A] rounded-lg p-6 sm:p-8 text-center">
+                <div className="bg-[#1A3A4A]  p-6 sm:p-8 text-center">
                   <p className="text-white text-base sm:text-lg italic leading-relaxed">
                     &quot;SF Slackers, still at it! Three lines up.&quot;
                   </p>
@@ -462,13 +462,13 @@ export default function HistoryPage() {
               href="https://sfslackline.org"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-block bg-[#C8A84E] text-[#1A3A4A] px-6 py-3 rounded text-xs font-semibold uppercase tracking-wider hover:bg-[#B8983E] transition-colors"
+              className="inline-block bg-[#C8A84E] text-[#1A3A4A] px-6 py-3 text-xs font-semibold uppercase tracking-wider hover:bg-[#B8983E] transition-colors"
             >
               Original Site
             </a>
             <Link
               href="/community"
-              className="inline-block border border-gray-300 text-[#1A3A4A] px-6 py-3 rounded text-xs font-semibold uppercase tracking-wider hover:bg-gray-50 transition-colors"
+              className="inline-block border border-gray-300 text-[#1A3A4A] px-6 py-3 text-xs font-semibold uppercase tracking-wider hover:bg-gray-50 transition-colors"
             >
               Meet the Crew
             </Link>

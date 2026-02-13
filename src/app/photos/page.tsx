@@ -57,7 +57,7 @@ export default function PhotosPage() {
           </a>.
         </p>
         <div className="flex gap-4 mt-6 text-white/30 text-xs">
-          <span>📸 21 photos</span>
+          <span>21 photos</span>
           <span>·</span>
           <span>2010–2012</span>
           <span>·</span>
@@ -74,7 +74,7 @@ export default function PhotosPage() {
               className="break-inside-avoid cursor-pointer group"
               onClick={() => lightbox.open(i)}
             >
-              <div className="relative overflow-hidden rounded-lg">
+              <div className="relative overflow-hidden ">
                 <Image
                   src={photo.src}
                   alt={photo.caption}

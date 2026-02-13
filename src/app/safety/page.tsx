@@ -87,7 +87,7 @@ export default function SafetyPage() {
           </blockquote>
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
             {injuries.map((injury, i) => (
-              <div key={injury.file} className="rounded-lg overflow-hidden border border-gray-100 cursor-pointer group" onClick={() => lightbox.open(i)}>
+              <div key={injury.file} className=" overflow-hidden border border-gray-100 cursor-pointer group" onClick={() => lightbox.open(i)}>
                 <div className="relative h-32 sm:h-40 bg-gray-100">
                   <Image
                     src={`/photos/injuries/${injury.file}`}
@@ -104,7 +104,7 @@ export default function SafetyPage() {
           </div>
 
           {/* Medical literature */}
-          <div className="mt-10 p-5 rounded-lg bg-[#F5F0E0] border border-[#C8A84E]/20">
+          <div className="mt-10 p-5  bg-[#F5F0E0] border border-[#C8A84E]/20">
             <h3 className="font-display text-lg font-black text-[#1A3A4A] mb-2">What the Medical Literature Says</h3>
             <p className="text-sm text-gray-700 font-light leading-relaxed">
               Search PubMed for &quot;slackline injury&quot; and you get <span className="font-semibold text-[#1A3A4A]">7 results</span>.
@@ -126,7 +126,7 @@ export default function SafetyPage() {
         <div className="max-w-5xl mx-auto px-5 sm:px-6">
           <h2 className="font-display text-2xl sm:text-3xl font-black text-[#1A3A4A] mb-1">SF Rec & Park Policy</h2>
           {/* Policy Disappearance Callout */}
-          <div className="mb-8 p-5 rounded-lg bg-[#C8A84E]/15 border-l-4 border-[#C8A84E]">
+          <div className="mb-8 p-5  bg-[#C8A84E]/15 border-l-4 border-[#C8A84E]">
             <p className="text-sm font-semibold text-[#1A3A4A] mb-1">
               The city&apos;s slacklining policy page at sfrecpark.org/slacklining-policy/ now returns 404.
             </p>
@@ -149,7 +149,7 @@ export default function SafetyPage() {
             </p>
           </div>
 
-          <div className="bg-white rounded-xl p-6 sm:p-8 border border-gray-200">
+          <div className="bg-white  p-6 sm:p-8 border border-gray-200">
             <h3 className="font-display text-lg font-black text-[#1A3A4A] mb-4">Official Rules (as of 2019)</h3>
             <div className="space-y-3">
               {[
@@ -166,7 +166,7 @@ export default function SafetyPage() {
                 { rule: 'Slackliners assume all risk', detail: 'Explicitly stated in the policy.' },
               ].map((item, i) => (
                 <div key={i} className="flex gap-3 items-start">
-                  <span className="w-5 h-5 rounded-full bg-[#1A3A4A] text-white text-[10px] font-bold flex items-center justify-center shrink-0 mt-0.5">
+                  <span className="w-5 h-5  bg-[#1A3A4A] text-white text-[10px] font-bold flex items-center justify-center shrink-0 mt-0.5">
                     {i + 1}
                   </span>
                   <div>
@@ -177,14 +177,14 @@ export default function SafetyPage() {
               ))}
             </div>
 
-            <div className="mt-6 p-4 rounded-lg bg-red-50 border border-red-100">
+            <div className="mt-6 p-4  bg-red-50 border border-red-100">
               <h4 className="text-sm font-semibold text-red-800 mb-1">Banned Locations (5)</h4>
               <p className="text-sm text-red-700 font-light">
                 Conservatory Valley, Botanical Garden, Music Concourse, Japanese Tea Garden, National AIDS Memorial Grove
               </p>
             </div>
 
-            <div className="mt-4 p-4 rounded-lg bg-[#C8A84E]/10 border border-[#C8A84E]/20">
+            <div className="mt-4 p-4  bg-[#C8A84E]/10 border border-[#C8A84E]/20">
               <p className="text-sm text-gray-700 font-light">
                 <span className="font-semibold text-[#1A3A4A]">To confirm current status:</span> Call
                 SF Rec & Park at 415-831-2700. These rules may still be in effect — or they may not.
@@ -211,7 +211,7 @@ export default function SafetyPage() {
             ))}
           </div>
 
-          <div className="mt-10 p-5 rounded-lg bg-white/5 border border-white/10">
+          <div className="mt-10 p-5  bg-white/5 border border-white/10">
             <p className="text-white/70 text-sm font-light leading-relaxed">
               The pattern is clear. 2011: occasional encounters, mostly warnings. 2012: active shutdowns,
               complaint-driven enforcement. 2014 onward: the community went quieter. The tweets slowed.
@@ -230,7 +230,7 @@ export default function SafetyPage() {
           </p>
 
           <div className="grid sm:grid-cols-3 gap-5">
-            <div className="p-5 rounded-xl bg-[#F2F4F6] border border-gray-200">
+            <div className="p-5  bg-[#F2F4F6] border border-gray-200">
               <div className="font-display text-3xl font-black text-[#C8A84E] mb-1">30cm</div>
               <p className="text-sm font-semibold text-[#1A3A4A]">Minimum tree diameter</p>
               <p className="text-xs text-gray-500 font-light mt-1">
@@ -238,7 +238,7 @@ export default function SafetyPage() {
                 Smaller trees flex too much and sustain bark damage.
               </p>
             </div>
-            <div className="p-5 rounded-xl bg-[#F2F4F6] border border-gray-200">
+            <div className="p-5  bg-[#F2F4F6] border border-gray-200">
               <div className="font-display text-3xl font-black text-[#C8A84E] mb-1">5cm+</div>
               <p className="text-sm font-semibold text-[#1A3A4A]">Minimum sling width</p>
               <p className="text-xs text-gray-500 font-light mt-1">
@@ -246,7 +246,7 @@ export default function SafetyPage() {
                 Wider distributes the load. This is non-negotiable.
               </p>
             </div>
-            <div className="p-5 rounded-xl bg-[#F2F4F6] border border-gray-200">
+            <div className="p-5  bg-[#F2F4F6] border border-gray-200">
               <div className="font-display text-3xl font-black text-[#1A3A4A]">20cm</div>
               <p className="text-xs text-[#1E6B7B] font-medium">x 2–3 meters</p>
               <p className="text-sm font-semibold text-[#1A3A4A] mt-1">Protection pad specs</p>
@@ -259,21 +259,21 @@ export default function SafetyPage() {
 
           {/* Three Categories of Tree Stress */}
           <div className="mt-8 grid sm:grid-cols-3 gap-4">
-            <div className="p-4 rounded-lg border border-gray-200">
+            <div className="p-4  border border-gray-200">
               <h4 className="text-sm font-semibold text-[#1A3A4A] mb-1">1. Tension</h4>
               <p className="text-xs text-gray-600 font-light leading-relaxed">
                 The pull force on the tree. Why minimum diameter matters — thin trees flex,
                 crack, or uproot. Higher tension (longer lines, more bounce) = bigger tree required.
               </p>
             </div>
-            <div className="p-4 rounded-lg border border-gray-200">
+            <div className="p-4  border border-gray-200">
               <h4 className="text-sm font-semibold text-[#1A3A4A] mb-1">2. Pressure</h4>
               <p className="text-xs text-gray-600 font-light leading-relaxed">
                 Contact force from sling on bark. Narrow slings concentrate force and crush cambium.
                 Wide slings (5cm+) spread the load. Trees with thin bark are especially vulnerable.
               </p>
             </div>
-            <div className="p-4 rounded-lg border border-gray-200">
+            <div className="p-4  border border-gray-200">
               <h4 className="text-sm font-semibold text-[#1A3A4A] mb-1">3. Friction</h4>
               <p className="text-xs text-gray-600 font-light leading-relaxed">
                 Sling movement against bark during use. Robust padding (felt, carpet) ensures
@@ -282,7 +282,7 @@ export default function SafetyPage() {
             </div>
           </div>
 
-          <div className="mt-6 p-5 rounded-lg bg-[#1A3A4A]">
+          <div className="mt-6 p-5  bg-[#1A3A4A]">
             <p className="text-white/80 text-sm font-light">
               <span className="text-[#C8A84E] font-semibold">Pad your trees. Don&apos;t be the reason we lose a spot.</span>
             </p>
@@ -307,13 +307,13 @@ export default function SafetyPage() {
           <div className="flex gap-3 justify-center">
             <Link
               href="/gear"
-              className="inline-block bg-[#C8A84E] text-[#1A3A4A] px-5 py-2.5 rounded text-xs font-semibold uppercase tracking-wider hover:bg-[#B8983E] transition-colors"
+              className="inline-block bg-[#C8A84E] text-[#1A3A4A] px-5 py-2.5 text-xs font-semibold uppercase tracking-wider hover:bg-[#B8983E] transition-colors"
             >
               Tree Protection Gear
             </Link>
             <Link
               href="/spots"
-              className="inline-block border border-white/30 text-white px-5 py-2.5 rounded text-xs font-semibold uppercase tracking-wider hover:bg-white/10 transition-colors"
+              className="inline-block border border-white/30 text-white px-5 py-2.5 text-xs font-semibold uppercase tracking-wider hover:bg-white/10 transition-colors"
             >
               Find a Spot
             </Link>

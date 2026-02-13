@@ -204,7 +204,7 @@ export default function EventsPage() {
 
           <div className="grid sm:grid-cols-2 gap-6">
             {featuredEvents.map((event) => (
-              <div key={event.title} className="group rounded-xl overflow-hidden border border-gray-100 hover:border-[#C8A84E]/30 transition-colors">
+              <div key={event.title} className="group  overflow-hidden border border-gray-100 hover:border-[#C8A84E]/30 transition-colors">
                 <EventPhoto src={event.photo} alt={event.title} />
                 <div className="p-5">
                   <span className="text-[10px] font-mono text-[#C8A84E] uppercase tracking-wider">{event.date}</span>
@@ -229,7 +229,7 @@ export default function EventsPage() {
 
           <div className="grid sm:grid-cols-2 gap-5">
             {recurringPatterns.map((r) => (
-              <div key={r.pattern} className="bg-white rounded-xl p-5 border border-[#C8A84E]/10">
+              <div key={r.pattern} className="bg-white  p-5 border border-[#C8A84E]/10">
                 <h3 className="font-display text-base font-black text-[#1A3A4A] mb-2">{r.pattern}</h3>
                 {r.quote && (
                   <p className="text-sm italic text-[#1E6B7B] mb-2 leading-relaxed">{r.quote}</p>
@@ -293,7 +293,7 @@ export default function EventsPage() {
 
           <div className="space-y-3">
             {historicalEvents.map((event) => (
-              <div key={event.title} className="bg-white p-5 rounded-xl border border-gray-100 hover:border-[#C8A84E]/20 transition-colors">
+              <div key={event.title} className="bg-white p-5  border border-gray-100 hover:border-[#C8A84E]/20 transition-colors">
                 <div className="flex flex-col sm:flex-row sm:items-start gap-4">
                   <div className="sm:w-28 shrink-0">
                     <span className="text-xs font-mono text-[#C8A84E]">{event.date}</span>
@@ -301,7 +301,7 @@ export default function EventsPage() {
                   <div className="flex-1">
                     <div className="flex items-center gap-2 mb-1">
                       <h3 className="font-semibold text-sm text-[#1A3A4A]">{event.title}</h3>
-                      <span className={`text-[10px] px-1.5 py-0.5 border rounded ${typeColors[event.type] || ''}`}>{event.type}</span>
+                      <span className={`text-[10px] px-1.5 py-0.5 border ${typeColors[event.type] || ''}`}>{event.type}</span>
                     </div>
                     {event.quote && (
                       <p className="text-sm italic text-[#1E6B7B] mb-1">{event.quote}</p>
@@ -329,7 +329,7 @@ export default function EventsPage() {
             </blockquote>
             <p className="text-white/40 text-xs mb-8">5 likes. Then silence.</p>
 
-            <div className="bg-white/5 border border-white/10 rounded-xl p-6 sm:p-8 text-left">
+            <div className="bg-white/5 border border-white/10  p-6 sm:p-8 text-left">
               <h3 className="font-display text-xl font-black text-[#C8A84E] mb-3">Bring It Back</h3>
               <div className="space-y-3 text-sm text-white/60 font-light leading-relaxed">
                 <p>
@@ -350,13 +350,13 @@ export default function EventsPage() {
             <div className="flex gap-3 justify-center mt-8">
               <Link
                 href="/spots"
-                className="inline-block bg-[#C8A84E] text-[#1A3A4A] px-5 py-2.5 rounded text-xs font-semibold uppercase tracking-wider hover:bg-[#B8983E] transition-colors"
+                className="inline-block bg-[#C8A84E] text-[#1A3A4A] px-5 py-2.5 text-xs font-semibold uppercase tracking-wider hover:bg-[#B8983E] transition-colors"
               >
                 Find a Spot
               </Link>
               <Link
                 href="/safety"
-                className="inline-block border border-white/30 text-white px-5 py-2.5 rounded text-xs font-semibold uppercase tracking-wider hover:bg-white/10 transition-colors"
+                className="inline-block border border-white/30 text-white px-5 py-2.5 text-xs font-semibold uppercase tracking-wider hover:bg-white/10 transition-colors"
               >
                 Know the Rules
               </Link>

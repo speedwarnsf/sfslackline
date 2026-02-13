@@ -79,21 +79,21 @@ export default function LearnPage() {
           <TweetQuote text="Stop by if you want a lesson - Dat." date="2011" note="— this is how it starts" />
           <h2 className="font-display text-xl font-black text-[#1A3A4A] mb-4">Getting Started</h2>
           <div className="grid sm:grid-cols-3 gap-5">
-            <div className="bg-white rounded-lg p-5 border border-[#C8A84E]/10">
+            <div className="bg-white  p-5 border border-[#C8A84E]/10">
               <h3 className="font-semibold text-sm text-[#1A3A4A] mb-2">Look at the end</h3>
               <p className="text-xs text-gray-600 font-light leading-relaxed">
                 Fixed point at the end of the line, not your feet. Your body follows your eyes.
                 This is the single most important thing.
               </p>
             </div>
-            <div className="bg-white rounded-lg p-5 border border-[#C8A84E]/10">
+            <div className="bg-white  p-5 border border-[#C8A84E]/10">
               <h3 className="font-semibold text-sm text-[#1A3A4A] mb-2">Breathe and bend</h3>
               <p className="text-xs text-gray-600 font-light leading-relaxed">
                 Deep belly breaths. Soft knees. The line amplifies tension —
                 if you&apos;re stiff, you&apos;re falling. Relax into the wobble.
               </p>
             </div>
-            <div className="bg-white rounded-lg p-5 border border-[#C8A84E]/10">
+            <div className="bg-white  p-5 border border-[#C8A84E]/10">
               <h3 className="font-semibold text-sm text-[#1A3A4A] mb-2">Short and low first</h3>
               <p className="text-xs text-gray-600 font-light leading-relaxed">
                 Start at 30–40ft, knee height. Don&apos;t buy gear yet —
@@ -112,7 +112,7 @@ export default function LearnPage() {
 
           <div className="space-y-6">
             {instructionalVideos.map((v) => (
-              <div key={v.id} className="rounded-xl overflow-hidden border border-gray-100">
+              <div key={v.id} className=" overflow-hidden border border-gray-100">
                 <YouTubeEmbed id={v.id} title={v.title} />
                 <div className="p-4">
                   <div className="flex items-center gap-2 mb-1">
@@ -138,7 +138,7 @@ export default function LearnPage() {
           <TweetQuote text="A little rain wont teather us to the earth. But it reminds us that things fall." date="Mar 13, 2011" />
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            <div className="rounded-lg p-5 bg-[#F5F0E0] border border-[#C8A84E]/15">
+            <div className=" p-5 bg-[#F5F0E0] border border-[#C8A84E]/15">
               <span className="text-[10px] font-mono text-[#C8A84E] font-bold">STAGE 1</span>
               <h3 className="font-semibold text-sm text-[#1A3A4A] mt-1 mb-2">Beginner</h3>
               <p className="text-xs text-gray-600 font-light leading-relaxed mb-2">
@@ -146,7 +146,7 @@ export default function LearnPage() {
               </p>
               <p className="text-[10px] text-gray-400">Gear: ratchet kit, tree pads</p>
             </div>
-            <div className="rounded-lg p-5 bg-[#F5F0E0] border border-[#C8A84E]/15">
+            <div className=" p-5 bg-[#F5F0E0] border border-[#C8A84E]/15">
               <span className="text-[10px] font-mono text-[#C8A84E] font-bold">STAGE 2</span>
               <h3 className="font-semibold text-sm text-[#1A3A4A] mt-1 mb-2">Intermediate</h3>
               <p className="text-xs text-gray-600 font-light leading-relaxed mb-2">
@@ -154,7 +154,7 @@ export default function LearnPage() {
               </p>
               <p className="text-[10px] text-gray-400">Gear: primitive or pulley system</p>
             </div>
-            <div className="rounded-lg p-5 bg-[#F5F0E0] border border-[#C8A84E]/15">
+            <div className=" p-5 bg-[#F5F0E0] border border-[#C8A84E]/15">
               <span className="text-[10px] font-mono text-[#C8A84E] font-bold">STAGE 3</span>
               <h3 className="font-semibold text-sm text-[#1A3A4A] mt-1 mb-2">Longline</h3>
               <p className="text-xs text-gray-600 font-light leading-relaxed mb-2">
@@ -162,7 +162,7 @@ export default function LearnPage() {
               </p>
               <p className="text-[10px] text-gray-400">Gear: pulleys, longer webbing, backup</p>
             </div>
-            <div className="rounded-lg p-5 bg-[#F5F0E0] border border-[#C8A84E]/15">
+            <div className=" p-5 bg-[#F5F0E0] border border-[#C8A84E]/15">
               <span className="text-[10px] font-mono text-[#C8A84E] font-bold">STAGE 4</span>
               <h3 className="font-semibold text-sm text-[#1A3A4A] mt-1 mb-2">Highline</h3>
               <p className="text-xs text-gray-600 font-light leading-relaxed mb-2">
@@ -193,7 +193,7 @@ export default function LearnPage() {
               { title: 'One line per meadow', text: 'SF Rec Park policy was one per park/meadow. We pushed that to 6 at Sasha\'s birthday. Don\'t be the reason they enforce it.' },
               { title: 'Take it down', text: 'No unattended lines. When you leave, the line comes with you. An empty line in a park is an invitation for a complaint.' },
             ].map((item) => (
-              <div key={item.title} className="p-5 rounded-lg bg-white/5 border border-white/10">
+              <div key={item.title} className="p-5  bg-white/5 border border-white/10">
                 <h3 className="text-sm font-semibold text-[#C8A84E] mb-2">{item.title}</h3>
                 <p className="text-xs text-white/60 font-light leading-relaxed">{item.text}</p>
               </div>
@@ -209,7 +209,7 @@ export default function LearnPage() {
           <p className="text-sm text-gray-500 font-light mb-6">Real sessions, real community</p>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {communityVideos.map((v) => (
-              <div key={v.id} className="rounded-lg overflow-hidden bg-white shadow-sm">
+              <div key={v.id} className=" overflow-hidden bg-white shadow-sm">
                 <YouTubeEmbed id={v.id} title={v.title} />
                 <div className="p-2">
                   <h3 className="text-[11px] font-medium text-[#1A3A4A]">{v.title}</h3>
@@ -227,7 +227,7 @@ export default function LearnPage() {
           <p className="text-sm text-gray-500 font-light mb-6">Pure stoke from the slackline world</p>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {funVideos.map((v) => (
-              <div key={v.id} className="rounded-lg overflow-hidden border border-gray-100">
+              <div key={v.id} className=" overflow-hidden border border-gray-100">
                 <YouTubeEmbed id={v.id} title={v.title} />
                 <div className="p-2">
                   <h3 className="text-[11px] font-medium text-[#1A3A4A]">{v.title}</h3>
@@ -249,19 +249,19 @@ export default function LearnPage() {
           <div className="flex gap-3 justify-center flex-wrap">
             <Link
               href="/gear"
-              className="inline-block bg-[#C8A84E] text-[#1A3A4A] px-5 py-2.5 rounded text-xs font-semibold uppercase tracking-wider hover:bg-[#B8983E] transition-colors"
+              className="inline-block bg-[#C8A84E] text-[#1A3A4A] px-5 py-2.5 text-xs font-semibold uppercase tracking-wider hover:bg-[#B8983E] transition-colors"
             >
               Gear Guide
             </Link>
             <Link
               href="/safety"
-              className="inline-block border border-[#C8A84E]/50 text-[#C8A84E] px-5 py-2.5 rounded text-xs font-semibold uppercase tracking-wider hover:bg-white/10 transition-colors"
+              className="inline-block border border-[#C8A84E]/50 text-[#C8A84E] px-5 py-2.5 text-xs font-semibold uppercase tracking-wider hover:bg-white/10 transition-colors"
             >
               Tree Protection
             </Link>
             <Link
               href="/spots"
-              className="inline-block border border-white/30 text-white px-5 py-2.5 rounded text-xs font-semibold uppercase tracking-wider hover:bg-white/10 transition-colors"
+              className="inline-block border border-white/30 text-white px-5 py-2.5 text-xs font-semibold uppercase tracking-wider hover:bg-white/10 transition-colors"
             >
               Find a Spot
             </Link>

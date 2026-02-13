@@ -133,7 +133,7 @@ export default function BoardPage() {
             <h1 className="font-display text-4xl sm:text-5xl font-black text-white leading-tight">
               The Board
             </h1>
-            <span className="text-[10px] uppercase tracking-widest text-[#C8A84E] font-semibold bg-[#C8A84E]/15 px-2.5 py-1 rounded-full mt-2">
+            <span className="text-[10px] uppercase tracking-widest text-[#C8A84E] font-semibold bg-[#C8A84E]/15 px-2.5 py-1  mt-2">
               Community
             </span>
           </div>
@@ -149,7 +149,7 @@ export default function BoardPage() {
               value={search}
               onChange={e => setSearch(e.target.value)}
               placeholder="Search the board…"
-              className="w-full pl-9 pr-4 py-2.5 rounded-lg bg-white/10 text-white placeholder-white/40 text-sm border border-white/10 focus:border-[#C8A84E]/50 focus:outline-none focus:ring-1 focus:ring-[#C8A84E]/30 transition-colors"
+              className="w-full pl-9 pr-4 py-2.5  bg-white/10 text-white placeholder-white/40 text-sm border border-white/10 focus:border-[#C8A84E]/50 focus:outline-none focus:ring-1 focus:ring-[#C8A84E]/30 transition-colors"
             />
             <svg className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-white/40" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
           </div>
@@ -162,7 +162,7 @@ export default function BoardPage() {
                 <button
                   key={cat}
                   onClick={() => setActiveCategory(cat)}
-                  className={`shrink-0 text-[11px] uppercase tracking-wider font-semibold px-3.5 py-1.5 rounded-full transition-all ${
+                  className={`shrink-0 text-[11px] uppercase tracking-wider font-semibold px-3.5 py-1.5  transition-all ${
                     active
                       ? 'bg-[#C8A84E] text-[#1A3A4A]'
                       : 'bg-white/10 text-white/60 hover:bg-white/20'
@@ -204,13 +204,13 @@ export default function BoardPage() {
             <div className="flex items-center gap-2">
               <button
                 onClick={() => setShowHowTo(true)}
-                className="text-[11px] font-semibold px-3 py-1.5 rounded-lg border border-[#1A3A4A]/15 text-[#1A3A4A]/60 hover:border-[#1E6B7B]/30 hover:text-[#1E6B7B] transition-colors"
+                className="text-[11px] font-semibold px-3 py-1.5  border border-[#1A3A4A]/15 text-[#1A3A4A]/60 hover:border-[#1E6B7B]/30 hover:text-[#1E6B7B] transition-colors"
               >
                 How to Post
               </button>
               <button
                 onClick={() => setShowForm(true)}
-                className="text-[11px] font-semibold px-4 py-1.5 rounded-lg bg-[#C8A84E] text-[#1A3A4A] hover:bg-[#D4B95E] transition-colors shadow-sm"
+                className="text-[11px] font-semibold px-4 py-1.5  bg-[#C8A84E] text-[#1A3A4A] hover:bg-[#D4B95E] transition-colors shadow-sm"
               >
                 + Post a Notice
               </button>
@@ -227,7 +227,7 @@ export default function BoardPage() {
         </div>
 
         {/* ── HOW TO POST (inline) ── */}
-        <div className="mb-12 bg-white border border-dashed border-[#1A3A4A]/15 rounded-2xl p-6 sm:p-8 max-w-2xl mx-auto">
+        <div className="mb-12 bg-white border border-dashed border-[#1A3A4A]/15  p-6 sm:p-8 max-w-2xl mx-auto">
           <h2 className="font-display text-xl font-black text-[#1A3A4A] mb-3">This is your board.</h2>
           <div className="text-sm text-[#1A3A4A]/70 space-y-2 leading-relaxed">
             <p>
@@ -274,7 +274,7 @@ function NoticeCard({ notice, isPinned }: { notice: Notice; isPinned?: boolean }
       </div>
 
       <div
-        className={`pt-6 pb-5 px-5 rounded-xl border shadow-sm transition-shadow group-hover:shadow-md ${
+        className={`pt-6 pb-5 px-5  border shadow-sm transition-shadow group-hover:shadow-md ${
           isPinned
             ? 'bg-gradient-to-b from-[#FFFDF5] to-white border-[#C8A84E]/30 ring-1 ring-[#C8A84E]/10'
             : 'bg-white border-[#1A3A4A]/10'
@@ -283,11 +283,11 @@ function NoticeCard({ notice, isPinned }: { notice: Notice; isPinned?: boolean }
       >
         {/* Category badge */}
         <div className="flex items-center justify-between mb-2.5">
-          <span className={`text-[10px] uppercase tracking-wider font-bold px-2 py-0.5 rounded-full ${meta.bgColor} ${meta.color}`}>
+          <span className={`text-[10px] uppercase tracking-wider font-bold px-2 py-0.5  ${meta.bgColor} ${meta.color}`}>
             {meta.label}
           </span>
           {notice.userSubmitted && (
-            <span className="text-[9px] uppercase tracking-wider font-semibold px-2 py-0.5 rounded-full bg-[#C8A84E]/20 text-[#C8A84E]">
+            <span className="text-[9px] uppercase tracking-wider font-semibold px-2 py-0.5  bg-[#C8A84E]/20 text-[#C8A84E]">
               Pending Review
             </span>
           )}
@@ -333,7 +333,7 @@ function NoticeCard({ notice, isPinned }: { notice: Notice; isPinned?: boolean }
 function HowToModal({ onClose }: { onClose: () => void }) {
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm" onClick={onClose}>
-      <div className="bg-[#FFFDF5] rounded-2xl w-full max-w-md p-6 shadow-xl border border-[#C8A84E]/20" onClick={e => e.stopPropagation()}>
+      <div className="bg-[#FFFDF5]  w-full max-w-md p-6 shadow-xl border border-[#C8A84E]/20" onClick={e => e.stopPropagation()}>
         <div className="flex items-center justify-between mb-4">
           <h2 className="font-display text-lg font-black text-[#1A3A4A]">How to Post</h2>
           <button onClick={onClose} className="text-[#1A3A4A]/30 hover:text-[#1A3A4A]/60 text-xl leading-none">&times;</button>
@@ -384,7 +384,7 @@ function SubmitModal({ onClose, onSubmit }: { onClose: () => void; onSubmit: (n:
     });
   }
 
-  const inputCls = "w-full px-3 py-2.5 rounded-lg border border-[#1A3A4A]/12 text-sm text-[#1A3A4A] placeholder-[#1A3A4A]/30 bg-white focus:border-[#1E6B7B] focus:outline-none focus:ring-1 focus:ring-[#1E6B7B]/30";
+  const inputCls = "w-full px-3 py-2.5  border border-[#1A3A4A]/12 text-sm text-[#1A3A4A] placeholder-[#1A3A4A]/30 bg-white focus:border-[#1E6B7B] focus:outline-none focus:ring-1 focus:ring-[#1E6B7B]/30";
 
   const categoryOptions = [
     { value: 'event', label: 'Event / Session' },
@@ -396,7 +396,7 @@ function SubmitModal({ onClose, onSubmit }: { onClose: () => void; onSubmit: (n:
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm" onClick={onClose}>
-      <div className="bg-[#FFFDF5] rounded-2xl w-full max-w-lg max-h-[90vh] overflow-y-auto p-6 shadow-xl border border-[#C8A84E]/20" onClick={e => e.stopPropagation()}>
+      <div className="bg-[#FFFDF5]  w-full max-w-lg max-h-[90vh] overflow-y-auto p-6 shadow-xl border border-[#C8A84E]/20" onClick={e => e.stopPropagation()}>
         <div className="flex items-center justify-between mb-5">
           <h2 className="font-display text-xl font-black text-[#1A3A4A]">Post a Notice</h2>
           <button onClick={onClose} className="text-[#1A3A4A]/30 hover:text-[#1A3A4A]/60 text-xl leading-none">&times;</button>
@@ -432,7 +432,7 @@ function SubmitModal({ onClose, onSubmit }: { onClose: () => void; onSubmit: (n:
               <input className={inputCls} placeholder="Dolores Park" value={form.location} onChange={e => setForm(f => ({ ...f, location: e.target.value }))} />
             </div>
           </div>
-          <button type="submit" className="w-full py-3 rounded-lg bg-[#1E6B7B] text-white text-sm font-bold hover:bg-[#1A3A4A] transition-colors shadow-sm">
+          <button type="submit" className="w-full py-3  bg-[#1E6B7B] text-white text-sm font-bold hover:bg-[#1A3A4A] transition-colors shadow-sm">
             Pin It to the Board
           </button>
           <p className="text-[10px] text-[#1A3A4A]/35 text-center">Stored locally. Shows with a &quot;Pending Review&quot; badge.</p>

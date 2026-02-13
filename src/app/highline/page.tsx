@@ -29,7 +29,7 @@ export default function HighlinePage() {
       <section className="bg-[#F5F0E0] py-10 sm:py-12">
         <div className="max-w-5xl mx-auto px-5 sm:px-6">
           <div className="flex gap-4 items-start">
-            <span className="text-2xl shrink-0">⚠️</span>
+            <span className="text-sm font-black text-red-600 shrink-0 uppercase tracking-widest">WARNING</span>
             <div>
               <h2 className="font-display text-xl font-black text-[#1A3A4A] mb-2">Safety Is Non-Negotiable</h2>
               <p className="text-sm text-gray-700 font-light leading-relaxed mb-3">
@@ -64,7 +64,7 @@ export default function HighlinePage() {
               { name: 'Point Reyes', length: '15–40m', height: '50–150ft', description: 'Secluded spots with stunning coastal scenery. Limited access, requires planning and permits.', access: 'Long approach' },
               { name: 'Yosemite Valley', length: '20–1000m+', height: '100–3000ft', description: 'The birthplace of slacklining. World-class highlines for the most experienced. Special permits required.', access: '3–4 hour drive' },
             ].map((spot) => (
-              <div key={spot.name} className="p-5 rounded-xl bg-[#F2F4F6] border border-gray-100">
+              <div key={spot.name} className="p-5  bg-[#F2F4F6] border border-gray-100">
                 <h3 className="font-display text-lg font-black text-[#1A3A4A] mb-1">{spot.name}</h3>
                 <div className="flex flex-wrap gap-3 mb-3">
                   <span className="text-[10px] text-[#1E6B7B] font-medium">Length: {spot.length}</span>
@@ -89,13 +89,13 @@ export default function HighlinePage() {
           <div className="flex gap-3 justify-center">
             <Link
               href="/learn"
-              className="inline-block bg-[#C8A84E] text-[#1A3A4A] px-5 py-2.5 rounded text-xs font-semibold uppercase tracking-wider hover:bg-[#B8983E] transition-colors"
+              className="inline-block bg-[#C8A84E] text-[#1A3A4A] px-5 py-2.5 text-xs font-semibold uppercase tracking-wider hover:bg-[#B8983E] transition-colors"
             >
               Learn the Basics
             </Link>
             <Link
               href="/events"
-              className="inline-block border border-white/30 text-white px-5 py-2.5 rounded text-xs font-semibold uppercase tracking-wider hover:bg-white/10 transition-colors"
+              className="inline-block border border-white/30 text-white px-5 py-2.5 text-xs font-semibold uppercase tracking-wider hover:bg-white/10 transition-colors"
             >
               Join a Trip
             </Link>

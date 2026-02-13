@@ -287,8 +287,8 @@ export default function SpotsPage() {
         <div className="bg-[#C8A84E] px-5 py-3">
           <div className="max-w-5xl mx-auto flex items-center gap-2">
             <span className="relative flex h-3 w-3">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#1A3A4A] opacity-75" />
-              <span className="relative inline-flex rounded-full h-3 w-3 bg-[#1A3A4A]" />
+              <span className="animate-ping absolute inline-flex h-full w-full  bg-[#1A3A4A] opacity-75" />
+              <span className="relative inline-flex  h-3 w-3 bg-[#1A3A4A]" />
             </span>
             <span className="text-[#1A3A4A] text-sm font-semibold">
               {activeLines.join(' · ')} — LINE{activeLines.length > 1 ? 'S' : ''} UP
@@ -318,16 +318,16 @@ export default function SpotsPage() {
                 {/* Pulsing beacon overlay */}
                 <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none">
                   <span className="relative flex h-6 w-6">
-                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#C8A84E] opacity-60" />
-                    <span className="relative inline-flex rounded-full h-6 w-6 bg-[#C8A84E] border-2 border-white shadow-lg" />
+                    <span className="animate-ping absolute inline-flex h-full w-full  bg-[#C8A84E] opacity-60" />
+                    <span className="relative inline-flex  h-6 w-6 bg-[#C8A84E] border-2 border-white shadow-lg" />
                   </span>
                 </div>
                 {/* Label */}
                 <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-3">
                   <div className="flex items-center gap-2">
                     <span className="relative flex h-2 w-2">
-                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#C8A84E] opacity-75" />
-                      <span className="relative inline-flex rounded-full h-2 w-2 bg-[#C8A84E]" />
+                      <span className="animate-ping absolute inline-flex h-full w-full  bg-[#C8A84E] opacity-75" />
+                      <span className="relative inline-flex  h-2 w-2 bg-[#C8A84E]" />
                     </span>
                     <span className="text-white text-xs font-semibold">{spot.name}</span>
                   </div>
@@ -367,19 +367,19 @@ export default function SpotsPage() {
               />
               {zoomedSpot ? (
                 <div className="absolute top-3 left-3 right-3 flex items-center justify-between">
-                  <div className="bg-white/90 rounded-lg px-3 py-2 shadow">
+                  <div className="bg-white/90  px-3 py-2 shadow">
                     <p className="text-sm font-semibold text-[#1A3A4A]">{zoomedSpot.name}</p>
                     <p className="text-[10px] text-[#1E6B7B]">{zoomedSpot.aka}</p>
                   </div>
                   <button
                     onClick={() => setZoomedSpot(null)}
-                    className="bg-white/90 rounded-lg px-3 py-2 shadow text-xs text-[#1A3A4A] font-medium hover:bg-white transition-colors"
+                    className="bg-white/90  px-3 py-2 shadow text-xs text-[#1A3A4A] font-medium hover:bg-white transition-colors"
                   >
                     All spots
                   </button>
                 </div>
               ) : (
-                <div className="absolute top-3 left-3 bg-white/90 rounded-lg px-3 py-2 shadow text-xs text-[#1A3A4A]">
+                <div className="absolute top-3 left-3 bg-white/90  px-3 py-2 shadow text-xs text-[#1A3A4A]">
                   Tap a spot below to zoom in
                 </div>
               )}
@@ -387,7 +387,7 @@ export default function SpotsPage() {
           )}
 
           {selectedSpot && (
-            <div className="absolute bottom-4 left-4 right-4 sm:left-4 sm:right-auto sm:w-80 bg-white rounded-xl shadow-lg p-4 z-10">
+            <div className="absolute bottom-4 left-4 right-4 sm:left-4 sm:right-auto sm:w-80 bg-white  shadow-lg p-4 z-10">
               <button onClick={() => setSelectedSpot(null)} className="absolute top-2 right-2 text-gray-400 hover:text-gray-600 text-lg leading-none">×</button>
               <h3 className="font-display text-lg font-black text-[#1A3A4A]">{selectedSpot.name}</h3>
               <p className="text-xs text-[#1E6B7B] font-medium">{selectedSpot.aka}</p>
@@ -410,8 +410,8 @@ export default function SpotsPage() {
               {activeLines.includes(selectedSpot.name) && (
                 <div className="mt-2 flex items-center gap-2 text-xs font-semibold text-[#C8A84E]">
                   <span className="relative flex h-2 w-2">
-                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#C8A84E] opacity-75" />
-                    <span className="relative inline-flex rounded-full h-2 w-2 bg-[#C8A84E]" />
+                    <span className="animate-ping absolute inline-flex h-full w-full  bg-[#C8A84E] opacity-75" />
+                    <span className="relative inline-flex  h-2 w-2 bg-[#C8A84E]" />
                   </span>
                   LINE UP NOW
                 </div>
@@ -425,9 +425,9 @@ export default function SpotsPage() {
         <div className="max-w-5xl mx-auto">
           <p className="text-[10px] uppercase tracking-widest text-white/40 mb-2">Demo: simulate real-time</p>
           <div className="flex gap-2 flex-wrap">
-            <button onClick={() => simulateLineUp('Dolores Park')} className="px-3 py-1.5 bg-[#C8A84E] text-[#1A3A4A] rounded text-xs font-semibold hover:bg-[#B8983E] transition-colors">DP Line Up</button>
-            <button onClick={() => simulateLineUp('The Panhandle')} className="px-3 py-1.5 bg-[#C8A84E] text-[#1A3A4A] rounded text-xs font-semibold hover:bg-[#B8983E] transition-colors">Panhandle Up</button>
-            <button onClick={() => setActiveLines([])} className="px-3 py-1.5 border border-white/20 text-white/60 rounded text-xs hover:bg-white/5 transition-colors">All Down</button>
+            <button onClick={() => simulateLineUp('Dolores Park')} className="px-3 py-1.5 bg-[#C8A84E] text-[#1A3A4A] text-xs font-semibold hover:bg-[#B8983E] transition-colors">DP Line Up</button>
+            <button onClick={() => simulateLineUp('The Panhandle')} className="px-3 py-1.5 bg-[#C8A84E] text-[#1A3A4A] text-xs font-semibold hover:bg-[#B8983E] transition-colors">Panhandle Up</button>
+            <button onClick={() => setActiveLines([])} className="px-3 py-1.5 border border-white/20 text-white/60 text-xs hover:bg-white/5 transition-colors">All Down</button>
           </div>
         </div>
       </div>
@@ -458,9 +458,9 @@ export default function SpotsPage() {
             <div key={l.len}>
               <div className="flex items-center gap-3">
                 <span className="font-display text-sm font-black text-[#1A3A4A] w-20 shrink-0 text-right">{l.len}</span>
-                <div className="flex-1 bg-gray-100 rounded-full h-5 overflow-hidden">
+                <div className="flex-1 bg-gray-100  h-5 overflow-hidden">
                   <div
-                    className="h-full rounded-full bg-gradient-to-r from-[#1E6B7B] to-[#C8A84E]"
+                    className="h-full  bg-gradient-to-r from-[#1E6B7B] to-[#C8A84E]"
                     style={{ width: `${l.pct}%`, minWidth: '8px' }}
                   />
                 </div>
@@ -486,7 +486,7 @@ export default function SpotsPage() {
             <button
               key={spot.name}
               onClick={() => flyTo(spot)}
-              className="text-left rounded-xl border border-gray-200 hover:border-[#1E6B7B] hover:shadow-md transition-all overflow-hidden"
+              className="text-left  border border-gray-200 hover:border-[#1E6B7B] hover:shadow-md transition-all overflow-hidden"
             >
               {spot.photo && (
                 <div className="relative h-48 sm:h-56">
@@ -501,8 +501,8 @@ export default function SpotsPage() {
                 </div>
                 {activeLines.includes(spot.name) && (
                   <span className="relative flex h-3 w-3 mt-1">
-                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#C8A84E] opacity-75" />
-                    <span className="relative inline-flex rounded-full h-3 w-3 bg-[#C8A84E]" />
+                    <span className="animate-ping absolute inline-flex h-full w-full  bg-[#C8A84E] opacity-75" />
+                    <span className="relative inline-flex  h-3 w-3 bg-[#C8A84E]" />
                   </span>
                 )}
               </div>

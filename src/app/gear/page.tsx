@@ -68,12 +68,12 @@ export default function GearPage() {
                 desc: 'A secondary line run underneath as a safety catch. Not needed for short beginner lines close to the ground. Becomes essential once you\'re rigging longer or higher setups.',
               },
             ].map((item) => (
-              <div key={item.name} className={`p-5 rounded-xl border ${item.rec ? 'border-[#C8A84E]/30 bg-[#F5F0E0]/30' : 'border-gray-100'}`}>
+              <div key={item.name} className={`p-5  border ${item.rec ? 'border-[#C8A84E]/30 bg-[#F5F0E0]/30' : 'border-gray-100'}`}>
                 <div className="flex items-start justify-between gap-4">
                   <div>
                     <div className="flex items-center gap-2">
                       <h3 className="font-semibold text-sm text-[#1A3A4A]">{item.name}</h3>
-                      {item.rec && <span className="text-[10px] px-1.5 py-0.5 bg-[#C8A84E]/10 text-[#C8A84E] border border-[#C8A84E]/20 rounded font-semibold">START HERE</span>}
+                      {item.rec && <span className="text-[10px] px-1.5 py-0.5 bg-[#C8A84E]/10 text-[#C8A84E] border border-[#C8A84E]/20 font-semibold">START HERE</span>}
                     </div>
                     <p className="text-xs text-gray-600 font-light mt-1 leading-relaxed">{item.desc}</p>
                   </div>
@@ -101,8 +101,8 @@ export default function GearPage() {
 
           <div className="grid sm:grid-cols-3 gap-5">
             {/* Beginner */}
-            <div className="p-5 rounded-xl bg-white border border-gray-200">
-              <div className="text-[10px] px-1.5 py-0.5 bg-[#1E6B7B]/10 text-[#1E6B7B] border border-[#1E6B7B]/20 rounded font-semibold inline-block mb-3">BEGINNER</div>
+            <div className="p-5  bg-white border border-gray-200">
+              <div className="text-[10px] px-1.5 py-0.5 bg-[#1E6B7B]/10 text-[#1E6B7B] border border-[#1E6B7B]/20 font-semibold inline-block mb-3">BEGINNER</div>
               <h3 className="font-display text-lg font-black text-[#1A3A4A] mb-1">Park Lines</h3>
               <p className="text-xs text-gray-500 font-light mb-3">Up to 80ft · Low to ground</p>
               <ul className="space-y-2">
@@ -119,8 +119,8 @@ export default function GearPage() {
             </div>
 
             {/* Longline */}
-            <div className="p-5 rounded-xl bg-white border border-gray-200">
-              <div className="text-[10px] px-1.5 py-0.5 bg-[#C8A84E]/10 text-[#C8A84E] border border-[#C8A84E]/20 rounded font-semibold inline-block mb-3">INTERMEDIATE</div>
+            <div className="p-5  bg-white border border-gray-200">
+              <div className="text-[10px] px-1.5 py-0.5 bg-[#C8A84E]/10 text-[#C8A84E] border border-[#C8A84E]/20 font-semibold inline-block mb-3">INTERMEDIATE</div>
               <h3 className="font-display text-lg font-black text-[#1A3A4A] mb-1">Longlines</h3>
               <p className="text-xs text-gray-500 font-light mb-3">100–300ft · Pulley tensioned</p>
               <ul className="space-y-2">
@@ -143,8 +143,8 @@ export default function GearPage() {
             </div>
 
             {/* Highline */}
-            <div className="p-5 rounded-xl bg-white border border-[#1A3A4A]/20">
-              <div className="text-[10px] px-1.5 py-0.5 bg-[#1A3A4A]/10 text-[#1A3A4A] border border-[#1A3A4A]/20 rounded font-semibold inline-block mb-3">ADVANCED</div>
+            <div className="p-5  bg-white border border-[#1A3A4A]/20">
+              <div className="text-[10px] px-1.5 py-0.5 bg-[#1A3A4A]/10 text-[#1A3A4A] border border-[#1A3A4A]/20 font-semibold inline-block mb-3">ADVANCED</div>
               <h3 className="font-display text-lg font-black text-[#1A3A4A] mb-1">Highlines</h3>
               <p className="text-xs text-gray-500 font-light mb-3">Any height · Full safety system</p>
               <ul className="space-y-2">
@@ -189,7 +189,7 @@ export default function GearPage() {
               { name: 'Load Cell / Tension Meter', price: '$150–300', desc: 'Measures actual tension on the line. Critical for highlines, useful for longlines. Tells you if you\'re overloading anchors or webbing. Not optional for serious rigging.' },
               { name: 'Rigging Plate + Pulleys', price: '$100–200', desc: 'Build your own system. Infinite customization. This is what T used to rig 140ft at Cole in the Panhandle.' },
             ].map((item) => (
-              <div key={item.name} className="p-5 rounded-xl bg-[#F2F4F6] border border-gray-200">
+              <div key={item.name} className="p-5  bg-[#F2F4F6] border border-gray-200">
                 <div className="flex items-start justify-between gap-4">
                   <div>
                     <h3 className="font-semibold text-sm text-[#1A3A4A]">{item.name}</h3>
@@ -219,17 +219,17 @@ export default function GearPage() {
           </p>
 
           <div className="grid sm:grid-cols-3 gap-5 mb-8">
-            <div className="p-5 rounded-xl bg-white border border-[#C8A84E]/20">
+            <div className="p-5  bg-white border border-[#C8A84E]/20">
               <h3 className="font-display text-2xl font-black text-[#C8A84E]">5cm+</h3>
               <p className="text-sm font-semibold text-[#1A3A4A] mt-1">Sling width</p>
               <p className="text-xs text-gray-600 font-light mt-1">Minimum 2 inches. Narrow slings cut bark.</p>
             </div>
-            <div className="p-5 rounded-xl bg-white border border-[#C8A84E]/20">
+            <div className="p-5  bg-white border border-[#C8A84E]/20">
               <h3 className="font-display text-2xl font-black text-[#C8A84E]">20cm &times; 2–3m</h3>
               <p className="text-sm font-semibold text-[#1A3A4A] mt-1">Pad size</p>
               <p className="text-xs text-gray-600 font-light mt-1">8 inches wide, 2–3 meters long per tree.</p>
             </div>
-            <div className="p-5 rounded-xl bg-white border border-[#C8A84E]/20">
+            <div className="p-5  bg-white border border-[#C8A84E]/20">
               <h3 className="font-display text-2xl font-black text-[#C8A84E]">30cm</h3>
               <p className="text-sm font-semibold text-[#1A3A4A] mt-1">Min trunk diameter</p>
               <p className="text-xs text-gray-600 font-light mt-1">About 12 inches. No small or young trees. Ever.</p>
@@ -242,7 +242,7 @@ export default function GearPage() {
               { name: 'Carpet Strips', price: 'Free–$5', desc: 'Cut carpet remnants work. SF Rec Park explicitly listed carpet strips as acceptable. Ask at any carpet store for scraps.' },
               { name: 'Felt Mats / Burlap', price: '$5–15', desc: 'Hardware store felt or burlap sacking. Wrap around the trunk, secure with tape or string. Cheap and effective.' },
             ].map((item) => (
-              <div key={item.name} className="p-4 rounded-lg bg-white border border-[#C8A84E]/10">
+              <div key={item.name} className="p-4  bg-white border border-[#C8A84E]/10">
                 <div className="flex items-start justify-between gap-4">
                   <div>
                     <h3 className="font-semibold text-sm text-[#1A3A4A]">{item.name}</h3>
@@ -268,7 +268,7 @@ export default function GearPage() {
         <div className="max-w-5xl mx-auto px-5 sm:px-6">
           <TweetQuoteDark text="Dusty's got em." date="2011" note="— gear was always shared" />
           <h2 className="font-display text-2xl font-black text-white mb-3">Where to Buy</h2>
-          <div className="p-5 rounded-xl bg-white/5 border border-white/10">
+          <div className="p-5  bg-white/5 border border-white/10">
             <h3 className="font-semibold text-sm text-[#C8A84E] mb-2">Balance Community</h3>
             <p className="text-white/60 text-sm font-light leading-relaxed">
               The go-to shop for slackliners. Started as a forum and community,
@@ -280,13 +280,13 @@ export default function GearPage() {
               href="https://balancecommunity.com"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-block mt-3 bg-[#C8A84E] text-[#1A3A4A] px-5 py-2.5 rounded text-xs font-semibold uppercase tracking-wider hover:bg-[#B8983E] transition-colors"
+              className="inline-block mt-3 bg-[#C8A84E] text-[#1A3A4A] px-5 py-2.5 text-xs font-semibold uppercase tracking-wider hover:bg-[#B8983E] transition-colors"
             >
               balancecommunity.com
             </a>
           </div>
 
-          <div className="p-4 rounded-xl bg-white/5 border border-white/10 mt-4">
+          <div className="p-4  bg-white/5 border border-white/10 mt-4">
             <h3 className="font-semibold text-sm text-white/70 mb-1">Amazon / Generic Kits</h3>
             <p className="text-white/40 text-xs font-light leading-relaxed">
               Fine for a first ratchet kit if you just want to try it. Gibbon and Slackline Industries
@@ -312,19 +312,19 @@ export default function GearPage() {
           <div className="flex gap-3 justify-center flex-wrap">
             <Link
               href="/learn"
-              className="inline-block bg-[#C8A84E] text-[#1A3A4A] px-5 py-2.5 rounded text-xs font-semibold uppercase tracking-wider hover:bg-[#B8983E] transition-colors"
+              className="inline-block bg-[#C8A84E] text-[#1A3A4A] px-5 py-2.5 text-xs font-semibold uppercase tracking-wider hover:bg-[#B8983E] transition-colors"
             >
               Learn to Slackline
             </Link>
             <Link
               href="/spots"
-              className="inline-block border border-white/30 text-white px-5 py-2.5 rounded text-xs font-semibold uppercase tracking-wider hover:bg-white/10 transition-colors"
+              className="inline-block border border-white/30 text-white px-5 py-2.5 text-xs font-semibold uppercase tracking-wider hover:bg-white/10 transition-colors"
             >
               Find a Spot
             </Link>
             <Link
               href="/safety"
-              className="inline-block border border-white/30 text-white px-5 py-2.5 rounded text-xs font-semibold uppercase tracking-wider hover:bg-white/10 transition-colors"
+              className="inline-block border border-white/30 text-white px-5 py-2.5 text-xs font-semibold uppercase tracking-wider hover:bg-white/10 transition-colors"
             >
               Safety &amp; Legal
             </Link>

@@ -65,7 +65,7 @@ export default function Lightbox({
       {/* Close */}
       <button
         onClick={onClose}
-        className="absolute top-4 right-4 z-10 w-10 h-10 flex items-center justify-center rounded-full bg-white/10 hover:bg-white/20 text-white text-2xl transition-colors"
+        className="absolute top-4 right-4 z-10 w-10 h-10 flex items-center justify-center  bg-white/10 hover:bg-white/20 text-white text-2xl transition-colors"
         aria-label="Close"
       >
         ✕
@@ -75,7 +75,7 @@ export default function Lightbox({
       {images.length > 1 && (
         <button
           onClick={(e) => { e.stopPropagation(); prev(); }}
-          className="absolute left-3 top-1/2 -translate-y-1/2 z-10 w-10 h-10 flex items-center justify-center rounded-full bg-white/10 hover:bg-white/20 text-white text-xl transition-colors"
+          className="absolute left-3 top-1/2 -translate-y-1/2 z-10 w-10 h-10 flex items-center justify-center  bg-white/10 hover:bg-white/20 text-white text-xl transition-colors"
           aria-label="Previous"
         >
           ‹
@@ -86,7 +86,7 @@ export default function Lightbox({
       {images.length > 1 && (
         <button
           onClick={(e) => { e.stopPropagation(); next(); }}
-          className="absolute right-3 top-1/2 -translate-y-1/2 z-10 w-10 h-10 flex items-center justify-center rounded-full bg-white/10 hover:bg-white/20 text-white text-xl transition-colors"
+          className="absolute right-3 top-1/2 -translate-y-1/2 z-10 w-10 h-10 flex items-center justify-center  bg-white/10 hover:bg-white/20 text-white text-xl transition-colors"
           aria-label="Next"
         >
           ›

@@ -88,7 +88,7 @@ const extendedFamily = [
     connection: 'Visited SF and slacked with the crew. His catchphrase: "I hope you have the best day ever."',
     link: 'https://youtube.com/watch?v=UimnK9DIxEw',
     linkLabel: 'Watch the Documentary',
-    emoji: '🤙',
+    emoji: null,
   },
   {
     name: 'Andy Lewis',
@@ -98,7 +98,7 @@ const extendedFamily = [
     connection: 'Bay Area native. Connected to the SF community from the beginning.',
     link: 'https://en.wikipedia.org/wiki/Andy_Lewis_(slackliner)',
     linkLabel: 'Wikipedia',
-    emoji: '🏆',
+    emoji: null,
   },
   {
     name: 'Alexander Schulz',
@@ -108,7 +108,7 @@ const extendedFamily = [
     connection: 'Late 2011: two-month trip in the western US. Walked 119m at Consumnes River Gorge, CA. Stayed with the SF Slackline crew.',
     link: null,
     linkLabel: null,
-    emoji: '🌋',
+    emoji: null,
   },
   {
     name: 'Lukas Irmler',
@@ -118,7 +118,7 @@ const extendedFamily = [
     connection: 'Stayed with the SF Slackline crew for several nights. World-class highliner who slept on our couches.',
     link: null,
     linkLabel: null,
-    emoji: '🎈',
+    emoji: null,
   },
 ];
 
@@ -179,7 +179,7 @@ export default function CommunityPage() {
               { src: '/photos/prideline.jpg', alt: 'Pride weekend · Jun 25, 2011' },
               { src: '/photos/july4th.jpg', alt: 'July 4th · Jul 2, 2011 · Nikon D90' },
             ].map((p) => (
-              <div key={p.src} className="relative aspect-[4/3] sm:aspect-[3/4] rounded-xl overflow-hidden">
+              <div key={p.src} className="relative aspect-[4/3] sm:aspect-[3/4]  overflow-hidden">
                 <ClickablePhoto src={p.src} alt={p.alt} className="object-cover" fill sizes="(max-width: 640px) 100vw, 33vw" />
               </div>
             ))}
@@ -187,7 +187,7 @@ export default function CommunityPage() {
 
           <div className="space-y-4">
             {sfCrew.map((person) => (
-              <div key={person.name} className="p-5 sm:p-6 rounded-xl bg-white border border-[#1A3A4A]/10 hover:border-[#C8A84E]/40 transition-colors">
+              <div key={person.name} className="p-5 sm:p-6  bg-white border border-[#1A3A4A]/10 hover:border-[#C8A84E]/40 transition-colors">
                 <div className="flex items-start justify-between gap-4 flex-wrap">
                   <div>
                     <h3 className="font-display text-lg sm:text-xl font-black text-[#1A3A4A]">
@@ -208,7 +208,7 @@ export default function CommunityPage() {
           </div>
 
           {/* Also Mentioned */}
-          <div className="mt-10 p-5 sm:p-6 rounded-xl bg-white/60 border border-[#1A3A4A]/5">
+          <div className="mt-10 p-5 sm:p-6  bg-white/60 border border-[#1A3A4A]/5">
             <h3 className="font-display text-lg font-black text-[#1A3A4A] mb-4">Also in the Feed</h3>
             <div className="space-y-2">
               {alsoMentioned.map((person) => (
@@ -238,9 +238,9 @@ export default function CommunityPage() {
 
           <div className="grid gap-6">
             {extendedFamily.map((person) => (
-              <div key={person.name} className="p-6 sm:p-8 rounded-2xl bg-gradient-to-br from-[#F5F0E0]/60 to-white border border-[#C8A84E]/20">
+              <div key={person.name} className="p-6 sm:p-8  bg-gradient-to-br from-[#F5F0E0]/60 to-white border border-[#C8A84E]/20">
                 <div className="flex items-start gap-4">
-                  <span className="text-3xl sm:text-4xl shrink-0">{person.emoji}</span>
+                  {person.emoji && <span className="text-3xl sm:text-4xl shrink-0">{person.emoji}</span>}
                   <div className="min-w-0">
                     <div className="flex items-baseline gap-2 flex-wrap">
                       <h3 className="font-display text-xl sm:text-2xl font-black text-[#1A3A4A]">{person.name}</h3>
@@ -286,7 +286,7 @@ export default function CommunityPage() {
             The people and orgs keeping the slackline world connected.
           </p>
 
-          <div className="p-6 sm:p-8 rounded-2xl bg-white/5 border border-white/10">
+          <div className="p-6 sm:p-8  bg-white/5 border border-white/10">
             <h3 className="font-display text-xl sm:text-2xl font-black text-[#C8A84E] mb-2">Balance Community</h3>
             <p className="text-white/70 text-sm sm:text-base font-light leading-relaxed max-w-2xl">
               The online hub for slackliners since the early days. Started as a forum and community resource,
@@ -297,7 +297,7 @@ export default function CommunityPage() {
               href="https://balancecommunity.com"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-block mt-5 bg-[#C8A84E] text-[#1A3A4A] px-6 py-3 rounded-lg text-sm font-semibold uppercase tracking-wider hover:bg-[#B8983E] transition-colors"
+              className="inline-block mt-5 bg-[#C8A84E] text-[#1A3A4A] px-6 py-3  text-sm font-semibold uppercase tracking-wider hover:bg-[#B8983E] transition-colors"
             >
               balancecommunity.com &rarr;
             </a>
@@ -315,13 +315,13 @@ export default function CommunityPage() {
           <div className="flex gap-3 justify-center flex-wrap">
             <Link
               href="/spots"
-              className="inline-block bg-[#C8A84E] text-[#1A3A4A] px-6 py-3 rounded-lg text-sm font-semibold uppercase tracking-wider hover:bg-[#B8983E] transition-colors"
+              className="inline-block bg-[#C8A84E] text-[#1A3A4A] px-6 py-3  text-sm font-semibold uppercase tracking-wider hover:bg-[#B8983E] transition-colors"
             >
               Find a Spot
             </Link>
             <Link
               href="/events"
-              className="inline-block border border-white/30 text-white px-6 py-3 rounded-lg text-sm font-semibold uppercase tracking-wider hover:bg-white/10 transition-colors"
+              className="inline-block border border-white/30 text-white px-6 py-3  text-sm font-semibold uppercase tracking-wider hover:bg-white/10 transition-colors"
             >
               Events
             </Link>

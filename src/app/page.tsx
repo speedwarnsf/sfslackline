@@ -87,13 +87,13 @@ export default function Home() {
           <div className="flex flex-wrap gap-3">
             <Link
               href="/spots"
-              className="bg-[#C8A84E] text-[#1A3A4A] px-6 py-3 rounded-sm text-xs font-bold uppercase tracking-widest hover:bg-[#D4B85E] transition-colors"
+              className="bg-[#C8A84E] text-[#1A3A4A] px-6 py-3  text-xs font-bold uppercase tracking-widest hover:bg-[#D4B85E] transition-colors"
             >
               Find a Spot
             </Link>
             <Link
               href="/history"
-              className="border border-white/40 text-white px-6 py-3 rounded-sm text-xs font-bold uppercase tracking-widest hover:bg-white/10 transition-colors"
+              className="border border-white/40 text-white px-6 py-3  text-xs font-bold uppercase tracking-widest hover:bg-white/10 transition-colors"
             >
               Our Story
             </Link>
@@ -114,7 +114,7 @@ export default function Home() {
             {featured.map((photo, i) => (
               <div
                 key={photo.src}
-                className={`relative overflow-hidden rounded-lg cursor-pointer group ${
+                className={`relative overflow-hidden  cursor-pointer group ${
                   i === 0 ? 'sm:col-span-2 aspect-[16/9]' : 'aspect-[4/3]'
                 }`}
                 onClick={() => lightbox.open(allPhotos.indexOf(photo))}
@@ -139,7 +139,7 @@ export default function Home() {
             {remaining.map((photo) => (
               <div
                 key={photo.src}
-                className="relative aspect-square overflow-hidden rounded-lg cursor-pointer group"
+                className="relative aspect-square overflow-hidden  cursor-pointer group"
                 onClick={() => lightbox.open(allPhotos.indexOf(photo))}
               >
                 <Image
@@ -227,7 +227,7 @@ export default function Home() {
               <Link
                 key={link.href}
                 href={link.href}
-                className="group relative overflow-hidden rounded-xl aspect-[3/2] flex items-end"
+                className="group relative overflow-hidden  aspect-[3/2] flex items-end"
               >
                 <Image
                   src={link.photo}
@@ -276,13 +276,13 @@ export default function Home() {
           <div className="flex flex-wrap gap-3 justify-center">
             <Link
               href="/board"
-              className="bg-[#1A3A4A] text-[#C8A84E] px-6 py-3 rounded-sm text-xs font-bold uppercase tracking-widest hover:bg-[#0F2A36] transition-colors"
+              className="bg-[#1A3A4A] text-[#C8A84E] px-6 py-3  text-xs font-bold uppercase tracking-widest hover:bg-[#0F2A36] transition-colors"
             >
               Community Board
             </Link>
             <Link
               href="/events"
-              className="border-2 border-[#1A3A4A] text-[#1A3A4A] px-6 py-3 rounded-sm text-xs font-bold uppercase tracking-widest hover:bg-[#1A3A4A] hover:text-white transition-colors"
+              className="border-2 border-[#1A3A4A] text-[#1A3A4A] px-6 py-3  text-xs font-bold uppercase tracking-widest hover:bg-[#1A3A4A] hover:text-white transition-colors"
             >
               Events
             </Link>
