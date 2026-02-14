@@ -316,6 +316,37 @@ export default function EventsPage() {
         </div>
       </section>
 
+      {/* ── Upcoming Events ── */}
+      <section className="bg-[#FAF8F2] py-12 sm:py-16">
+        <div className="max-w-5xl mx-auto px-5 sm:px-6">
+          <h2 className="font-display text-2xl sm:text-3xl font-black text-[#1A3A4A] mb-2">Upcoming Events</h2>
+          <p className="text-sm text-gray-400 font-light mb-8">New sessions, new people, same palms. Check back or post on the <Link href="/board" className="text-[#1E6B7B] underline hover:text-[#C8A84E]">community board</Link>.</p>
+
+          <div className="grid sm:grid-cols-2 gap-5">
+            <div className="bg-white p-6 border border-[#C8A84E]/20 border-dashed">
+              <span className="text-[10px] font-mono text-[#C8A84E] uppercase tracking-wider">TBD</span>
+              <h3 className="font-display text-lg font-black text-[#1A3A4A] mt-1 mb-2">Sunday Session at Dolores</h3>
+              <p className="text-sm text-gray-600 font-light leading-relaxed">
+                The palms at Cumberland & Dolores. Bring tree pads, bring a line. Beginners welcome — someone will teach you.
+              </p>
+              <p className="text-[10px] text-gray-400 mt-3">Location: Dolores Park, The Palms</p>
+            </div>
+            <div className="bg-white p-6 border border-[#C8A84E]/20 border-dashed">
+              <span className="text-[10px] font-mono text-[#C8A84E] uppercase tracking-wider">TBD</span>
+              <h3 className="font-display text-lg font-black text-[#1A3A4A] mt-1 mb-2">Panhandle Longline Day</h3>
+              <p className="text-sm text-gray-600 font-light leading-relaxed">
+                Cole & Fell. The tree spacing for 100ft+ lines. Intermediate and up. Bring your own primitive or pulley system.
+              </p>
+              <p className="text-[10px] text-gray-400 mt-3">Location: Panhandle, Cole & Fell entrance</p>
+            </div>
+          </div>
+
+          <p className="text-sm text-[#1A3A4A]/50 font-light mt-6">
+            Want to organize a session? Post it on the <Link href="/board" className="text-[#1E6B7B] underline hover:text-[#C8A84E]">board</Link>. That&apos;s how it always worked — someone says &ldquo;line goin up in 15&rdquo; and people show up.
+          </p>
+        </div>
+      </section>
+
       {/* ── Revival ── */}
       <section className="bg-[#1A3A4A] py-14 sm:py-20">
         <div className="max-w-5xl mx-auto px-5 sm:px-6">

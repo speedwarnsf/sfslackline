@@ -56,6 +56,48 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${display.variable} ${body.variable}`}>
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@graph": [
+                {
+                  "@type": "Organization",
+                  "name": "SF Slackline",
+                  "url": "https://sfslackline.vercel.app",
+                  "description": "San Francisco's slackline community since 2009. 849 photos, 360 tweets, 15 years of lines between trees.",
+                  "foundingDate": "2009",
+                  "areaServed": {
+                    "@type": "City",
+                    "name": "San Francisco",
+                    "containedInPlace": { "@type": "State", "name": "California" }
+                  },
+                  "sameAs": ["https://sfslackline.org"]
+                },
+                {
+                  "@type": "WebSite",
+                  "name": "SF Slackline",
+                  "url": "https://sfslackline.vercel.app"
+                },
+                {
+                  "@type": "SportsOrganization",
+                  "name": "SF Slackline",
+                  "sport": "Slacklining",
+                  "url": "https://sfslackline.vercel.app",
+                  "location": {
+                    "@type": "City",
+                    "name": "San Francisco",
+                    "addressRegion": "CA",
+                    "addressCountry": "US"
+                  }
+                }
+              ]
+            }),
+          }}
+        />
+      </head>
       <body className="font-[family-name:var(--font-body)] min-h-screen flex flex-col">
         <Navigation />
         <main className="flex-1">{children}</main>
