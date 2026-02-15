@@ -264,6 +264,90 @@ export default function Home() {
         </div>
       </section>
 
+      {/* ===== WEEKLY MEETUPS ===== */}
+      <section className="bg-[#F5F0E0] py-14 sm:py-20">
+        <div className="max-w-6xl mx-auto px-5 sm:px-8">
+          <h2 className="font-display text-3xl sm:text-4xl font-black text-[#1A3A4A] mb-2">Come Out</h2>
+          <p className="text-[#1E6B7B] text-sm font-light mb-10">
+            Regular meetup spots. Bring tree pads. Beginners always welcome.
+          </p>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+            {[
+              {
+                spot: 'Dolores Park — The Palms',
+                when: 'Sundays, afternoon',
+                desc: 'Cumberland & Dolores. The original spot since 2009. Multiple lines, all levels. Someone will teach you.',
+                length: '50–80ft lines',
+              },
+              {
+                spot: 'Panhandle — Cole & Fell',
+                when: 'Weekends',
+                desc: 'The tree spacing for serious longlines. 100–195ft. Intermediate and up. Bring your own rig.',
+                length: '100–195ft lines',
+              },
+              {
+                spot: 'Crissy Field',
+                when: 'Weekends, weather permitting',
+                desc: 'Waterfront lines with Golden Gate views. Wind can be a factor. Worth it.',
+                length: '50–100ft lines',
+              },
+            ].map((m) => (
+              <div key={m.spot} className="bg-white p-6 border border-[#1A3A4A]/10 hover:border-[#C8A84E]/40 transition-colors">
+                <h3 className="font-display text-lg font-black text-[#1A3A4A] mb-1">{m.spot}</h3>
+                <p className="text-xs text-[#C8A84E] font-semibold uppercase tracking-wider mb-3">{m.when}</p>
+                <p className="text-sm text-[#1A3A4A]/60 font-light leading-relaxed mb-2">{m.desc}</p>
+                <p className="text-xs text-[#1E6B7B] font-medium">{m.length}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ===== COMMUNITY LINKS ===== */}
+      <section className="bg-[#FAF8F2] py-14 sm:py-20">
+        <div className="max-w-6xl mx-auto px-5 sm:px-8">
+          <h2 className="font-display text-3xl sm:text-4xl font-black text-[#1A3A4A] mb-2">Links</h2>
+          <p className="text-[#1E6B7B] text-sm font-light mb-10">
+            The wider slackline world. Organizations, maps, and places to train indoors.
+          </p>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            {[
+              {
+                name: 'International Slackline Association',
+                url: 'https://slacklineinternational.org',
+                desc: 'Global standards for rigging, safety, and highline certification.',
+              },
+              {
+                name: 'SlackMap',
+                url: 'https://slackmap.com',
+                desc: 'Find slackline spots and communities worldwide. Add SF spots to the map.',
+              },
+              {
+                name: 'Movement SF',
+                url: 'https://movement.com/san-francisco',
+                desc: 'Indoor climbing gym with slacklines. Train balance year-round when the fog rolls in.',
+              },
+              {
+                name: 'Balance Community',
+                url: 'https://balancecommunity.com',
+                desc: 'Gear shop run by slackliners. Webbing, hardware, tree protection. The community standard.',
+              },
+            ].map((link) => (
+              <a
+                key={link.name}
+                href={link.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block p-5 bg-white border border-[#1A3A4A]/10 hover:border-[#C8A84E]/40 transition-colors group"
+              >
+                <h3 className="font-display text-base font-black text-[#1A3A4A] mb-2 group-hover:text-[#1E6B7B] transition-colors">{link.name}</h3>
+                <p className="text-sm text-[#1A3A4A]/50 font-light leading-relaxed">{link.desc}</p>
+              </a>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* ===== CTA ===== */}
       <section className="bg-[#F5F0E0] py-14 sm:py-20">
         <div className="max-w-3xl mx-auto px-5 sm:px-8 text-center">

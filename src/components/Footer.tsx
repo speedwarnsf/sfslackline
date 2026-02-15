@@ -55,6 +55,8 @@ export function Footer() {
               {[
                 { href: 'https://balancecommunity.com', label: 'Balance Community', ext: true },
                 { href: 'https://slacklineinternational.org', label: 'ISA Standards', ext: true },
+                { href: 'https://slackmap.com', label: 'SlackMap', ext: true },
+                { href: 'https://movement.com/san-francisco', label: 'Movement SF', ext: true },
                 { href: 'https://sfslackline.org', label: 'Original Site', ext: true },
               ].map((link) => (
                 <li key={link.href}>

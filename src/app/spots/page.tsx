@@ -530,14 +530,15 @@ export default function SpotsPage() {
       <style jsx global>{`
         .spot-marker { cursor: pointer; }
         .marker-dot {
-          width: 16px; height: 16px; border-radius: 50%;
+          width: 16px; height: 16px;
           position: relative; border: 2px solid white;
           box-shadow: 0 1px 4px rgba(0,0,0,0.3);
+          transform: rotate(45deg);
         }
         .marker-dot.primary { background: #C8A84E; width: 20px; height: 20px; }
         .marker-dot.secondary { background: #1E6B7B; }
         .pulse-ring {
-          position: absolute; inset: -6px; border-radius: 50%;
+          position: absolute; inset: -6px;
           border: 2px solid #C8A84E;
           animation: pulse-ring 2s ease-out infinite; opacity: 0;
         }
