@@ -22,6 +22,7 @@ export function Footer() {
                 { href: '/learn', label: 'Learn' },
                 { href: '/gear', label: 'Gear' },
                 { href: '/spots', label: 'Find a Spot' },
+                { href: '/faq', label: 'FAQ' },
                 { href: '/safety', label: 'Safety & Legal' },
               ].map((link) => (
                 <li key={link.href}>

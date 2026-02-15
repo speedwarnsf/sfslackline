@@ -316,34 +316,161 @@ export default function EventsPage() {
         </div>
       </section>
 
-      {/* ── Upcoming Events ── */}
+      {/* ── Recurring Meetups Calendar ── */}
       <section className="bg-[#FAF8F2] py-12 sm:py-16">
         <div className="max-w-5xl mx-auto px-5 sm:px-6">
-          <h2 className="font-display text-2xl sm:text-3xl font-black text-[#1A3A4A] mb-2">Upcoming Events</h2>
-          <p className="text-sm text-gray-400 font-light mb-8">New sessions, new people, same palms. Check back or post on the <Link href="/board" className="text-[#1E6B7B] underline hover:text-[#C8A84E]">community board</Link>.</p>
+          <h2 className="font-display text-2xl sm:text-3xl font-black text-[#1A3A4A] mb-2">Weekly Schedule</h2>
+          <p className="text-sm text-gray-400 font-light mb-8">Recurring sessions. Weather permitting. Show up and someone will be there.</p>
 
-          <div className="grid sm:grid-cols-2 gap-5">
-            <div className="bg-white p-6 border border-[#C8A84E]/20 border-dashed">
-              <span className="text-[10px] font-mono text-[#C8A84E] uppercase tracking-wider">TBD</span>
-              <h3 className="font-display text-lg font-black text-[#1A3A4A] mt-1 mb-2">Sunday Session at Dolores</h3>
-              <p className="text-sm text-gray-600 font-light leading-relaxed">
-                The palms at Cumberland & Dolores. Bring tree pads, bring a line. Beginners welcome — someone will teach you.
-              </p>
-              <p className="text-[10px] text-gray-400 mt-3">Location: Dolores Park, The Palms</p>
+          {/* Calendar grid */}
+          <div className="grid grid-cols-7 gap-1 sm:gap-2 mb-8">
+            {['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'].map((day) => (
+              <div key={day} className="text-center text-[10px] sm:text-xs font-semibold text-[#1A3A4A] uppercase tracking-wider pb-2">
+                {day}
+              </div>
+            ))}
+            {/* Mon-Thu: quiet */}
+            {['Mon', 'Tue', 'Wed', 'Thu'].map((day) => (
+              <div key={day} className="bg-white border border-gray-100 p-2 sm:p-3 min-h-[80px] sm:min-h-[100px]">
+                <p className="text-[10px] text-gray-300 font-light">Open session</p>
+                <p className="text-[9px] text-gray-300 mt-1">Bring your own line to any park</p>
+              </div>
+            ))}
+            {/* Fri */}
+            <div className="bg-white border border-[#1E6B7B]/20 p-2 sm:p-3 min-h-[80px] sm:min-h-[100px]">
+              <p className="text-[10px] text-[#1E6B7B] font-semibold">Evening</p>
+              <p className="text-[9px] text-gray-500 mt-1">Nightline at Dolores (summer)</p>
+              <p className="text-[9px] text-gray-400">After sunset, LED lights</p>
             </div>
-            <div className="bg-white p-6 border border-[#C8A84E]/20 border-dashed">
-              <span className="text-[10px] font-mono text-[#C8A84E] uppercase tracking-wider">TBD</span>
-              <h3 className="font-display text-lg font-black text-[#1A3A4A] mt-1 mb-2">Panhandle Longline Day</h3>
-              <p className="text-sm text-gray-600 font-light leading-relaxed">
-                Cole & Fell. The tree spacing for 100ft+ lines. Intermediate and up. Bring your own primitive or pulley system.
-              </p>
-              <p className="text-[10px] text-gray-400 mt-3">Location: Panhandle, Cole & Fell entrance</p>
+            {/* Sat */}
+            <div className="bg-[#C8A84E]/5 border border-[#C8A84E]/20 p-2 sm:p-3 min-h-[80px] sm:min-h-[100px]">
+              <p className="text-[10px] text-[#C8A84E] font-semibold">Longlines</p>
+              <p className="text-[9px] text-gray-500 mt-1">Panhandle @ Cole</p>
+              <p className="text-[9px] text-gray-400">100ft+ / Intermediate</p>
+            </div>
+            {/* Sun */}
+            <div className="bg-[#C8A84E]/10 border border-[#C8A84E]/30 p-2 sm:p-3 min-h-[80px] sm:min-h-[100px]">
+              <p className="text-[10px] text-[#C8A84E] font-bold">Main Session</p>
+              <p className="text-[9px] text-gray-500 mt-1">Dolores Park</p>
+              <p className="text-[9px] text-gray-400">All levels / Afternoon</p>
             </div>
           </div>
 
-          <p className="text-sm text-[#1A3A4A]/50 font-light mt-6">
+          {/* Detailed recurring events */}
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            {[
+              {
+                title: 'Sunday at Dolores',
+                when: 'Every Sunday, 1pm-sunset',
+                where: 'Dolores Park, The Palms (Cumberland & Dolores)',
+                level: 'All levels',
+                desc: 'The main weekly session since 2009. Multiple lines, beginners welcome, gear shared. Just show up.',
+                recurring: true,
+              },
+              {
+                title: 'Saturday Longlines',
+                when: 'Saturdays, noon-4pm',
+                where: 'Panhandle, Cole & Fell entrance',
+                level: 'Intermediate+',
+                desc: 'Longline territory. 100-195ft. Bring your own pulley system. The tree spacing here is perfect for pushing distance.',
+                recurring: true,
+              },
+              {
+                title: 'Friday Nightline',
+                when: 'Fridays after sunset (summer only)',
+                where: 'Dolores Park, The Palms',
+                level: 'All levels',
+                desc: 'LED-lit lines after dark. "Line is down. Moon is up." Bring headlamps or string lights. Magic happens.',
+                recurring: true,
+              },
+              {
+                title: 'Beginner Workshop',
+                when: '1st Sunday of month, 11am',
+                where: 'Dolores Park',
+                level: 'Beginners only',
+                desc: 'Dedicated intro session. Learn to stand, walk, and turn. Gear provided. No experience needed.',
+                recurring: true,
+              },
+              {
+                title: 'Crissy Field Session',
+                when: '2nd & 4th Saturdays, weather permitting',
+                where: 'Crissy Field, near warming hut',
+                level: 'Intermediate',
+                desc: 'Waterfront lines with Golden Gate views. Wind can be brutal — check forecast. Worth it when conditions align.',
+                recurring: true,
+              },
+              {
+                title: 'Full Moon Nightline',
+                when: 'Monthly, on the full moon',
+                where: 'Dolores Park or Panhandle',
+                level: 'All levels',
+                desc: 'Special nightline session on every full moon. No artificial lights needed. The line glows in the moonlight.',
+                recurring: true,
+              },
+            ].map((event) => (
+              <div key={event.title} className="bg-white p-5 border border-gray-100 hover:border-[#C8A84E]/30 transition-colors">
+                <div className="flex items-center gap-2 mb-2">
+                  <span className="text-[10px] px-1.5 py-0.5 bg-[#1E6B7B]/10 text-[#1E6B7B] border border-[#1E6B7B]/20 font-semibold">RECURRING</span>
+                  <span className={`text-[10px] px-1.5 py-0.5 font-semibold border ${
+                    event.level === 'All levels' ? 'bg-[#1E6B7B]/10 text-[#1E6B7B] border-[#1E6B7B]/20' :
+                    event.level === 'Beginners only' ? 'bg-green-50 text-green-700 border-green-200' :
+                    'bg-[#C8A84E]/10 text-[#C8A84E] border-[#C8A84E]/20'
+                  }`}>{event.level}</span>
+                </div>
+                <h3 className="font-display text-base font-black text-[#1A3A4A] mb-1">{event.title}</h3>
+                <p className="text-xs text-[#C8A84E] font-semibold mb-1">{event.when}</p>
+                <p className="text-xs text-[#1E6B7B] font-medium mb-2">{event.where}</p>
+                <p className="text-xs text-gray-500 font-light leading-relaxed">{event.desc}</p>
+              </div>
+            ))}
+          </div>
+
+          <p className="text-sm text-[#1A3A4A]/50 font-light mt-8">
             Want to organize a session? Post it on the <Link href="/board" className="text-[#1E6B7B] underline hover:text-[#C8A84E]">board</Link>. That&apos;s how it always worked — someone says &ldquo;line goin up in 15&rdquo; and people show up.
           </p>
+        </div>
+      </section>
+
+      {/* ── One-Off Events ── */}
+      <section className="bg-[#F5F0E0] py-12 sm:py-16">
+        <div className="max-w-5xl mx-auto px-5 sm:px-6">
+          <h2 className="font-display text-2xl sm:text-3xl font-black text-[#1A3A4A] mb-2">Special Events</h2>
+          <p className="text-sm text-gray-400 font-light mb-8">One-off sessions and seasonal happenings</p>
+
+          <div className="grid sm:grid-cols-2 gap-5">
+            <div className="bg-white p-6 border border-[#C8A84E]/20">
+              <span className="text-[10px] font-mono text-[#C8A84E] uppercase tracking-wider">Spring 2026</span>
+              <h3 className="font-display text-lg font-black text-[#1A3A4A] mt-1 mb-2">Equinox Line</h3>
+              <p className="text-sm text-gray-600 font-light leading-relaxed">
+                Celebrating perfect balance on the spring equinox. Longline at Cole & Fell. Inspired by the original 2013 equinox line — 135ft. &ldquo;Celebrate perfect balance with us.&rdquo;
+              </p>
+              <p className="text-[10px] text-gray-400 mt-3">Location: Panhandle, Cole & Fell</p>
+            </div>
+            <div className="bg-white p-6 border border-[#C8A84E]/20">
+              <span className="text-[10px] font-mono text-[#C8A84E] uppercase tracking-wider">Summer 2026</span>
+              <h3 className="font-display text-lg font-black text-[#1A3A4A] mt-1 mb-2">SlackDay Revival</h3>
+              <p className="text-sm text-gray-600 font-light leading-relaxed">
+                Bringing back the all-day slackfest. Multiple lines, all levels, BBQ, music. Inspired by the original 2012 SlackDay at MLK Park — 30+ people showed up. Date TBD.
+              </p>
+              <p className="text-[10px] text-gray-400 mt-3">Location: TBD -- post on the board to help plan</p>
+            </div>
+            <div className="bg-white p-6 border border-[#C8A84E]/20">
+              <span className="text-[10px] font-mono text-[#C8A84E] uppercase tracking-wider">Jun 2026</span>
+              <h3 className="font-display text-lg font-black text-[#1A3A4A] mt-1 mb-2">Pride Weekend Lines</h3>
+              <p className="text-sm text-gray-600 font-light leading-relaxed">
+                Lines up during SF Pride, just like 2011. Dolores Park will be packed. We&apos;ll be at the palms.
+              </p>
+              <p className="text-[10px] text-gray-400 mt-3">Location: Dolores Park, The Palms</p>
+            </div>
+            <div className="bg-white p-6 border border-[#C8A84E]/20">
+              <span className="text-[10px] font-mono text-[#C8A84E] uppercase tracking-wider">Jul 4, 2026</span>
+              <h3 className="font-display text-lg font-black text-[#1A3A4A] mt-1 mb-2">July 4th Session</h3>
+              <p className="text-sm text-gray-600 font-light leading-relaxed">
+                All-day session at Dolores. Fireworks from the line. A tradition since 2011.
+              </p>
+              <p className="text-[10px] text-gray-400 mt-3">Location: Dolores Park, The Palms</p>
+            </div>
+          </div>
         </div>
       </section>
 

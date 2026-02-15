@@ -3,6 +3,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import Lightbox, { useLightbox } from '@/components/Lightbox';
+import { WeatherWidget } from '@/components/WeatherWidget';
 
 /*
  * ALL DATA FROM: SF_SLACKLINE_VOICE_AND_DATA.md
@@ -96,6 +97,73 @@ export default function Home() {
               className="border border-white/40 text-white px-6 py-3  text-xs font-bold uppercase tracking-widest hover:bg-white/10 transition-colors"
             >
               Our Story
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* ===== WEATHER WIDGET ===== */}
+      <section className="bg-[#F5F0E0] pt-10 sm:pt-14">
+        <div className="max-w-6xl mx-auto px-5 sm:px-8">
+          <WeatherWidget />
+        </div>
+      </section>
+
+      {/* ===== BEGINNER'S QUICK START ===== */}
+      <section className="bg-[#F5F0E0] py-14 sm:py-20">
+        <div className="max-w-6xl mx-auto px-5 sm:px-8">
+          <h2 className="font-display text-3xl sm:text-4xl font-black text-[#1A3A4A] mb-2">New Here?</h2>
+          <p className="text-[#1E6B7B] text-sm font-light mb-8">
+            Everything you need to know in 60 seconds. No signup. No gear required. Just show up.
+          </p>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+            <div className="bg-white p-5 border border-[#1A3A4A]/10">
+              <span className="text-[10px] font-mono text-[#C8A84E] font-bold">STEP 1</span>
+              <h3 className="font-display text-lg font-black text-[#1A3A4A] mt-1 mb-2">Show Up</h3>
+              <p className="text-xs text-[#1A3A4A]/60 font-light leading-relaxed">
+                Dolores Park, Sundays, afternoon. Look for webbing between the palm trees near Cumberland & Dolores. Say &ldquo;can I try?&rdquo; That&apos;s it.
+              </p>
+            </div>
+            <div className="bg-white p-5 border border-[#1A3A4A]/10">
+              <span className="text-[10px] font-mono text-[#C8A84E] font-bold">STEP 2</span>
+              <h3 className="font-display text-lg font-black text-[#1A3A4A] mt-1 mb-2">Get On</h3>
+              <p className="text-xs text-[#1A3A4A]/60 font-light leading-relaxed">
+                Someone holds your hand. You step on. Look at the end of the line, not your feet. Soft knees, deep breaths. You&apos;ll stand in 10 minutes.
+              </p>
+            </div>
+            <div className="bg-white p-5 border border-[#1A3A4A]/10">
+              <span className="text-[10px] font-mono text-[#C8A84E] font-bold">STEP 3</span>
+              <h3 className="font-display text-lg font-black text-[#1A3A4A] mt-1 mb-2">Walk</h3>
+              <p className="text-xs text-[#1A3A4A]/60 font-light leading-relaxed">
+                Small steps. Arms up for balance. You&apos;ll fall a lot. That&apos;s normal — the line is 2 feet off the grass. Most people walk the full line within a few sessions.
+              </p>
+            </div>
+            <div className="bg-white p-5 border border-[#1A3A4A]/10">
+              <span className="text-[10px] font-mono text-[#C8A84E] font-bold">STEP 4</span>
+              <h3 className="font-display text-lg font-black text-[#1A3A4A] mt-1 mb-2">Come Back</h3>
+              <p className="text-xs text-[#1A3A4A]/60 font-light leading-relaxed">
+                You will. When you&apos;re hooked, a starter kit is $50-80. But don&apos;t buy gear yet — try different setups first. Everyone shares.
+              </p>
+            </div>
+          </div>
+          <div className="flex flex-wrap gap-3 mt-8">
+            <Link
+              href="/learn"
+              className="bg-[#1A3A4A] text-[#C8A84E] px-6 py-3 text-xs font-bold uppercase tracking-widest hover:bg-[#0F2A36] transition-colors"
+            >
+              Full Beginner&apos;s Guide
+            </Link>
+            <Link
+              href="/faq"
+              className="border-2 border-[#1A3A4A] text-[#1A3A4A] px-6 py-3 text-xs font-bold uppercase tracking-widest hover:bg-[#1A3A4A] hover:text-white transition-colors"
+            >
+              Common Questions
+            </Link>
+            <Link
+              href="/gear"
+              className="border-2 border-[#1A3A4A] text-[#1A3A4A] px-6 py-3 text-xs font-bold uppercase tracking-widest hover:bg-[#1A3A4A] hover:text-white transition-colors"
+            >
+              Gear ($50 to start)
             </Link>
           </div>
         </div>

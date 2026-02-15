@@ -16,6 +16,9 @@ interface Spot {
   lengths?: string;
   photo?: string;
   photoCaption?: string;
+  difficulty?: 'Beginner' | 'Intermediate' | 'Advanced' | 'All Levels';
+  bestTimes?: string;
+  whatToBring?: string[];
 }
 
 const spots: Spot[] = [
@@ -31,6 +34,9 @@ const spots: Spot[] = [
     lengths: '35–80ft typical, up to 6 lines simultaneously',
     photo: '/photos/nightline-2.jpg',
     photoCaption: 'Nightline at the palms · Oct 2010',
+    difficulty: 'All Levels',
+    bestTimes: 'Sundays afternoon. Weekdays after 4pm in summer. Avoid mornings — fog burns off by noon.',
+    whatToBring: ['Tree pads', 'Sunscreen', 'Water', 'Ratchet kit or primitive setup', 'Shoes (grass can be damp)'],
   },
   {
     name: 'The Panhandle',
@@ -44,6 +50,9 @@ const spots: Spot[] = [
     lengths: '80–195ft, record 186ft (Nov 2012)',
     photo: '/photos/panhandle-170.jpg',
     photoCaption: '170ft at Cole & Fell · Nov 2011',
+    difficulty: 'Intermediate',
+    bestTimes: 'Weekends midday. Less foot traffic than Dolores. Wind can pick up in the afternoon.',
+    whatToBring: ['Pulley system (ratchet won\'t cut it for 100ft+)', 'Tree pads', 'Backup line', 'Patience'],
   },
   {
     name: 'Ocean Beach / Fort Funston',
@@ -57,6 +66,9 @@ const spots: Spot[] = [
     lengths: '150ft over sand',
     photo: '/photos/ocean-beach.jpg',
     photoCaption: '150ft over sand · Dec 2011',
+    difficulty: 'Advanced',
+    bestTimes: 'Low wind days only. Check forecast — the beach gets hammered by wind. Best in fall when the fog clears.',
+    whatToBring: ['Pulley system', 'Extra webbing', 'Warm layers', 'Windbreaker', 'Sand-resistant gear bags'],
   },
   {
     name: 'Golden Gate Park',
@@ -68,6 +80,9 @@ const spots: Spot[] = [
     years: '2012–2016',
     note: '"Near the log cabin in GG park." 200–300ft threaded attempts.',
     lengths: '200–300ft threaded (Mar 2012)',
+    difficulty: 'Advanced',
+    bestTimes: 'Weekends. Less crowded than Dolores. Fog can linger here longer — give it until noon.',
+    whatToBring: ['Full longline setup', 'Tree pads (big trees here)', 'Layers — GGP is cooler than the Mission'],
   },
   {
     name: 'Fort Miley',
@@ -80,6 +95,9 @@ const spots: Spot[] = [
     note: '"Ft Miley line up one high and one low!" With Dat Phan.',
     photo: '/photos/highline.jpg',
     photoCaption: 'Highline · Feb 2012',
+    difficulty: 'Advanced',
+    bestTimes: 'Morning before the wind picks up. Lands End gets battered in the afternoon.',
+    whatToBring: ['Full rigging kit', 'Harness + leash if highlining', 'Warm layers', 'First aid kit'],
   },
   {
     name: 'Islais Creek Park',
@@ -91,6 +109,9 @@ const spots: Spot[] = [
     years: '2013',
     note: 'Waterlines. "Water Lines going up at islais park in dog patch." 71ft.',
     lengths: '71ft waterline',
+    difficulty: 'Intermediate',
+    bestTimes: 'Weekends. Check tide — water level affects the setup.',
+    whatToBring: ['Waterline-rated webbing', 'Towel', 'Change of clothes', 'Tree pads'],
   },
   {
     name: 'Precita Park',
@@ -101,6 +122,9 @@ const spots: Spot[] = [
     tweetCount: '3+',
     years: '2014',
     note: '"Short line up at Precita Park - Dat." Later-era spot.',
+    difficulty: 'Beginner',
+    bestTimes: 'Afternoons. Quieter neighborhood park — less foot traffic.',
+    whatToBring: ['Ratchet kit', 'Tree pads', 'Water'],
   },
   {
     name: 'Duboce Park',
@@ -111,6 +135,9 @@ const spots: Spot[] = [
     tweetCount: '1',
     years: '2016',
     note: '"Nice looking line going up at the base of duboce park."',
+    difficulty: 'Beginner',
+    bestTimes: 'Weekday evenings, weekend mornings. Small park — go when it\'s quiet.',
+    whatToBring: ['Ratchet kit', 'Tree pads'],
   },
   {
     name: 'SF Rooftop',
@@ -499,15 +526,38 @@ export default function SpotsPage() {
                   <h3 className="font-semibold text-[#1A3A4A]">{spot.name}</h3>
                   <p className="text-xs text-[#1E6B7B] font-medium">{spot.aka}</p>
                 </div>
-                {activeLines.includes(spot.name) && (
-                  <span className="relative flex h-3 w-3 mt-1">
-                    <span className="animate-ping absolute inline-flex h-full w-full  bg-[#C8A84E] opacity-75" />
-                    <span className="relative inline-flex  h-3 w-3 bg-[#C8A84E]" />
-                  </span>
-                )}
+                <div className="flex items-center gap-2">
+                  {spot.difficulty && (
+                    <span className={`text-[10px] px-1.5 py-0.5 font-semibold border ${
+                      spot.difficulty === 'Beginner' ? 'bg-green-50 text-green-700 border-green-200' :
+                      spot.difficulty === 'Intermediate' ? 'bg-[#C8A84E]/10 text-[#C8A84E] border-[#C8A84E]/20' :
+                      spot.difficulty === 'Advanced' ? 'bg-red-50 text-red-600 border-red-200' :
+                      'bg-[#1E6B7B]/10 text-[#1E6B7B] border-[#1E6B7B]/20'
+                    }`}>{spot.difficulty}</span>
+                  )}
+                  {activeLines.includes(spot.name) && (
+                    <span className="relative flex h-3 w-3 mt-1">
+                      <span className="animate-ping absolute inline-flex h-full w-full  bg-[#C8A84E] opacity-75" />
+                      <span className="relative inline-flex  h-3 w-3 bg-[#C8A84E]" />
+                    </span>
+                  )}
+                </div>
               </div>
               <p className="text-xs text-gray-500 mt-2">{spot.note}</p>
               {spot.lengths && <p className="text-xs text-gray-400 mt-1"><span className="font-medium text-[#1A3A4A]">Lines:</span> {spot.lengths}</p>}
+              {spot.bestTimes && (
+                <p className="text-xs text-gray-400 mt-1"><span className="font-medium text-[#1A3A4A]">Best times:</span> {spot.bestTimes}</p>
+              )}
+              {spot.whatToBring && spot.whatToBring.length > 0 && (
+                <div className="mt-2">
+                  <span className="text-[10px] font-medium text-[#1A3A4A] uppercase tracking-wider">Bring:</span>
+                  <div className="flex flex-wrap gap-1 mt-1">
+                    {spot.whatToBring.map((item) => (
+                      <span key={item} className="text-[10px] px-1.5 py-0.5 bg-[#F5F0E0] text-[#1A3A4A]/70 border border-[#C8A84E]/10">{item}</span>
+                    ))}
+                  </div>
+                </div>
+              )}
               <div className="mt-3 flex items-center justify-between">
                 <span className="text-[10px] text-gray-400">{spot.tweetCount} tweets · {spot.years}</span>
                 <a
@@ -517,7 +567,7 @@ export default function SpotsPage() {
                   onClick={e => e.stopPropagation()}
                   className="text-[10px] text-[#1E6B7B] hover:text-[#C8A84E] font-medium"
                 >
-                  Google Earth →
+                  Google Earth {"->"}
                 </a>
               </div>
               </div>
