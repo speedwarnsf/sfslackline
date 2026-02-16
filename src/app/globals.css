@@ -33,6 +33,10 @@ html {
   scroll-behavior: smooth;
 }
 
+h1, h2, h3, h4, p, blockquote, figcaption {
+  text-wrap: balance;
+}
+
 body {
   background: var(--color-light-gray);
   color: var(--color-deep-teal);
